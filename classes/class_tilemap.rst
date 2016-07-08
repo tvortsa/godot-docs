@@ -114,15 +114,16 @@ Signals
 Numeric Constants
 -----------------
 
-- **HALF_OFFSET_X** = **0** --- Half offset on the X coordinate.
-- **HALF_OFFSET_Y** = **1** --- Half offset on the Y coordinate.
-- **HALF_OFFSET_DISABLED** = **2** --- Half offset disabled.
 - **INVALID_CELL** = **-1** --- Returned when a cell doesn't exist.
 - **MODE_SQUARE** = **0** --- Orthogonal orientation mode.
 - **MODE_ISOMETRIC** = **1** --- Isometric orientation mode.
 - **MODE_CUSTOM** = **2** --- Custom orientation mode.
+- **HALF_OFFSET_X** = **0** --- Half offset on the X coordinate.
+- **HALF_OFFSET_Y** = **1** --- Half offset on the Y coordinate.
+- **HALF_OFFSET_DISABLED** = **2** --- Half offset disabled.
 - **TILE_ORIGIN_TOP_LEFT** = **0** --- Tile origin at its top-left corner.
 - **TILE_ORIGIN_CENTER** = **1** --- Tile origin at its center.
+- **TILE_ORIGIN_BOTTOM_LEFT** = **2**
 
 Description
 -----------
@@ -320,17 +321,13 @@ Set tiles to be centered in y coordinate. (by default this is false and they are
 
 - void  **set_collision_bounce**  **(** :ref:`float<class_float>` value  **)**
 
-Set the collision bounce parameter.
-
-Allowable values range from 0 to 1.
+Set the collision bounce parameter. Allowable values range from 0 to 1.
 
 .. _class_TileMap_set_collision_friction:
 
 - void  **set_collision_friction**  **(** :ref:`float<class_float>` value  **)**
 
-Set the collision friction parameter.
-
-Allowable values range from 0 to 1.
+Set the collision friction parameter. Allowable values range from 0 to 1.
 
 .. _class_TileMap_set_collision_layer:
 

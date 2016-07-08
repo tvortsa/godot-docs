@@ -19,6 +19,8 @@ Member Functions
 ----------------
 
 +--------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| void                           | :ref:`align<class_Camera2D_align>`  **(** **)**                                                                                          |
++--------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | void                           | :ref:`clear_current<class_Camera2D_clear_current>`  **(** **)**                                                                          |
 +--------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | void                           | :ref:`force_update_scroll<class_Camera2D_force_update_scroll>`  **(** **)**                                                              |
@@ -55,6 +57,8 @@ Member Functions
 +--------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | void                           | :ref:`make_current<class_Camera2D_make_current>`  **(** **)**                                                                            |
 +--------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| void                           | :ref:`reset_smoothing<class_Camera2D_reset_smoothing>`  **(** **)**                                                                      |
++--------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | void                           | :ref:`set_anchor_mode<class_Camera2D_set_anchor_mode>`  **(** :ref:`int<class_int>` anchor_mode  **)**                                   |
 +--------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | void                           | :ref:`set_drag_margin<class_Camera2D_set_drag_margin>`  **(** :ref:`int<class_int>` margin, :ref:`float<class_float>` drag_margin  **)** |
@@ -83,8 +87,8 @@ Member Functions
 Numeric Constants
 -----------------
 
-- **ANCHOR_MODE_FIXED_TOP_LEFT** = **0**
 - **ANCHOR_MODE_DRAG_CENTER** = **1**
+- **ANCHOR_MODE_FIXED_TOP_LEFT** = **0**
 
 Description
 -----------
@@ -95,6 +99,12 @@ This node is intended to be a simple helper get get things going quickly and it 
 
 Member Function Description
 ---------------------------
+
+.. _class_Camera2D_align:
+
+- void  **align**  **(** **)**
+
+Align the camera to the tracked node
 
 .. _class_Camera2D_clear_current:
 
@@ -181,6 +191,14 @@ Return true of this is the current camera (see :ref:`make_current<class_Camera2D
 - void  **make_current**  **(** **)**
 
 Make this the current 2D camera for the scene (viewport and layer), in case there's many cameras in the scene.
+
+.. _class_Camera2D_reset_smoothing:
+
+- void  **reset_smoothing**  **(** **)**
+
+Set the camera's position immediately to its current smoothing destination.
+
+This has no effect if smoothing is disabled.
 
 .. _class_Camera2D_set_anchor_mode:
 

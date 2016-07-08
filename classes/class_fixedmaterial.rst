@@ -18,47 +18,39 @@ Simple Material with a fixed parameter set.
 Member Functions
 ----------------
 
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`bool<class_bool>`            | :ref:`get_fixed_flag<class_FixedMaterial_get_fixed_flag>`  **(** :ref:`int<class_int>` flag  **)** const                              |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`int<class_int>`              | :ref:`get_light_shader<class_FixedMaterial_get_light_shader>`  **(** **)** const                                                      |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| void                               | :ref:`get_parameter<class_FixedMaterial_get_parameter>`  **(** :ref:`int<class_int>` param  **)** const                               |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`float<class_float>`          | :ref:`get_point_size<class_FixedMaterial_get_point_size>`  **(** **)** const                                                          |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`int<class_int>`              | :ref:`get_texcoord_mode<class_FixedMaterial_get_texcoord_mode>`  **(** :ref:`int<class_int>` param  **)** const                       |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`Texture<class_texture>`      | :ref:`get_texture<class_FixedMaterial_get_texture>`  **(** :ref:`int<class_int>` param  **)** const                                   |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| :ref:`Transform<class_transform>`  | :ref:`get_uv_transform<class_FixedMaterial_get_uv_transform>`  **(** **)** const                                                      |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| void                               | :ref:`set_fixed_flag<class_FixedMaterial_set_fixed_flag>`  **(** :ref:`int<class_int>` flag, :ref:`bool<class_bool>` value  **)**     |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| void                               | :ref:`set_light_shader<class_FixedMaterial_set_light_shader>`  **(** :ref:`int<class_int>` shader  **)**                              |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| void                               | :ref:`set_parameter<class_FixedMaterial_set_parameter>`  **(** :ref:`int<class_int>` param, var value  **)**                          |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| void                               | :ref:`set_point_size<class_FixedMaterial_set_point_size>`  **(** :ref:`float<class_float>` size  **)**                                |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| void                               | :ref:`set_texcoord_mode<class_FixedMaterial_set_texcoord_mode>`  **(** :ref:`int<class_int>` param, :ref:`int<class_int>` mode  **)** |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| void                               | :ref:`set_texture<class_FixedMaterial_set_texture>`  **(** :ref:`int<class_int>` param, :ref:`Texture<class_texture>` texture  **)**  |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| void                               | :ref:`set_uv_transform<class_FixedMaterial_set_uv_transform>`  **(** :ref:`Transform<class_transform>` transform  **)**               |
-+------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`bool<class_bool>`            | :ref:`get_fixed_flag<class_FixedMaterial_get_fixed_flag>`  **(** :ref:`int<class_int>` flag  **)** const                               |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`int<class_int>`              | :ref:`get_light_shader<class_FixedMaterial_get_light_shader>`  **(** **)** const                                                       |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| void                               | :ref:`get_parameter<class_FixedMaterial_get_parameter>`  **(** :ref:`int<class_int>` param  **)** const                                |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`float<class_float>`          | :ref:`get_point_size<class_FixedMaterial_get_point_size>`  **(** **)** const                                                           |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`int<class_int>`              | :ref:`get_texcoord_mode<class_FixedMaterial_get_texcoord_mode>`  **(** :ref:`int<class_int>` param  **)** const                        |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`Texture<class_texture>`      | :ref:`get_texture<class_FixedMaterial_get_texture>`  **(** :ref:`int<class_int>` param  **)** const                                    |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`Transform<class_transform>`  | :ref:`get_uv_transform<class_FixedMaterial_get_uv_transform>`  **(** **)** const                                                       |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| void                               | :ref:`set_fixed_flag<class_FixedMaterial_set_fixed_flag>`  **(** :ref:`int<class_int>` flag, :ref:`bool<class_bool>` value  **)**      |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| void                               | :ref:`set_light_shader<class_FixedMaterial_set_light_shader>`  **(** :ref:`int<class_int>` shader  **)**                               |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| void                               | :ref:`set_parameter<class_FixedMaterial_set_parameter>`  **(** :ref:`int<class_int>` param, :ref:`Variant<class_variant>` value  **)** |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| void                               | :ref:`set_point_size<class_FixedMaterial_set_point_size>`  **(** :ref:`float<class_float>` size  **)**                                 |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| void                               | :ref:`set_texcoord_mode<class_FixedMaterial_set_texcoord_mode>`  **(** :ref:`int<class_int>` param, :ref:`int<class_int>` mode  **)**  |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| void                               | :ref:`set_texture<class_FixedMaterial_set_texture>`  **(** :ref:`int<class_int>` param, :ref:`Texture<class_texture>` texture  **)**   |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+| void                               | :ref:`set_uv_transform<class_FixedMaterial_set_uv_transform>`  **(** :ref:`Transform<class_transform>` transform  **)**                |
++------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
 
 Numeric Constants
 -----------------
 
-- **FLAG_USE_ALPHA** = **0**
-- **FLAG_USE_COLOR_ARRAY** = **1**
-- **FLAG_USE_POINT_SIZE** = **2**
-- **FLAG_DISCARD_ALPHA** = **3**
-- **LIGHT_SHADER_LAMBERT** = **0**
-- **LIGHT_SHADER_WRAP** = **1**
-- **LIGHT_SHADER_VELVET** = **2**
-- **LIGHT_SHADER_TOON** = **3**
 - **PARAM_DIFFUSE** = **0** --- Diffuse Lighting (light scattered from surface).
 - **PARAM_DETAIL** = **1** --- Detail Layer for diffuse lighting.
 - **PARAM_SPECULAR** = **2** --- Specular Lighting (light reflected from the surface).
@@ -72,6 +64,14 @@ Numeric Constants
 - **TEXCOORD_UV_TRANSFORM** = **1** --- Read texture coordinates from the UV array and transform them by uv_xform.
 - **TEXCOORD_UV2** = **2** --- Read texture coordinates from the UV2 array.
 - **TEXCOORD_SPHERE** = **3**
+- **FLAG_USE_ALPHA** = **0**
+- **FLAG_USE_COLOR_ARRAY** = **1**
+- **FLAG_USE_POINT_SIZE** = **2**
+- **FLAG_DISCARD_ALPHA** = **3**
+- **LIGHT_SHADER_LAMBERT** = **0**
+- **LIGHT_SHADER_WRAP** = **1**
+- **LIGHT_SHADER_VELVET** = **2**
+- **LIGHT_SHADER_TOON** = **3**
 
 Description
 -----------
@@ -127,7 +127,7 @@ Returns the special transform used to post-transform UV coordinates of the uv_xf
 
 .. _class_FixedMaterial_set_parameter:
 
-- void  **set_parameter**  **(** :ref:`int<class_int>` param, var value  **)**
+- void  **set_parameter**  **(** :ref:`int<class_int>` param, :ref:`Variant<class_variant>` value  **)**
 
 Set a parameter, parameters are defined in the PARAM\_\* enum. The type of each parameter may change, so it's best to check the enum.
 

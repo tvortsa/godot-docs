@@ -31,6 +31,8 @@ Member Functions
 +------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`int<class_int>`        | :ref:`get_tab_size<class_RichTextLabel_get_tab_size>`  **(** **)** const                                                                                                            |
 +------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`String<class_string>`  | :ref:`get_text<class_RichTextLabel_get_text>`  **(** **)**                                                                                                                          |
++------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`int<class_int>`        | :ref:`get_total_character_count<class_RichTextLabel_get_total_character_count>`  **(** **)** const                                                                                  |
 +------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Object<class_object>`  | :ref:`get_v_scroll<class_RichTextLabel_get_v_scroll>`  **(** **)**                                                                                                                  |
@@ -65,7 +67,7 @@ Member Functions
 +------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                         | :ref:`push_list<class_RichTextLabel_push_list>`  **(** :ref:`int<class_int>` type  **)**                                                                                            |
 +------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                         | :ref:`push_meta<class_RichTextLabel_push_meta>`  **(** var data  **)**                                                                                                              |
+| void                         | :ref:`push_meta<class_RichTextLabel_push_meta>`  **(** :ref:`Variant<class_variant>` data  **)**                                                                                    |
 +------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                         | :ref:`push_table<class_RichTextLabel_push_table>`  **(** :ref:`int<class_int>` columns  **)**                                                                                       |
 +------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -104,9 +106,11 @@ Numeric Constants
 - **ALIGN_CENTER** = **1**
 - **ALIGN_RIGHT** = **2**
 - **ALIGN_FILL** = **3**
+- **LIST_NUMBERS** = **0**
+- **LIST_LETTERS** = **1**
+- **LIST_DOTS** = **2**
 - **ITEM_FRAME** = **0**
 - **ITEM_TEXT** = **1**
-- **ITEM_META** = **11**
 - **ITEM_IMAGE** = **2**
 - **ITEM_NEWLINE** = **3**
 - **ITEM_FONT** = **4**
@@ -115,9 +119,7 @@ Numeric Constants
 - **ITEM_ALIGN** = **7**
 - **ITEM_INDENT** = **8**
 - **ITEM_LIST** = **9**
-- **LIST_NUMBERS** = **0**
-- **LIST_LETTERS** = **1**
-- **LIST_DOTS** = **2**
+- **ITEM_META** = **11**
 
 Description
 -----------
@@ -150,6 +152,12 @@ Member Function Description
 .. _class_RichTextLabel_get_tab_size:
 
 - :ref:`int<class_int>`  **get_tab_size**  **(** **)** const
+
+.. _class_RichTextLabel_get_text:
+
+- :ref:`String<class_string>`  **get_text**  **(** **)**
+
+Returns the raw text, stripping out the formatting information.
 
 .. _class_RichTextLabel_get_total_character_count:
 
@@ -223,7 +231,7 @@ Return true if selecting the text inside this richtext is allowed.
 
 .. _class_RichTextLabel_push_meta:
 
-- void  **push_meta**  **(** var data  **)**
+- void  **push_meta**  **(** :ref:`Variant<class_variant>` data  **)**
 
 .. _class_RichTextLabel_push_table:
 

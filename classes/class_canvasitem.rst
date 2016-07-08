@@ -27,17 +27,19 @@ Member Functions
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                 | :ref:`draw_circle<class_CanvasItem_draw_circle>`  **(** :ref:`Vector2<class_vector2>` pos, :ref:`float<class_float>` radius, :ref:`Color<class_color>` color  **)**                                                                                                                            |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                 | :ref:`draw_colored_polygon<class_CanvasItem_draw_colored_polygon>`  **(** :ref:`Vector2Array<class_vector2array>` points, :ref:`Color<class_color>` color, :ref:`Vector2Array<class_vector2array>` uvs=Vector2Array(), :ref:`Texture<class_texture>` texture=NULL  **)**                       |
+| void                                                 | :ref:`draw_colored_polygon<class_CanvasItem_draw_colored_polygon>`  **(** :ref:`Vector2Array<class_vector2array>` points, :ref:`Color<class_color>` color, :ref:`Vector2Array<class_vector2array>` uvs=Vector2Array([]), :ref:`Texture<class_texture>` texture=NULL  **)**                     |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                 | :ref:`draw_line<class_CanvasItem_draw_line>`  **(** :ref:`Vector2<class_vector2>` from, :ref:`Vector2<class_vector2>` to, :ref:`Color<class_color>` color, :ref:`float<class_float>` width=1  **)**                                                                                            |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                 | :ref:`draw_polygon<class_CanvasItem_draw_polygon>`  **(** :ref:`Vector2Array<class_vector2array>` points, :ref:`ColorArray<class_colorarray>` colors, :ref:`Vector2Array<class_vector2array>` uvs=Vector2Array(), :ref:`Texture<class_texture>` texture=NULL  **)**                            |
+| void                                                 | :ref:`draw_polygon<class_CanvasItem_draw_polygon>`  **(** :ref:`Vector2Array<class_vector2array>` points, :ref:`ColorArray<class_colorarray>` colors, :ref:`Vector2Array<class_vector2array>` uvs=Vector2Array([]), :ref:`Texture<class_texture>` texture=NULL  **)**                          |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                 | :ref:`draw_primitive<class_CanvasItem_draw_primitive>`  **(** :ref:`Vector2Array<class_vector2array>` points, :ref:`ColorArray<class_colorarray>` colors, :ref:`Vector2Array<class_vector2array>` uvs, :ref:`Texture<class_texture>` texture=NULL, :ref:`float<class_float>` width=1  **)**    |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                 | :ref:`draw_rect<class_CanvasItem_draw_rect>`  **(** :ref:`Rect2<class_rect2>` rect, :ref:`Color<class_color>` color  **)**                                                                                                                                                                     |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                 | :ref:`draw_set_transform<class_CanvasItem_draw_set_transform>`  **(** :ref:`Vector2<class_vector2>` pos, :ref:`float<class_float>` rot, :ref:`Vector2<class_vector2>` scale  **)**                                                                                                             |
++------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| void                                                 | :ref:`draw_set_transform_matrix<class_CanvasItem_draw_set_transform_matrix>`  **(** :ref:`Matrix32<class_matrix32>` xform  **)**                                                                                                                                                               |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                 | :ref:`draw_string<class_CanvasItem_draw_string>`  **(** :ref:`Font<class_font>` font, :ref:`Vector2<class_vector2>` pos, :ref:`String<class_string>` text, :ref:`Color<class_color>` modulate=Color(1,1,1,1), :ref:`int<class_int>` clip_w=-1  **)**                                           |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -49,13 +51,13 @@ Member Functions
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                 | :ref:`draw_texture_rect_region<class_CanvasItem_draw_texture_rect_region>`  **(** :ref:`Texture<class_texture>` texture, :ref:`Rect2<class_rect2>` rect, :ref:`Rect2<class_rect2>` src_rect, :ref:`Color<class_color>` modulate=Color(1,1,1,1), :ref:`bool<class_bool>` transpose=false  **)** |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Variant                                              | :ref:`edit_get_state<class_CanvasItem_edit_get_state>`  **(** **)** const                                                                                                                                                                                                                      |
+| :ref:`Variant<class_variant>`                        | :ref:`edit_get_state<class_CanvasItem_edit_get_state>`  **(** **)** const                                                                                                                                                                                                                      |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                 | :ref:`edit_rotate<class_CanvasItem_edit_rotate>`  **(** :ref:`float<class_float>` degrees  **)**                                                                                                                                                                                               |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                 | :ref:`edit_set_rect<class_CanvasItem_edit_set_rect>`  **(** :ref:`Rect2<class_rect2>` rect  **)**                                                                                                                                                                                              |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                 | :ref:`edit_set_state<class_CanvasItem_edit_set_state>`  **(** var state  **)**                                                                                                                                                                                                                 |
+| void                                                 | :ref:`edit_set_state<class_CanvasItem_edit_set_state>`  **(** :ref:`Variant<class_variant>` state  **)**                                                                                                                                                                                       |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`int<class_int>`                                | :ref:`get_blend_mode<class_CanvasItem_get_blend_mode>`  **(** **)** const                                                                                                                                                                                                                      |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -70,6 +72,8 @@ Member Functions
 | :ref:`Matrix32<class_matrix32>`                      | :ref:`get_global_transform<class_CanvasItem_get_global_transform>`  **(** **)** const                                                                                                                                                                                                          |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Matrix32<class_matrix32>`                      | :ref:`get_global_transform_with_canvas<class_CanvasItem_get_global_transform_with_canvas>`  **(** **)** const                                                                                                                                                                                  |
++------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`Rect2<class_rect2>`                            | :ref:`get_item_and_children_rect<class_CanvasItem_get_item_and_children_rect>`  **(** **)** const                                                                                                                                                                                              |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`Rect2<class_rect2>`                            | :ref:`get_item_rect<class_CanvasItem_get_item_rect>`  **(** **)** const                                                                                                                                                                                                                        |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -102,6 +106,8 @@ Member Functions
 | :ref:`bool<class_bool>`                              | :ref:`is_set_as_toplevel<class_CanvasItem_is_set_as_toplevel>`  **(** **)** const                                                                                                                                                                                                              |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`bool<class_bool>`                              | :ref:`is_visible<class_CanvasItem_is_visible>`  **(** **)** const                                                                                                                                                                                                                              |
++------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| :ref:`Vector2<class_vector2>`                        | :ref:`make_canvas_pos_local<class_CanvasItem_make_canvas_pos_local>`  **(** :ref:`Vector2<class_vector2>` screen_point  **)** const                                                                                                                                                            |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`InputEvent<class_inputevent>`                  | :ref:`make_input_local<class_CanvasItem_make_input_local>`  **(** :ref:`InputEvent<class_inputevent>` event  **)** const                                                                                                                                                                       |
 +------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -144,11 +150,11 @@ Numeric Constants
 - **BLEND_MODE_SUB** = **2** --- Subtractive blending mode.
 - **BLEND_MODE_MUL** = **3** --- Multiplicative blending mode.
 - **BLEND_MODE_PREMULT_ALPHA** = **4** --- Mix blending mode. Colors are assumed to be premultiplied by the alpha (opacity) value.
-- **NOTIFICATION_TRANSFORM_CHANGED** = **29** --- Canvas item transform has changed. Only received if requested.
 - **NOTIFICATION_DRAW** = **30** --- CanvasItem is requested to draw.
 - **NOTIFICATION_VISIBILITY_CHANGED** = **31** --- Canvas item visibility has changed.
 - **NOTIFICATION_ENTER_CANVAS** = **32** --- Canvas item has entered the canvas.
 - **NOTIFICATION_EXIT_CANVAS** = **33** --- Canvas item has exited the canvas.
+- **NOTIFICATION_TRANSFORM_CHANGED** = **29** --- Canvas item transform has changed. Only received if requested.
 
 Description
 -----------
@@ -186,7 +192,7 @@ Draw a colored circle.
 
 .. _class_CanvasItem_draw_colored_polygon:
 
-- void  **draw_colored_polygon**  **(** :ref:`Vector2Array<class_vector2array>` points, :ref:`Color<class_color>` color, :ref:`Vector2Array<class_vector2array>` uvs=Vector2Array(), :ref:`Texture<class_texture>` texture=NULL  **)**
+- void  **draw_colored_polygon**  **(** :ref:`Vector2Array<class_vector2array>` points, :ref:`Color<class_color>` color, :ref:`Vector2Array<class_vector2array>` uvs=Vector2Array([]), :ref:`Texture<class_texture>` texture=NULL  **)**
 
 Draw a colored polygon of any amount of points, convex or concave.
 
@@ -198,7 +204,7 @@ Draw a line from a 2D point to another, with a given color and width.
 
 .. _class_CanvasItem_draw_polygon:
 
-- void  **draw_polygon**  **(** :ref:`Vector2Array<class_vector2array>` points, :ref:`ColorArray<class_colorarray>` colors, :ref:`Vector2Array<class_vector2array>` uvs=Vector2Array(), :ref:`Texture<class_texture>` texture=NULL  **)**
+- void  **draw_polygon**  **(** :ref:`Vector2Array<class_vector2array>` points, :ref:`ColorArray<class_colorarray>` colors, :ref:`Vector2Array<class_vector2array>` uvs=Vector2Array([]), :ref:`Texture<class_texture>` texture=NULL  **)**
 
 Draw a polygon of any amount of points, convex or concave.
 
@@ -219,6 +225,10 @@ Draw a colored rectangle.
 - void  **draw_set_transform**  **(** :ref:`Vector2<class_vector2>` pos, :ref:`float<class_float>` rot, :ref:`Vector2<class_vector2>` scale  **)**
 
 Set a custom transform for drawing. Anything drawn afterwards will be transformed by this.
+
+.. _class_CanvasItem_draw_set_transform_matrix:
+
+- void  **draw_set_transform_matrix**  **(** :ref:`Matrix32<class_matrix32>` xform  **)**
 
 .. _class_CanvasItem_draw_string:
 
@@ -252,7 +262,7 @@ Draw a textured rectangle region at a given position, optionally modulated by a 
 
 .. _class_CanvasItem_edit_get_state:
 
-- Variant  **edit_get_state**  **(** **)** const
+- :ref:`Variant<class_variant>`  **edit_get_state**  **(** **)** const
 
 Used for editing, returns an opaque value representing the transform state.
 
@@ -268,7 +278,7 @@ Used for editing, handle rotation.
 
 .. _class_CanvasItem_edit_set_state:
 
-- void  **edit_set_state**  **(** var state  **)**
+- void  **edit_set_state**  **(** :ref:`Variant<class_variant>` state  **)**
 
 Set the transform state of this CanvasItem. For :ref:`Node2D<class_node2d>`, this is an :ref:`Array<class_array>` with (in order) a :ref:`Vector2<class_vector2>` for position, a float for rotation and another :ref:`Vector2<class_vector2>` for scale. For :ref:`Control<class_control>` this is a :ref:`Rect2<class_rect2>` with the position and size.
 
@@ -313,6 +323,12 @@ Get the global transform matrix of this item.
 - :ref:`Matrix32<class_matrix32>`  **get_global_transform_with_canvas**  **(** **)** const
 
 Get the global transform matrix of this item in relation to the canvas.
+
+.. _class_CanvasItem_get_item_and_children_rect:
+
+- :ref:`Rect2<class_rect2>`  **get_item_and_children_rect**  **(** **)** const
+
+Get a :ref:`Rect2<class_rect2>` with the boundaries of this item and its children.
 
 .. _class_CanvasItem_get_item_rect:
 
@@ -409,6 +425,10 @@ Return if set as toplevel. See :ref:`set_as_toplevel<class_CanvasItem_set_as_top
 - :ref:`bool<class_bool>`  **is_visible**  **(** **)** const
 
 Return true if this CanvasItem is visible. It may be invisible because itself or a parent canvas item is hidden.
+
+.. _class_CanvasItem_make_canvas_pos_local:
+
+- :ref:`Vector2<class_vector2>`  **make_canvas_pos_local**  **(** :ref:`Vector2<class_vector2>` screen_point  **)** const
 
 .. _class_CanvasItem_make_input_local:
 

@@ -21,7 +21,7 @@ Member Functions
 ----------------
 
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                               | :ref:`area_add_shape<class_Physics2DServer_area_add_shape>`  **(** :ref:`RID<class_rid>` area, :ref:`RID<class_rid>` shape, :ref:`Matrix32<class_matrix32>` transform=1,0, 0,1, 0,0  **)**                                                                                           |
+| void                                                               | :ref:`area_add_shape<class_Physics2DServer_area_add_shape>`  **(** :ref:`RID<class_rid>` area, :ref:`RID<class_rid>` shape, :ref:`Matrix32<class_matrix32>` transform=((1, 0), (0, 1), (0, 0))  **)**                                                                                |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`area_attach_object_instance_ID<class_Physics2DServer_area_attach_object_instance_ID>`  **(** :ref:`RID<class_rid>` area, :ref:`int<class_int>` id  **)**                                                                                                                       |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -53,7 +53,7 @@ Member Functions
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`area_set_monitor_callback<class_Physics2DServer_area_set_monitor_callback>`  **(** :ref:`RID<class_rid>` area, :ref:`Object<class_object>` receiver, :ref:`String<class_string>` method  **)**                                                                                 |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                               | :ref:`area_set_param<class_Physics2DServer_area_set_param>`  **(** :ref:`RID<class_rid>` area, :ref:`int<class_int>` param, var value  **)**                                                                                                                                         |
+| void                                                               | :ref:`area_set_param<class_Physics2DServer_area_set_param>`  **(** :ref:`RID<class_rid>` area, :ref:`int<class_int>` param, :ref:`Variant<class_variant>` value  **)**                                                                                                               |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`area_set_shape<class_Physics2DServer_area_set_shape>`  **(** :ref:`RID<class_rid>` area, :ref:`int<class_int>` shape_idx, :ref:`RID<class_rid>` shape  **)**                                                                                                                   |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -67,7 +67,9 @@ Member Functions
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`body_add_collision_exception<class_Physics2DServer_body_add_collision_exception>`  **(** :ref:`RID<class_rid>` body, :ref:`RID<class_rid>` excepted_body  **)**                                                                                                                |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                               | :ref:`body_add_shape<class_Physics2DServer_body_add_shape>`  **(** :ref:`RID<class_rid>` body, :ref:`RID<class_rid>` shape, :ref:`Matrix32<class_matrix32>` transform=1,0, 0,1, 0,0  **)**                                                                                           |
+| void                                                               | :ref:`body_add_force<class_Physics2DServer_body_add_force>`  **(** :ref:`RID<class_rid>` body, :ref:`Vector2<class_vector2>` offset, :ref:`Vector2<class_vector2>` force  **)**                                                                                                      |
++--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| void                                                               | :ref:`body_add_shape<class_Physics2DServer_body_add_shape>`  **(** :ref:`RID<class_rid>` body, :ref:`RID<class_rid>` shape, :ref:`Matrix32<class_matrix32>` transform=((1, 0), (0, 1), (0, 0))  **)**                                                                                |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`body_apply_impulse<class_Physics2DServer_body_apply_impulse>`  **(** :ref:`RID<class_rid>` body, :ref:`Vector2<class_vector2>` pos, :ref:`Vector2<class_vector2>` impulse  **)**                                                                                               |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -121,7 +123,7 @@ Member Functions
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`body_set_continuous_collision_detection_mode<class_Physics2DServer_body_set_continuous_collision_detection_mode>`  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` mode  **)**                                                                                         |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                               | :ref:`body_set_force_integration_callback<class_Physics2DServer_body_set_force_integration_callback>`  **(** :ref:`RID<class_rid>` body, :ref:`Object<class_object>` receiver, :ref:`String<class_string>` method, var userdata=NULL  **)**                                          |
+| void                                                               | :ref:`body_set_force_integration_callback<class_Physics2DServer_body_set_force_integration_callback>`  **(** :ref:`RID<class_rid>` body, :ref:`Object<class_object>` receiver, :ref:`String<class_string>` method, :ref:`Variant<class_variant>` userdata=NULL  **)**                |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`body_set_layer_mask<class_Physics2DServer_body_set_layer_mask>`  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` mask  **)**                                                                                                                                           |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -141,13 +143,13 @@ Member Functions
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`body_set_shape_as_trigger<class_Physics2DServer_body_set_shape_as_trigger>`  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` shape_idx, :ref:`bool<class_bool>` enable  **)**                                                                                          |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                               | :ref:`body_set_shape_metadata<class_Physics2DServer_body_set_shape_metadata>`  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` shape_idx, var metadata  **)**                                                                                                                |
+| void                                                               | :ref:`body_set_shape_metadata<class_Physics2DServer_body_set_shape_metadata>`  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` shape_idx, :ref:`Variant<class_variant>` metadata  **)**                                                                                      |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`body_set_shape_transform<class_Physics2DServer_body_set_shape_transform>`  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` shape_idx, :ref:`Matrix32<class_matrix32>` transform  **)**                                                                                 |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | void                                                               | :ref:`body_set_space<class_Physics2DServer_body_set_space>`  **(** :ref:`RID<class_rid>` body, :ref:`RID<class_rid>` space  **)**                                                                                                                                                    |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                               | :ref:`body_set_state<class_Physics2DServer_body_set_state>`  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` state, var value  **)**                                                                                                                                         |
+| void                                                               | :ref:`body_set_state<class_Physics2DServer_body_set_state>`  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` state, :ref:`Variant<class_variant>` value  **)**                                                                                                               |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`bool<class_bool>`                                            | :ref:`body_test_motion<class_Physics2DServer_body_test_motion>`  **(** :ref:`RID<class_rid>` body, :ref:`Vector2<class_vector2>` motion, :ref:`float<class_float>` margin=0.08, :ref:`Physics2DTestMotionResult<class_physics2dtestmotionresult>` result=NULL  **)**                 |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -179,7 +181,7 @@ Member Functions
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`int<class_int>`                                              | :ref:`shape_get_type<class_Physics2DServer_shape_get_type>`  **(** :ref:`RID<class_rid>` shape  **)** const                                                                                                                                                                          |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| void                                                               | :ref:`shape_set_data<class_Physics2DServer_shape_set_data>`  **(** :ref:`RID<class_rid>` shape, var data  **)**                                                                                                                                                                      |
+| void                                                               | :ref:`shape_set_data<class_Physics2DServer_shape_set_data>`  **(** :ref:`RID<class_rid>` shape, :ref:`Variant<class_variant>` data  **)**                                                                                                                                            |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | :ref:`RID<class_rid>`                                              | :ref:`space_create<class_Physics2DServer_space_create>`  **(** **)**                                                                                                                                                                                                                 |
 +--------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -197,49 +199,13 @@ Member Functions
 Numeric Constants
 -----------------
 
-- **AREA_BODY_ADDED** = **0** --- The value of the first parameter and area callback function receives, when an object enters one of its shapes.
-- **AREA_PARAM_GRAVITY** = **0** --- Constant to set/get gravity strength in an area.
-- **AREA_SPACE_OVERRIDE_DISABLED** = **0** --- This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
-- **AREA_BODY_REMOVED** = **1** --- The value of the first parameter and area callback function receives, when an object exits one of its shapes.
-- **AREA_PARAM_GRAVITY_VECTOR** = **1** --- Constant to set/get gravity vector/center in an area.
-- **AREA_SPACE_OVERRIDE_COMBINE** = **1** --- This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
-- **AREA_PARAM_GRAVITY_IS_POINT** = **2** --- Constant to set/get whether the gravity vector of an area is a direction, or a center point.
-- **AREA_SPACE_OVERRIDE_COMBINE_REPLACE** = **2** --- This area adds its gravity/damp values to whatever has been calculated so far. Then stops taking into account the rest of the areas, even the default one.
-- **AREA_PARAM_GRAVITY_DISTANCE_SCALE** = **3** --- Constant to set/get the falloff factor for point gravity of an area. The greater this value is, the faster the strength of gravity decreases with the square of distance.
-- **AREA_SPACE_OVERRIDE_REPLACE** = **3** --- This area replaces any gravity/damp, even the default one, and stops taking into account the rest of the areas.
-- **AREA_PARAM_GRAVITY_POINT_ATTENUATION** = **4** --- This constant was used to set/get the falloff factor for point gravity. It has been superseded by AREA_PARAM_GRAVITY_DISTANCE_SCALE.
-- **AREA_SPACE_OVERRIDE_REPLACE_COMBINE** = **4** --- This area replaces any gravity/damp calculated so far, but keeps calculating the rest of the areas, down to the default one.
-- **AREA_PARAM_LINEAR_DAMP** = **5** --- Constant to set/get the linear dampening factor of an area.
-- **AREA_PARAM_ANGULAR_DAMP** = **6** --- Constant to set/get the angular dampening factor of an area.
-- **AREA_PARAM_PRIORITY** = **7** --- Constant to set/get the priority (order of processing) of an area.
-- **BODY_MODE_STATIC** = **0** --- Constant for static bodies.
-- **BODY_PARAM_BOUNCE** = **0** --- Constant to set/get a body's bounce factor.
-- **BODY_STATE_TRANSFORM** = **0** --- Constant to set/get the current transform matrix of the body.
-- **BODY_MODE_KINEMATIC** = **1** --- Constant for kinematic bodies.
-- **BODY_PARAM_FRICTION** = **1** --- Constant to set/get a body's friction.
-- **BODY_STATE_LINEAR_VELOCITY** = **1** --- Constant to set/get the current linear velocity of the body.
-- **BODY_MODE_RIGID** = **2** --- Constant for rigid bodies.
-- **BODY_PARAM_MASS** = **2** --- Constant to set/get a body's mass.
-- **BODY_STATE_ANGULAR_VELOCITY** = **2** --- Constant to set/get the current angular velocity of the body.
-- **BODY_MODE_CHARACTER** = **3** --- Constant for rigid bodies in character mode. In this mode, a body can not rotate, and only its linear velocity is affected by physics.
-- **BODY_PARAM_GRAVITY_SCALE** = **3** --- Constant to set/get a body's gravity multiplier.
-- **BODY_STATE_SLEEPING** = **3** --- Constant to sleep/wake up a body, or to get whether it is sleeping.
-- **BODY_PARAM_LINEAR_DAMP** = **4** --- Constant to set/get a body's linear dampening factor.
-- **BODY_STATE_CAN_SLEEP** = **4** --- Constant to set/get whether the body can sleep.
-- **BODY_PARAM_ANGULAR_DAMP** = **5** --- Constant to set/get a body's angular dampening factor.
-- **BODY_PARAM_MAX** = **6** --- This is the last ID for body parameters. Any attempt to set this property is ignored. Any attempt to get it returns 0.
-- **CCD_MODE_DISABLED** = **0** --- Disables continuous collision detection. This is the fastest way to detect body collisions, but can miss small, fast-moving objects.
-- **CCD_MODE_CAST_RAY** = **1** --- Enables continuous collision detection by raycasting. It is faster than shapecasting, but less precise.
-- **CCD_MODE_CAST_SHAPE** = **2** --- Enables continuous collision detection by shapecasting. It is the slowest CCD method, and the most precise.
-- **DAMPED_STRING_REST_LENGTH** = **0** --- Set the resting length of the spring joint. The joint will always try to go to back this length when pulled apart.
-- **DAMPED_STRING_STIFFNESS** = **1** --- Set the stiffness of the spring joint. The joint applies a force equal to the stiffness times the distance from its resting length.
-- **DAMPED_STRING_DAMPING** = **2** --- Set the damping ratio of the spring joint. A value of 0 indicates an undamped spring, while 1 causes the system to reach equilibrium as fast as possible (critical damping).
-- **INFO_ACTIVE_OBJECTS** = **0** --- Constant to get the number of objects that are not sleeping.
-- **INFO_COLLISION_PAIRS** = **1** --- Constant to get the number of possible collisions.
-- **INFO_ISLAND_COUNT** = **2** --- Constant to get the number of space regions where a collision could occur.
-- **JOINT_PIN** = **0** --- Constant to create pin joints.
-- **JOINT_GROOVE** = **1** --- Constant to create groove joints.
-- **JOINT_DAMPED_SPRING** = **2** --- Constant to create damped spring joints.
+- **SPACE_PARAM_CONTACT_RECYCLE_RADIUS** = **0** --- Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated.
+- **SPACE_PARAM_CONTACT_MAX_SEPARATION** = **1** --- Constant to set/get the maximum distance a shape can be from another before they are considered separated.
+- **SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION** = **2** --- Constant to set/get the maximum distance a shape can penetrate another shape before it is considered a collision.
+- **SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_TRESHOLD** = **3** --- Constant to set/get the linear velocity threshold. Bodies slower than this will be marked as potentially inactive.
+- **SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_TRESHOLD** = **4** --- Constant to set/get the angular velocity threshold. Bodies slower than this will be marked as potentially inactive.
+- **SPACE_PARAM_BODY_TIME_TO_SLEEP** = **5** --- Constant to set/get the maximum time of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after this time.
+- **SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS** = **6** --- Constant to set/get the default solver bias for all physics constraints. A solver bias is a factor controlling how much two objects "rebound", after violating a constraint, to avoid leaving them in that state because of numerical imprecision.
 - **SHAPE_LINE** = **0** --- This is the constant for creating line shapes. A line shape is an infinite line with an origin point, and a normal. Thus, it can be used for front/behind checks.
 - **SHAPE_SEGMENT** = **2** --- This is the constant for creating segment shapes. A segment shape is a line from a point A to a point B. It can be checked for intersections.
 - **SHAPE_CIRCLE** = **3** --- This is the constant for creating circle shapes. A circle shape only has a radius. It can be used for intersections and inside/outside checks.
@@ -248,13 +214,50 @@ Numeric Constants
 - **SHAPE_CONVEX_POLYGON** = **6** --- This is the constant for creating convex polygon shapes. A polygon is defined by a list of points. It can be used for intersections and inside/outside checks. Unlike the method :ref:`CollisionPolygon2D.set_polygon<class_CollisionPolygon2D_set_polygon>`, polygons modified with :ref:`shape_set_data<class_Physics2DServer_shape_set_data>` do not verify that the points supplied form, in fact, a convex polygon.
 - **SHAPE_CONCAVE_POLYGON** = **7** --- This is the constant for creating concave polygon shapes. A polygon is defined by a list of points. It can be used for intersections checks, but not for inside/outside checks.
 - **SHAPE_CUSTOM** = **8** --- This constant is used internally by the engine. Any attempt to create this kind of shape results in an error.
-- **SPACE_PARAM_CONTACT_RECYCLE_RADIUS** = **0** --- Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated.
-- **SPACE_PARAM_CONTACT_MAX_SEPARATION** = **1** --- Constant to set/get the maximum distance a shape can be from another before they are considered separated.
-- **SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION** = **2** --- Constant to set/get the maximum distance a shape can penetrate another shape before it is considered a collision.
-- **SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_TRESHOLD** = **3** --- Constant to set/get the linear velocity threshold. Bodies slower than this will be marked as potentially inactive.
-- **SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_TRESHOLD** = **4** --- Constant to set/get the angular velocity threshold. Bodies slower than this will be marked as potentially inactive.
-- **SPACE_PARAM_BODY_TIME_TO_SLEEP** = **5** --- Constant to set/get the maximum time of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after this time.
-- **SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS** = **6** --- Constant to set/get the default solver bias for all physics constraints. A solver bias is a factor controlling how much two objects "rebound", after violating a constraint, to avoid leaving them in that state because of numerical imprecision.
+- **AREA_PARAM_GRAVITY** = **0** --- Constant to set/get gravity strength in an area.
+- **AREA_PARAM_GRAVITY_VECTOR** = **1** --- Constant to set/get gravity vector/center in an area.
+- **AREA_PARAM_GRAVITY_IS_POINT** = **2** --- Constant to set/get whether the gravity vector of an area is a direction, or a center point.
+- **AREA_PARAM_GRAVITY_DISTANCE_SCALE** = **3** --- Constant to set/get the falloff factor for point gravity of an area. The greater this value is, the faster the strength of gravity decreases with the square of distance.
+- **AREA_PARAM_GRAVITY_POINT_ATTENUATION** = **4** --- This constant was used to set/get the falloff factor for point gravity. It has been superseded by AREA_PARAM_GRAVITY_DISTANCE_SCALE.
+- **AREA_PARAM_LINEAR_DAMP** = **5** --- Constant to set/get the linear dampening factor of an area.
+- **AREA_PARAM_ANGULAR_DAMP** = **6** --- Constant to set/get the angular dampening factor of an area.
+- **AREA_PARAM_PRIORITY** = **7** --- Constant to set/get the priority (order of processing) of an area.
+- **AREA_SPACE_OVERRIDE_DISABLED** = **0** --- This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
+- **AREA_SPACE_OVERRIDE_COMBINE** = **1** --- This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
+- **AREA_SPACE_OVERRIDE_COMBINE_REPLACE** = **2** --- This area adds its gravity/damp values to whatever has been calculated so far. Then stops taking into account the rest of the areas, even the default one.
+- **AREA_SPACE_OVERRIDE_REPLACE** = **3** --- This area replaces any gravity/damp, even the default one, and stops taking into account the rest of the areas.
+- **AREA_SPACE_OVERRIDE_REPLACE_COMBINE** = **4** --- This area replaces any gravity/damp calculated so far, but keeps calculating the rest of the areas, down to the default one.
+- **BODY_MODE_STATIC** = **0** --- Constant for static bodies.
+- **BODY_MODE_KINEMATIC** = **1** --- Constant for kinematic bodies.
+- **BODY_MODE_RIGID** = **2** --- Constant for rigid bodies.
+- **BODY_MODE_CHARACTER** = **3** --- Constant for rigid bodies in character mode. In this mode, a body can not rotate, and only its linear velocity is affected by physics.
+- **BODY_PARAM_BOUNCE** = **0** --- Constant to set/get a body's bounce factor.
+- **BODY_PARAM_FRICTION** = **1** --- Constant to set/get a body's friction.
+- **BODY_PARAM_MASS** = **2** --- Constant to set/get a body's mass.
+- **BODY_PARAM_INERTIA** = **3** --- Constant to set/get a body's inertia.
+- **BODY_PARAM_GRAVITY_SCALE** = **4** --- Constant to set/get a body's gravity multiplier.
+- **BODY_PARAM_LINEAR_DAMP** = **5** --- Constant to set/get a body's linear dampening factor.
+- **BODY_PARAM_ANGULAR_DAMP** = **6** --- Constant to set/get a body's angular dampening factor.
+- **BODY_PARAM_MAX** = **7** --- This is the last ID for body parameters. Any attempt to set this property is ignored. Any attempt to get it returns 0.
+- **BODY_STATE_TRANSFORM** = **0** --- Constant to set/get the current transform matrix of the body.
+- **BODY_STATE_LINEAR_VELOCITY** = **1** --- Constant to set/get the current linear velocity of the body.
+- **BODY_STATE_ANGULAR_VELOCITY** = **2** --- Constant to set/get the current angular velocity of the body.
+- **BODY_STATE_SLEEPING** = **3** --- Constant to sleep/wake up a body, or to get whether it is sleeping.
+- **BODY_STATE_CAN_SLEEP** = **4** --- Constant to set/get whether the body can sleep.
+- **JOINT_PIN** = **0** --- Constant to create pin joints.
+- **JOINT_GROOVE** = **1** --- Constant to create groove joints.
+- **JOINT_DAMPED_SPRING** = **2** --- Constant to create damped spring joints.
+- **DAMPED_STRING_REST_LENGTH** = **0** --- Set the resting length of the spring joint. The joint will always try to go to back this length when pulled apart.
+- **DAMPED_STRING_STIFFNESS** = **1** --- Set the stiffness of the spring joint. The joint applies a force equal to the stiffness times the distance from its resting length.
+- **DAMPED_STRING_DAMPING** = **2** --- Set the damping ratio of the spring joint. A value of 0 indicates an undamped spring, while 1 causes the system to reach equilibrium as fast as possible (critical damping).
+- **CCD_MODE_DISABLED** = **0** --- Disables continuous collision detection. This is the fastest way to detect body collisions, but can miss small, fast-moving objects.
+- **CCD_MODE_CAST_RAY** = **1** --- Enables continuous collision detection by raycasting. It is faster than shapecasting, but less precise.
+- **CCD_MODE_CAST_SHAPE** = **2** --- Enables continuous collision detection by shapecasting. It is the slowest CCD method, and the most precise.
+- **AREA_BODY_ADDED** = **0** --- The value of the first parameter and area callback function receives, when an object enters one of its shapes.
+- **AREA_BODY_REMOVED** = **1** --- The value of the first parameter and area callback function receives, when an object exits one of its shapes.
+- **INFO_ACTIVE_OBJECTS** = **0** --- Constant to get the number of objects that are not sleeping.
+- **INFO_COLLISION_PAIRS** = **1** --- Constant to get the number of possible collisions.
+- **INFO_ISLAND_COUNT** = **2** --- Constant to get the number of space regions where a collision could occur.
 
 Description
 -----------
@@ -266,7 +269,7 @@ Member Function Description
 
 .. _class_Physics2DServer_area_add_shape:
 
-- void  **area_add_shape**  **(** :ref:`RID<class_rid>` area, :ref:`RID<class_rid>` shape, :ref:`Matrix32<class_matrix32>` transform=1,0, 0,1, 0,0  **)**
+- void  **area_add_shape**  **(** :ref:`RID<class_rid>` area, :ref:`RID<class_rid>` shape, :ref:`Matrix32<class_matrix32>` transform=((1, 0), (0, 1), (0, 0))  **)**
 
 Add a shape to the area, along with a transform matrix. Shapes are usually referenced by their index, so you should track which shape has a given index.
 
@@ -372,7 +375,7 @@ Set the function to call when any body/area enters or exits the area. This callb
 
 .. _class_Physics2DServer_area_set_param:
 
-- void  **area_set_param**  **(** :ref:`RID<class_rid>` area, :ref:`int<class_int>` param, var value  **)**
+- void  **area_set_param**  **(** :ref:`RID<class_rid>` area, :ref:`int<class_int>` param, :ref:`Variant<class_variant>` value  **)**
 
 Set the value for an area parameter. A list of available parameters is on the AREA_PARAM\_\* constants.
 
@@ -412,9 +415,15 @@ Set the transform matrix for an area.
 
 Add a body to the list of bodies exempt from collisions.
 
+.. _class_Physics2DServer_body_add_force:
+
+- void  **body_add_force**  **(** :ref:`RID<class_rid>` body, :ref:`Vector2<class_vector2>` offset, :ref:`Vector2<class_vector2>` force  **)**
+
+Add a positioned force to the applied force and torque. As with :ref:`body_apply_impulse<class_Physics2DServer_body_apply_impulse>`, both the force and the offset from the body origin are in global coordinates. A force differs from an impulse in that, while the two are forces, the impulse clears itself after being applied.
+
 .. _class_Physics2DServer_body_add_shape:
 
-- void  **body_add_shape**  **(** :ref:`RID<class_rid>` body, :ref:`RID<class_rid>` shape, :ref:`Matrix32<class_matrix32>` transform=1,0, 0,1, 0,0  **)**
+- void  **body_add_shape**  **(** :ref:`RID<class_rid>` body, :ref:`RID<class_rid>` shape, :ref:`Matrix32<class_matrix32>` transform=((1, 0), (0, 1), (0, 0))  **)**
 
 Add a shape to the body, along with a transform matrix. Shapes are usually referenced by their index, so you should track which shape has a given index.
 
@@ -578,7 +587,7 @@ Continuous collision detection tries to predict where a moving body will collide
 
 .. _class_Physics2DServer_body_set_force_integration_callback:
 
-- void  **body_set_force_integration_callback**  **(** :ref:`RID<class_rid>` body, :ref:`Object<class_object>` receiver, :ref:`String<class_string>` method, var userdata=NULL  **)**
+- void  **body_set_force_integration_callback**  **(** :ref:`RID<class_rid>` body, :ref:`Object<class_object>` receiver, :ref:`String<class_string>` method, :ref:`Variant<class_variant>` userdata=NULL  **)**
 
 Set the function used to calculate physics for an object, if that object allows it (see :ref:`body_set_omit_force integration<class_Physics2DServer_body_set_omit_force integration>`).
 
@@ -638,7 +647,7 @@ Mark a body's shape as a trigger. A trigger shape cannot affect other bodies, bu
 
 .. _class_Physics2DServer_body_set_shape_metadata:
 
-- void  **body_set_shape_metadata**  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` shape_idx, var metadata  **)**
+- void  **body_set_shape_metadata**  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` shape_idx, :ref:`Variant<class_variant>` metadata  **)**
 
 Set metadata of a shape within a body. This metadata is different from :ref:`Object.set_meta<class_Object_set_meta>`, and can be retrieved on shape queries.
 
@@ -656,7 +665,7 @@ Assign a space to the body (see :ref:`create_space<class_Physics2DServer_create_
 
 .. _class_Physics2DServer_body_set_state:
 
-- void  **body_set_state**  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` state, var value  **)**
+- void  **body_set_state**  **(** :ref:`RID<class_rid>` body, :ref:`int<class_int>` state, :ref:`Variant<class_variant>` value  **)**
 
 Set a body state (see BODY_STATE\* constants).
 
@@ -752,7 +761,7 @@ Return the type of shape (see SHAPE\_\* constants).
 
 .. _class_Physics2DServer_shape_set_data:
 
-- void  **shape_set_data**  **(** :ref:`RID<class_rid>` shape, var data  **)**
+- void  **shape_set_data**  **(** :ref:`RID<class_rid>` shape, :ref:`Variant<class_variant>` data  **)**
 
 Set the shape data that defines its shape and size. The data to be passed depends on the kind of shape created :ref:`shape_get_type<class_Physics2DServer_shape_get_type>`.
 
