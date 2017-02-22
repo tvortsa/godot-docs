@@ -1,4 +1,4 @@
-Learning step by step
+Изучение шаг за шагом
 =====================
 
 .. toctree::
