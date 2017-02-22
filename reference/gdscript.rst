@@ -817,51 +817,51 @@ Multipatterns:
 
 
 
-Classes
+Классы
 ~~~~~~~
 
-By default, the body of a script file is an unnamed class and it can
-only be referenced externally as a resource or file. Class syntax is
-meant to be very compact and can only contain member variables or
-functions. Static functions are allowed, but not static members (this is
-in the spirit of thread safety, since scripts can be initialized in
-separate threads without the user knowing). In the same way, member
-variables (including arrays and dictionaries) are initialized every time
-an instance is created.
+По умолчанию, тело файла скрипта это безымянный класс и извне к нему можно
+обратиться только как к ресурсу или файлу. 
+Синтаксис Class очень компактный и может содержать только переменные - члены
+или функции. 
+Статические функции допустимы, но не статические члены (это в духе потоко-безопасности,
+скрипты могут инициализироваться в отдельных потоках без ведома пользователя).
+Тким же образом, переменные члены (включая массивы и словари) инициализируются 
+каждый раз при создании экземпляра.
 
-Below is an example of a class file. 
+Ниже примеры файла класса. 
 
 ::
 
-    # saved as a file named myclass.gd
+    # сохранен как файл с именем myclass.gd
 
     var a = 5
 
     func print_value_of_a():
         print(a)
 
-Inheritance
+наследование
 ^^^^^^^^^^^
 
-A class (stored as a file) can inherit from 
+Класс (сохраненный как файлe) может наследовать от 
 
-- A global class
-- Another class file 
-- An inner class inside another class file. 
+- Глобального класса
+- Другого файла-класса 
+- Внутреннего класса внутри другого файла-класса. 
 
-Multiple inheritance is not allowed. 
+Множественного наследования нет. 
 
-Inheritance uses the ``extends`` keyword:
+Наследование использует ключевое слово ``extends`` :
 
 ::
 
-    # Inherit/extend a globally available class
+    # Наследование/расширение глобально доступного класса
     extends SomeClass 
     
-    # Inherit/extend a named class file
+    # Наследование/расширение именованного класса-файла
     extends "somefile.gd" 
     
-    # Inherit/extend an inner class in another file
+    # Наследование/расширение внутреннего класса из другого класса
     extends "somefile.gd".SomeInnerClass
 
 
@@ -879,30 +879,29 @@ the ``extends`` keyword can be used as an operator instead:
     if (entity extends enemy_class):
         entity.apply_damage()
 
-Class Constructor
+Конструктор класса
 ^^^^^^^^^^^^^^^^^
 
-The class constructor, called on class instantiation, is named ``_init``. 
-As mentioned earlier, the constructors of parent classes are called automatically when
-inheriting a class. So there is usually no need to call ``._init()`` explicitly.
+Конструктор класса, вызывающий инстанцирование класса, называется ``_init``. 
+Как упоминалось ранее конструкторы родительского класса вызываются автоматически
+при наследовании класса. Поэтому не нужно вызывать ``._init()`` явно.
 
-If a parent constructor takes arguments, they are passed like this:
+Если родительский конструктор принимает аргументы, они передаются так:
 
 ::
 
     func _init(args).(parent_args):
        pass
 
-Inner classes
+Внутренние классы
 ^^^^^^^^^^^^^
 
-A class file can contain inner classes. Inner classes are defined using the
-``class`` keyword. They are instanced using the ``ClassName.new()`` 
-function.
+Файл-класс может содержать внутренние классы. Внутренние классы объявляют
+ключевым словом ``class`` . Они инстанцируются используя функцию ``ClassName.new()`` .
 
 ::
 
-    # inside a class file
+    # внутри файла класса
 
     # An inner class in this class file
     class SomeInnerClass:
@@ -915,7 +914,7 @@ function.
         var c = SomeInnerClass.new() 
         c.print_value_of_a()
 
-Classes as resources
+Классы как ресурсы
 ^^^^^^^^^^^^^^^^^^^^
 
 Classes stored as files are treated as :ref:`resources <class_GDScript>`. They
@@ -943,7 +942,7 @@ is done by using the ``export`` keyword::
 
     extends Button
 
-    export var number = 5  # value will be saved and visible in the property editor
+    export var number = 5  # значение будет сохранено и видимо в редакторе свойств
 
 An exported variable must be initialized to a constant expression or have an
 export hint in the form of an argument to the export keyword (see below).
@@ -1031,7 +1030,7 @@ It must be noted that even if the script is not being run while at the
 editor, the exported properties are still editable (see below for
 "tool").
 
-Exporting bit flags
+Экспорт битовых флагов
 ^^^^^^^^^^^^^^^^^^^
 
 Integers used as bit flags can store multiple ``true``/``false`` (boolean)
@@ -1059,7 +1058,7 @@ on).
 Using bit flags requires some understanding of bitwise operations. If in
 doubt, boolean variables should be exported instead.
 
-Exporting arrays
+Экспорт массивов
 ^^^^^^^^^^^^^^^^
 
 Exporting arrays works but with an important caveat: While regular
@@ -1087,7 +1086,7 @@ initializers, but they must be constant expressions.
     var b = [a,2,3]
 
 
-Setters/getters
+Сеттеры/геттеры
 ~~~~~~~~~~~~~~~
 
 It is often useful to know when a class' member variable changes for 
@@ -1143,7 +1142,7 @@ illustration of this:
         self.myinteger=5
         print(self.myinteger)
 
-Tool mode
+режим Tool 
 ~~~~~~~~~
 
 Scripts, by default, don't run inside the editor and only the exported
@@ -1160,7 +1159,7 @@ placed at the top of the file:
     func _ready():
         print("Hello")
 
-Memory management
+Управление памятью
 ~~~~~~~~~~~~~~~~~
 
 If a class inherits from :ref:`class_Reference`, then instances will be
@@ -1172,7 +1171,7 @@ avoid reference cycles that can't be freed, a ``weakref`` function is
 provided for creating weak references.
 
 
-Signals
+Сигналы
 ~~~~~~~
 
 It is often desired to send a notification that something happened in an
@@ -1311,7 +1310,7 @@ signal is received, execution will recommence. Here are some examples:
     # Wait 5 seconds, then resume execution (Godot 2.2+)
     yield( get_tree().create_timer(5.0), "timeout" )
 
-Onready keyword
+ключевое слово Onready 
 ~~~~~~~~~~~~~~~
 
 When using nodes, it's very common to desire to keep references to parts
