@@ -3,22 +3,19 @@
 GDScript
 ========
 
-Introduction
+Введение
 ------------
 
-*GDScript* is a high level, dynamically typed programming language used to
-create content. It uses a syntax similar to 
+*GDScript* это высоко-уровневый, динамически типизированный язык программирования используемый для создания контента. Он использует синтаксис похожий на
 `Python <https://en.wikipedia.org/wiki/Python_%28programming_language%29>`_ 
-(blocks are indent-based and many keywords are similar). Its goal is 
-to be optimized for and tightly integrated with Godot Engine, allowing great
-flexibility for content creation and integration.
+(блоки отступа и большинство ключевых слов похоже). Его цель быть оптимизированным и тесно интегрированным с Godot Engine, позволяет гибкое создание контента.
 
-History
+История
 ~~~~~~~
 
-Initially, Godot was designed to support multiple scripting languages
-(this ability still exists today). However, only GDScript is in use
-right now. There is a little history behind this.
+Изначально, Godot разрабатывался для поддержки многих языков скриптинга
+(эта возможность существует до сих пор). Тем не менее, только GDScript используется сейчас.
+There is a little history behind this.
 
 In the early days, the engine used the `Lua <http://www.lua.org>`__
 scripting language. Lua is fast, but creating bindings to an object
@@ -31,25 +28,22 @@ was `Squirrel <http://squirrel-lang.org>`__, but it was dropped as well.
 At that point, it became evident that a custom scripting language could 
 more optimally make use of Godot's particular architecture:
 
--  Godot embeds scripts in nodes. Most languages are not designed with
-   this in mind.
--  Godot uses several built-in data types for 2D and 3D math. Script
-   languages do not provide this, and binding them is inefficient.
--  Godot uses threads heavily for lifting and initializing data from the
-   net or disk. Script interpreters for common languages are not
-   friendly to this.
--  Godot already has a memory management model for resources, most
-   script languages provide their own, which results in duplicate
-   effort and bugs.
--  Binding code is always messy and results in several failure points,
-   unexpected bugs and generally low maintainability.
+-  Godot включает скрипты в узлы. Большинство языков не учитывают такого.
+-  Godot использует несколько встроенных типов данных для 2D и 3D математики. 
+   Языки скриптинга не делают такого, и вставляют их неэффективно.
+-  Godot использует потоки для извлечения и инициализации данных из сети
+   или с диска. Интерпретатор скриптов для большинства языков не умеют это.
+-  Godot имеет модель управления памятью под ресурсы, большинство скриптовых языков 
+   имеют свой собственный что приводит к дублированию и ошибкам.
+-  Связывание кода всегда неэффективно со многими точками ошибок,
+   неожиданными багами и сложностями поддержки.
 
 The result of these considerations is *GDScript*. The language and
 interpreter for GDScript ended up being smaller than the binding code itself
 for Lua and Squirrel, while having equal functionality. With time, having a
 built-in language has proven to be a huge advantage.
 
-Example of GDScript
+Пример GDScript
 ~~~~~~~~~~~~~~~~~~~
 
 Some people can learn better by just taking a look at the syntax, so
@@ -57,20 +51,20 @@ here's a simple example of how GDScript looks.
 
 ::
 
-    # a file is a class!
+    # файл это class!
 
-    # inheritance
+    # наследование
 
     extends BaseClass
 
-    # member variables
+    # переменные члены
 
     var a = 5 
     var s = "Hello"
     var arr = [1, 2, 3]
     var dict = {"key":"value", 2:3}
 
-    # constants
+    # константы
 
     const answer = 42
     const thename = "Charly"
@@ -80,12 +74,12 @@ here's a simple example of how GDScript looks.
     enum {UNIT_NEUTRAL, UNIT_ENEMY, UNIT_ALLY}
     enum Named {THING_1, THING_2, ANOTHER_THING = -1}
 
-    # built-in vector types
+    # встроенные типы vector types
 
     var v2 = Vector2(1, 2)
     var v3 = Vector3(1, 2, 3)
 
-    # function
+    # функция
 
     func some_function(param1, param2):
         var local_var = 5
@@ -107,89 +101,90 @@ here's a simple example of how GDScript looks.
         return local_var2
 
 
-    # inner class
+    # внутренний class
 
     class Something:
         var a = 10
 
-    # constructor
+    # конструктор
 
     func _init():
         print("constructed!")
         var lv = Something.new()
         print(lv.a)
 
-If you have previous experience with statically typed languages such as
-C, C++, or C# but never used a dynamically typed one before, it is advised you
-read this tutorial: :ref:`doc_gdscript_more_efficiently`.
+Если у вас есть предыдущий опыт со статически типизированными языкамитакими как
+C, C++, или C# но вы не сталкивались с динамически-типизированными языками, прочтите 
+этот туториал: :ref:`doc_gdscript_more_efficiently`.
 
-Language
+Язык
 --------
 
-In the following, an overview is given to GDScript. Details, such as which 
-methods are available to arrays or other objects, should be looked up in
-the linked class descriptions. 
+Далее, обзор-введение в GDScript. Детали, такие как 
+методы доступные для массивов и других объектов, могут быть найдены
+в описании их классов. 
 
-Identifiers
+Идентификаторы
 ~~~~~~~~~~~
 
-Any string that restricts itself to alphabetic characters (``a`` to
-``z`` and ``A`` to ``Z``), digits (``0`` to ``9``) and ``_`` qualifies
-as an identifier. Additionally, identifiers must not begin with a digit.
-Identifiers are case-sensitive (``foo`` is different from ``FOO``).
+Любая строка ограничена алфавитными символами (от ``a`` до
+``z`` и ``A`` до ``Z``), цифрами (от ``0`` до ``9``) и ``_`` квалифицируется
+как идентификатор. Кроме того, идентификатор не может начинаться с цифры.
+Идентификаторы регистро-зависимы (``foo`` отличается от ``FOO``).
 
-Keywords
+Ключевые слова
 ~~~~~~~~
 
-The following is the list of keywords supported by the language. Since
-keywords are reserved words (tokens), they can't be used as identifiers.
+Вот список ключевых слов поддерживаемых языком. Поскольку ключевые слова
+являются зарезервированными словами (tokens), они не могут использоваться
+как идентификаторы.
 
 +------------+---------------------------------------------------------------------------------------------------------------+
-|  Keyword   | Description                                                                                                   |
+|  Ключевое слово   | Описание                                                                                                   |
 +============+===============================================================================================================+
-| if         | See `if/else/elif`_.                                                                                          |
+| if         | см `if/else/elif`_.                                                                                          |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| elif       | See `if/else/elif`_.                                                                                          |
+| elif       | см `if/else/elif`_.                                                                                          |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| else       | See `if/else/elif`_.                                                                                          |
+| else       | см `if/else/elif`_.                                                                                          |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| for        | See for_.                                                                                                     |
+| for        | см for_.                                                                                                     |
 +------------+---------------------------------------------------------------------------------------------------------------+
 | do         | Reserved for future implementation of do...while loops.                                                       |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| while      | See while_.                                                                                                   |
+| while      | см while_.                                                                                                   |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| match      | See match_.                                                                                                   |
+| match      | см match_.                                                                                                   |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| switch     | Reserved for future implementation.                                                                           |
+| switch     | зарезервировано на будущее.                                                                           |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| case       | Reserved for future implementation.                                                                           |
+| case       | зарезервировано на будущее.                                                                           |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| break      | Exits the execution of the current ``for`` or ``while`` loop.                                                 |
+| break      | сейчас существует реализация для циклов ``for`` или ``while``.                                                 |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| continue   | Immediately skips to the next iteration of the ``for`` or ``while`` loop.                                     |
+| continue   | немедленный переход к следующей итерации ``for`` или ``while`` цикла.                                     |
 +------------+---------------------------------------------------------------------------------------------------------------+
 | pass       | Used where a statement is required syntactically but execution of code is undesired, e.g. in empty functions. |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| return     | Returns a value from a function.                                                                              |
+| return     | возврат значений из функции.                                                                              |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| class      | Defines a class.                                                                                              |
+| class      | объявляет class.                                                                                              |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| extends    | Defines what class to extend with the current class. Also tests whether a variable extends a given class.     |
+| extends    | говорит что class расширяет текуший class.Также проверяет расширяет ли переменная это данный класс.     |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| tool       | Executes the script in the editor.                                                                            |
+| tool       | выполняет script в редакторе.                                                                            |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| signal     | Defines a signal.                                                                                             |
+| signal     | объявляет signal.                                                                                             |
 +------------+---------------------------------------------------------------------------------------------------------------+
 | func       | Defines a function.                                                                                           |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| static     | Defines a static function. Static member variables are not allowed.                                           |
+| static     | объявляет статическую функцию. Static member variables are not allowed.                                           |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| const      | Defines a constant.                                                                                           |
+| const      | объявляет константу.                                                                                           |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| enum       | Defines an enum. (Godot 2.2+)                                                                                 |
+| enum       | объявляет enum. (Godot 2.2+)                                                                                 |
 +------------+---------------------------------------------------------------------------------------------------------------+
-| var        | Defines a variable.                                                                                           |
+| var        | объявляет переменную.                                                                                           |
 +------------+---------------------------------------------------------------------------------------------------------------+
 | onready    | Initializes a variable once the Node the script is attached to and its children are part of the scene tree.   |
 +------------+---------------------------------------------------------------------------------------------------------------+
@@ -286,118 +281,116 @@ considered a comment.
         lines is considered
         a comment """
 
-Built-in types
+Встроенные типы
 --------------
 
-Basic built-in types
+Базовые встроенные типы
 ~~~~~~~~~~~~~~~~~~~~
 
-A variable in GDScript can be assigned to several built-in types.
+Переменной в GDScript может быть присвоено значение нескольких типов.
 
 null
 ^^^^
 
-``null`` is an empty data type that contains no information and can not
-be assigned any other value. 
+``null`` пустой тип данных который не содержит никакой информации
+и не может быть назначено никакой другое значение. 
 
 bool
 ^^^^
 
-The Boolean data type can only contain ``true`` or ``false``.
+тип Boolean может быть только ``true`` или ``false``.
 
 int
 ^^^
 
-The integer data type can only contain integer numbers, (both negative
-and positive).
+целочисленный тип данных может содержать целые числа, (положительные и отрицательные).
 
 float
 ^^^^^
 
-Used to contain a floating point value (real numbers).
+Используется для хранения чисел с плавающей точкой (real numbers).
 
 :ref:`String <class_String>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A sequence of characters in `Unicode format <https://en.wikipedia.org/wiki/Unicode>`_. Strings can contain the
-`standard C escape sequences <https://en.wikipedia.org/wiki/Escape_sequences_in_C>`_.
-GDScript supports :ref:`format strings aka printf functionality
+набор символов в формате `Unicode  <https://en.wikipedia.org/wiki/Unicode>`_. Строки могут содержать
+`стандартные C escape sequences <https://en.wikipedia.org/wiki/Escape_sequences_in_C>`_.
+GDScript поддерживает :ref:`format strings aka printf functionality
 <doc_gdscript_printf>`.
 
-Vector built-in types
+встроенный типы Vector
 ~~~~~~~~~~~~~~~~~~~~~
 
 :ref:`Vector2 <class_Vector2>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2D vector type containing ``x`` and ``y`` fields. Can alternatively
-access fields as ``width`` and ``height`` for readability. Can also be
-accessed as array.
+2D вектор содержит поля  ``x`` и ``y`` . Альтернативно к полям можно
+обратиться как ``width`` и ``height`` для читабельности. А также можно
+обратиться как к массиву.
 
 :ref:`Rect2 <class_Rect2>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2D Rectangle type containing two vectors fields: ``pos`` and ``size``.
-Alternatively contains an ``end`` field which is ``pos+size``.
+2D прямоугольник имеет два векторных поля : ``pos`` и ``size``.
+Альтернативно содержит поле ``end`` с ``pos+size``.
 
 :ref:`Vector3 <class_Vector3>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3D vector type containing ``x``, ``y`` and ``z`` fields. This can also
-be accessed as an array.
+3D вектор содержит поля ``x``, ``y`` и ``z`` . Также доступны как массив.
 
 :ref:`Matrix32 <class_Matrix32>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3x2 matrix used for 2D transforms.
+3x2 матрица используемая для 2D трансформаций.
 
 :ref:`Plane <class_Plane>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3D Plane type in normalized form that contains a ``normal`` vector field
-and a ``d`` scalar distance.
+3D плоскость в нормализованной форме содержит векторное поле ``normal`` 
+и скалярное значение дистанции ``d``.
 
 :ref:`Quat <class_Quat>`
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Quaternion is a datatype used for representing a 3D rotation. It's
-useful for interpolating rotations.
+Quaternion это тип данных для представления 3D вращения. Полезно
+для интерполяции вращений.
 
 :ref:`AABB <class_AABB>`
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Axis Aligned bounding box (or 3D box) contains 2 vectors fields: ``pos``
-and ``size``. Alternatively contains an ``end`` field which is
-``pos+size``. As an alias of this type, ``Rect3`` can be used
+Axis Aligned bounding box - габаритный бокс выровненный по осям
+(или 3D box) содержит 2 векторных поля: ``pos``
+и ``size``. Альтернативно содержит поле ``end`` и
+``pos+size``. Как алиас типа, ``Rect3`` can be used
 interchangeably.
 
 :ref:`Matrix3 <class_Matrix3>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3x3 matrix used for 3D rotation and scale. It contains 3 vector fields
-(``x``, ``y`` and ``z``) and can also be accessed as an array of 3D
-vectors.
+3x3 матрица для 3D вращения и масштабирования. Содержит 3 векторных поля
+(``x``, ``y`` и ``z``) доступных также как массив 3D
+векторов.
 
 :ref:`Transform <class_Transform>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3D Transform contains a Matrix3 field ``basis`` and a Vector3 field
+3D Transform содержит поле Matrix3 ``basis`` и поле Vector3 
 ``origin``.
 
-Engine built-in types
+Встроенные типы в Engine
 ~~~~~~~~~~~~~~~~~~~~~
 
 :ref:`Color <class_Color>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Color data type contains ``r``, ``g``, ``b``, and ``a`` fields. It can
-also be accessed as ``h``, ``s``, and ``v`` for hue/saturation/value.
+тип данных Color содержит поля ``r``, ``g``, ``b``, и ``a`` . Доступные также как ``h``, ``s``, и ``v`` для hue/saturation/value.
 
 :ref:`Image <class_Image>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Contains a custom format 2D image and allows direct access to the
-pixels.
+Содержит кастомный формат 2D изображения и позволяет прямой доступ
+к пикселям.
 
 :ref:`NodePath <class_NodePath>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -413,13 +406,13 @@ Resource ID (RID). Servers use generic RIDs to reference opaque data.
 :ref:`Object <class_Object>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Base class for anything that is not a built-in type.
+Базовый класс для всего что не является встроенным типом.
 
 :ref:`InputEvent <class_InputEvent>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Events from input devices are contained in very compact form in
-InputEvent objects. Due to the fact that they can be received in high
+События от устройств ввода содержат в очень компактной форме в виде объектов
+InputEvent. Due to the fact that they can be received in high
 amounts from frame to frame they are optimized as their own data type.
 
 Container built-in types
@@ -436,31 +429,31 @@ Starting with Godot 2.1, indices may be negative like in Python, to count from t
 
     var arr=[]
     arr=[1, 2, 3]
-    var b = arr[1]            # this is 2
-    var c = arr[arr.size()-1] # this is 3
-    var d = arr[-1]           # same as the previous line, but shorter
-    arr[0] = "Hi!"            # replacing value 1 with "Hi"
-    arr.append(4)             # array is now ["Hi", 2, 3, 4]
+    var b = arr[1]            # это 2
+    var c = arr[arr.size()-1] # это 3
+    var d = arr[-1]           # как и предыдущая строка но короче
+    arr[0] = "Hi!"            # заменяет значение 1 на "Hi"
+    arr.append(4)             # теперь массив ["Hi", 2, 3, 4]
 
-GDScript arrays are allocated linearly in memory for speed. Very
-large arrays (more than tens of thousands of elements) may however cause
-memory fragmentation. If this is a concern special types of 
-arrays are available. These only accept a single data type. They avoid memory 
-fragmentation and also use less memory but are atomic and tend to run slower than generic
-arrays. They are therefore only recommended to use for very large data sets: 
+GDScript массивы расположены в памяти линейно для скорости. Очень большие массивы
+(больше 10 тыс. элементов) могут приводить к фрагментации памяти.
+Для этого сущестуют спец. типы массивов. 
+Которые принимают только значения одного типа. Они позволяют избежать фрагментации
+памяти и занимают меньше памяти но они atomic and tend to run slower than generic
+arrays. Они рекомендуются только для очень больших массивов данных: 
 
-- :ref:`ByteArray <class_ByteArray>`: An array of bytes (integers from 0 to 255).
-- :ref:`IntArray <class_IntArray>`: An array of integers.
-- :ref:`FloatArray <class_FloatArray>`: An array of floats.
-- :ref:`StringArray <class_StringArray>`: An array of strings.
-- :ref:`Vector2Array <class_Vector2Array>`: An array of :ref:`Vector2 <class_Vector2>` objects.
-- :ref:`Vector3Array <class_Vector3Array>`: An array of :ref:`Vector3 <class_Vector3>` objects.
-- :ref:`ColorArray <class_ColorArray>`: An array of :ref:`Color <class_Color>` objects.
+- :ref:`ByteArray <class_ByteArray>`: Массив байтов (целые от 0 до 255).
+- :ref:`IntArray <class_IntArray>`: Массив целых.
+- :ref:`FloatArray <class_FloatArray>`: Массив дробных с плав. точкой.
+- :ref:`StringArray <class_StringArray>`: Массив строк.
+- :ref:`Vector2Array <class_Vector2Array>`: Массив объектов :ref:`Vector2 <class_Vector2>` .
+- :ref:`Vector3Array <class_Vector3Array>`: Массив объектов :ref:`Vector3 <class_Vector3>` .
+- :ref:`ColorArray <class_ColorArray>`: Массив объектов :ref:`Color <class_Color>` .
 
 :ref:`Dictionary <class_Dictionary>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Associative container which contains values referenced by unique keys.
+Ассоциативный контейнер который содержит значения ссылающиеся по уникальным ключам.
 
 ::
 
@@ -487,53 +480,52 @@ start with a digit.
         morekey = "Hello"
     }
 
-To add a key to an existing dictionary, access it like an existing key and
-assign to it::
+Добавить ключ к существующему словарю можно обращаясь к нему как к существующему
+ключу и присваивая ему значение::
 
-    var d = {} # create an empty Dictionary
-    d.Waiting = 14 # add String "Waiting" as a key and assign the value 14 to it
-    d[4] = "hello" # add integer `4` as a key and assign the String "hello" as its value
-    d["Godot"] = 3.01 # add String "Godot" as a key and assign the value 3.01 to it
+    var d = {} # создает пустой словарь
+    d.Waiting = 14 # добавляет строку "Waiting" как ключ и назначает ему значение 14 
+    d[4] = "hello" # добавляет целое `4` как ключ и назначает ему строку "hello" как значение
+    d["Godot"] = 3.01 # добавляет строку "Godot" как ключ и назначает значение 3.01 
 
 Data
 ----
 
-Variables
+Переменные
 ~~~~~~~~~
 
-Variables can exist as class members or local to functions. They are
-created with the ``var`` keyword and may, optionally, be assigned a
-value upon initialization.
+Переменные могут существовать как члены класса или локально в функциях. Они создаются
+ключевым словом ``var`` и, опционально, могут получать значения при объявлении.
 
 ::
 
-    var a  # data type is null by default
+    var a  # по-умолчанию тип данных - null  
     var b = 5
     var c = 3.8
-    var d = b + c  # variables are always initialized in order
+    var d = b + c  # переменные всегда инициализируются по-порядку
 
-Constants
+Константы
 ~~~~~~~~~
 
 Constants are similar to variables, but must be constants or constant
-expressions and must be assigned on initialization. 
+expressions должны инициализироваться при объявлении. 
 
 ::
 
     const a = 5
     const b = Vector2(20, 20)
-    const c = 10 + 20 # constant expression
+    const c = 10 + 20 # константное выражение
     const d = Vector2(20, 30).x  # constant expression: 20
     const e = [1, 2, 3, 4][0]  # constant expression: 1
-    const f = sin(20)  # sin() can be used in constant expressions
-    const g = x + 20  # invalid; this is not a constant expression!
+    const f = sin(20)  # sin() может использоваться в константных выражениях
+    const g = x + 20  # invalid; это НЕ константное выражение!
     
 Enums
 ^^^^^
 
-*Note, only available in Godot 2.2 or higher.*
+*Note, только в Godot 2.2 и выше.*
 
-Enums are basically a shorthand for constants, and are pretty useful if you
+Enums основан на константах, and are pretty useful if you
 want to assign consecutive integers to some constant.
 
 If you pass a name to the enum, it would also put all the values inside a
@@ -542,78 +534,78 @@ constant dictionary of that name.
 ::
 
     enum {TILE_BRICK, TILE_FLOOR, TILE_SPIKE, TILE_TELEPORT}
-    # Is the same as:
+    # То же что и:
     const TILE_BRICK = 0
     const TILE_FLOOR = 1
     const TILE_SPIKE = 2
     const TILE_TELEPORT = 3
 
     enum State {STATE_IDLE, STATE_JUMP = 5, STATE_SHOOT}
-    # Is the same as:
+    # То же что и:
     const STATE_IDLE = 0
     const STATE_JUMP = 5
     const STATE_SHOOT = 6
     const State = {STATE_IDLE = 0, STATE_JUMP = 5, STATE_SHOOT = 6}
 
 
-Functions
+Функции
 ~~~~~~~~~
 
-Functions always belong to a `class <Classes_>`_. The scope priority for
-variable look-up is: local → class member → global. The ``self`` variable is
-always available and is provided as an option for accessing class members, but
-is not always required (and should *not* be sent as the function's first
-argument, unlike Python).
+Функции всегда принадлежат классам `class <Classes_>`_. 
+Приоритет области действия для поиска переменной: 
+локальная → член класса → глобальная. Переменная ``self`` всегда доступна
+и представляется как опция для доступа к членам класса, но не всегда требуется
+(and should *not* be sent as the function's first argument, unlike Python).
 
 ::
 
     func myfunction(a, b):
         print(a)
         print(b)
-        return a + b  # return is optional; without it null is returned
+        return a + b  # return опционален; без него вернется null 
 
-A function can ``return`` at any point. The default return value is ``null``.
+Функция может ``return`` в любом местеt. Дефолтное возвращаемое значение ``null``.
 
 Referencing Functions
 ^^^^^^^^^^^^^^^^^^^^^
 
-To call a function in a *base class* (i.e. one ``extend``-ed in your current class),
-prepend ``.`` to the function name:
+Для вызова функций в *base class* (i.e. one ``extend``-ed в вашем текущем классе),
+предваряйте ``.`` перед именем функции:
 
 ::
 
     .basefunc(args)
 
-Contrary to Python, functions are *not* first class objects in GDScript. This
-means they cannot be stored in variables, passed as an argument to another
-function or be returned from other functions. This is for performance reasons.
+В отличие от Python, функции *НЕ* объекты первого класса в GDScript.
+Это значит что они не могут быть сохранены в переменных variables, 
+переданы как аргумент другим функциям или озвращены из других функций.
+Это все из соображений производительности.
 
-To reference a function by name at runtime, (e.g. to store it in a variable, or
-pass it to another function as an argument) one must use the ``call`` or
-``funcref`` helpers::
+Для обращения к функции в рантайме, (e.g. to store it in a variable, or
+pass it to another function as an argument) one нужно использовать ``call`` или
+``funcref`` хелперы::
    
-    # Call a function by name in one step
+    # Вызов функции по-имени в один шаг
     mynode.call("myfunction", args)  
 
-    # Store a function reference 
+    # Сохранение обращения к функции 
     var myfunc = funcref(mynode, "myfunction")
-    # Call stored function reference 
+    
+    # Вызов сохраненного обращения к функции 
     myfunc.call_func(args)
 
 
-Remember that default functions like  ``_init``, and most
-notifications such as ``_enter_tree``, ``_exit_tree``, ``_process``,
-``_fixed_process``, etc. are called in all base classes automatically.
-So there is only a need to call the function explicitly when overloading
-them in some way. 
+Помните что дефолтные функции такие как  ``_init``, и большинство
+нотификаций таких как``_enter_tree``, ``_exit_tree``, ``_process``,
+``_fixed_process``, etc. вызываются во всех базовых классах автоматически.
+Так что вызывать их явно нужно только если вы их overloading каким-то образом. 
 
 
-Static functions
+Статические функции
 ^^^^^^^^^^^^^^^^
 
-A function can be declared static. When a function is static it has no
-access to the instance member variables or ``self``. This is mainly
-useful to make libraries of helper functions:
+Функция может быть объявлена статичной. Статическая функция не имеет доступа к членам класса
+или ``self``. Это полезно в основном для создания библиотек хелперов функций:
 
 ::
 
@@ -621,12 +613,11 @@ useful to make libraries of helper functions:
         return a + b
 
 
-Statements and control flow
+Операторы управления потоком выполнения
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Statements are standard and can be assignments, function calls, control
-flow structures, etc (see below). ``;`` as a statement separator is
-entirely optional.
+Операторы стандартны и могут быть присваиваться, вызовами функции, структурами
+управления потоком, и т.п.. ``;`` как разделитель операторов полностью опционален.
 
 if/else/elif
 ^^^^^^^^^^^^
