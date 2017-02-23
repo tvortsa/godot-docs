@@ -38,8 +38,8 @@
 для каждого узла в диаграмме, и использование инстанцирования 
 (кодом или редактором) для представления связей.
 
-Most of the time programming games (or software in general) is spent
-designing an architecture and fitting game components to that
+Большую часть времени программирования игр (и вообще программ) тратится
+на разработку архитектуры fitting game components to that
 architecture. Designing based on scenes replaces that and makes
 development much faster and more straightforward, allowing to
 concentrate on the game itself. Scene/Instancing based design is
