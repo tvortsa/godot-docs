@@ -1,48 +1,44 @@
 .. _doc_scenes_and_nodes:
 
-Scenes and nodes
+Сцены и узлы
 ================
 
-Introduction
+Введение
 ------------
 
 .. image:: /img/chef.png
 
-Imagine for a second that you are not a game developer anymore. Instead,
-you're a chef! Change your hipster outfit for a toque and a double
-breasted jacket. Now, instead of making games, you create new and
-delicious recipes for your guests.
+Представьте что вы больше не разработчик. Вы шеф-повар. 
+Сейчас, вместо создания игр, вы создаете новые деликатесы.
 
-So, how does a chef create a recipe? Recipes are divided into two
-sections: the first is the ingredients and the second is the
-instructions to prepare it. This way, anyone can follow the recipe and
-savor your magnificent creation.
+Итак, как повар создает рецепты? Рецепты делятся на два типа вещей:
+ингридиенты и инструкции по их приготовлению.
+Таким образом любой, следуя рецепту может создать удивительное творение.
 
-Making games in Godot feels pretty much the same way. Using the engine
-feels like being in a kitchen. In this kitchen, *nodes* are like a
-refrigerator full of fresh ingredients to cook with.
+Создание игр в Godot очень похоже. Использование движка как кухни.
+В этой кухне, *nodes* (узлы) как холодильник наолненный свежими ингридиентами.
 
-There are many types of nodes, some show images, others play sound,
-other nodes display 3D models, etc. There's dozens of them.
+Существует много типов узлов, некоторые отображают изображение, другие воспроизводят звук,
+а третьи - 3D модели, и т.д. .
 
-Nodes
+Узлы
 -----
 
-But let's start with the basics. A node is a basic element for creating a
-game, it has the following characteristics:
+Но давайте начнем с основ. Узел это базовый элемент для создания игры,
+он обладает следующими характеристиками:
 
--  Has a name.
--  Has editable properties.
--  Can receive a callback to process every frame.
--  Can be extended (to have more functions).
--  Can be added to other nodes as children.
+-  Имя.
+-  редактируемые свойства.
+-  может принимать callback для обработки каждый кадр.
+-  может быть расширен (получить больше функций).
+-  может быть добавлен к другому узлу как потомок.
 
 .. image:: /img/tree.png
 
-The last one is very important. Nodes can have other nodes as
-children. When arranged in this way, the nodes become a **tree**.
+Последнее крайне важно. Узлы могут иметь другие узлы в качестве потомков.
+Узлы тогда можно представить как **дерево**.
 
-In Godot, the ability to arrange nodes in this way creates a powerful
+В Godot, the ability to arrange nodes in this way creates a powerful
 tool for organizing projects. Since different nodes have different
 functions, combining them allows for creation of more complex functions.
 
@@ -50,7 +46,7 @@ This is probably not clear yet and makes little sense, but everything
 will click a few sections ahead. The most important fact to remember for
 now is that nodes exist and can be arranged this way.
 
-Scenes
+Сцены
 ------
 
 .. image:: /img/scene_tree_example.png
@@ -61,62 +57,58 @@ step is to explain what a Scene is.
 A scene is composed of a group of nodes organized hierarchically (in
 tree fashion). It has the following properties:
 
--  A scene always has only one root node.
--  Scenes can be saved to disk and loaded back.
--  Scenes can be *instanced* (more on that later).
--  Running a game means running a scene.
--  There can be several scenes in a project, but for it to start, one of
-   them must be selected to be loaded first.
+-  Сцена всегда имеет только один корневой узел.
+-  Сцены можно сохранить на диск и загрузить с диска.
+-  Сцены могут быть *инстанцированы* (об этом чуть позже).
+-  Запустить игру значит запустить сцену.
+-  В проекте может быть много сцен, но для их запуска, должна быть выбрана 
+   для загрузки первой.
 
-Basically, the Godot editor is a **scene editor**. It has plenty of
-tools for editing 2D and 3D scenes as well as user interfaces, but the 
-editor is based on the concept of editing a scene and the nodes
-that compose it.
+В сущности, редактор Godot это **редактор сцены**. Он имеет много инструментов
+для редактирования 2D и 3D сцен и интерфейса пользователя, но редактор
+основан на концепции редактирования сцены и узлов ее составляющих.
 
-Creating a new project
+Создание нового проекта
 ----------------------
 
-Theory is boring, so let's change the subject and go practical. Following a
-long tradition in tutorials, the first project will be a Hello World.
-For this, the editor will be used.
+Теория скучна, перейдем к практике. Следуя давней традиции туториалов,
+первый проект назовем Hello World. Для чего используем редактор.
 
-When the godot executable is run outside a project, the Project Manager
-appears. This helps developers manage their projects.
+Когда godot запускается вне проекта, появляется Project Manager.
+Что помогает управляться с проектами.
 
 .. image:: /img/project_manager.png
 
-To create a new project, the "New Project" option must be used. Choose
-and create a path for the project and specify the project name:
+Для создания нового проекта, используем опцию "New Project" . 
+Выберите путь для проекта и задайте имя проекта:
 
 .. image:: /img/create_new_project.png
 
-Editor
+Редактор
 ------
 
-Once the "New Project" is created, the next step is opening it. This
-will open the Godot editor. Here is how the editor looks when freshly
+Когда проект "New Project" создан, следующий шаг - открыть его. 
+Его откроет Godot редактор. Вот как выглядит только что открытый редактор
+
 opened:
 
 .. image:: /img/empty_editor.png
 
-As mentioned before, making games in Godot feels like being in a
-kitchen, so let's open the refrigerator and add some fresh nodes to the
-project. We'll begin with a Hello World! To do this, the "New Node"
-button must be pressed (looks like a plus symbol):
+Как мы упоминали, создание игр в Godot похоже на готовку, 
+так что давайте откроем холодильник и добавим свежих нодов в проект.
+Начнем с Hello World! Нажмем кнопку "New Node" (выглядит как символ "плюс"):
 
 .. image:: /img/newnode_button.png
 
-This will open the Create Node dialog, showing the long list of nodes
-that can be created:
+Откроется окно Create Node, появится длинный список узлов доступных для создания:
 
 .. image:: /img/node_classes.png
 
-From there, select the "Label" node first. Searching for it is probably
-the quickest way:
+Выберите здесь, узел "Label" . Быстрее всего наверное в поиске:
 
 .. image:: /img/node_search_label.png
 
-And finally, create the Label! A lot happens when Create is pressed:
+И нконец, создайте Label! A lot happens when Create is pressed:
 
 .. image:: /img/editor_with_label.png
 
