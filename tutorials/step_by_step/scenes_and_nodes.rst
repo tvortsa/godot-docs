@@ -108,97 +108,89 @@ opened:
 
 .. image:: /img/node_search_label.png
 
-И нконец, создайте Label! A lot happens when Create is pressed:
+И наконец, создайте Label! при нажатии Create происходит много чего:
 
 .. image:: /img/editor_with_label.png
 
-First of all, the scene is changed to the 2D editor (because Label is
-a 2D Node type), and the Label appears, selected, at the top left
-corner of the viewport.
+Прежде всего, сцена сменяется на 2D редактор (поскольку Label это
+узел 2D типа), и появляется Label, выделенная, в левом верхнем углу 
+вьюпорта.
 
-The node appears in the scene tree editor (box in the top left
-corner), and the label properties appear in the Inspector (box on the
-right side).
+Узел появляется в дереве сцены редактора (прямоугольник в левом верхнем углу), 
+а свойства label появляются в Inspector (прямоугольник справа).
 
-The next step will be to change the "Text" Property of the label, let's
-change it to "Hello, World!":
+Следующий шаг - изменить свойство "Text" у label, заменим его на "Hello, World!":
 
 .. image:: /img/hw.png
 
-Ok, everything's ready to run the scene! Press the PLAY SCENE Button on
-the top bar (or hit F6):
+Ok, все готово к запуску сцены! Пажмите кнопку PLAY SCENE сверху (или F6):
 
 .. image:: /img/playscene.png
 
-Aaaand... Oops.
+Ииииии... Упс.
 
 .. image:: /img/neversaved.png
 
-Scenes need to be saved to be run, so save the scene to something like
+Сцены нужно сохранить перед запуском, сохраним сцену как
 hello.scn in Scene -> Save:
 
 .. image:: /img/save_scene.png
 
-And here's when something funny happens. The file dialog is a special
-file dialog, and only allows you to save inside the project. The project
-root is "res://" which means "resource path". This means that files can
-only be saved inside the project. For the future, when doing file
-operations in Godot, remember that "res://" is the resource path, and no
-matter the platform or install location, it is the way to locate where
-resource files are from inside the game.
+И здесь происходит кое что занятное. Окно сохранения файла особенное, 
+и позвляет сохрянять файлы только внутри проектаand. Корневая папка проекта -
+ "res://" что значит "путь к ресурсам". Что значит что файлы могут быть 
+ сохранены только внутри проекта. На будущее, работая с файлами в Godot,
+помните, что "res://" это путь к ресурсам, платформа и место установки
+значения не имеют, это то где храняться все ресурсы игры.
 
-After saving the scene and pressing run scene again, the "Hello, World!"
-demo should finally execute:
+После сохранения сцены и нажатия на run scene снова, демо "Hello, World!"
+наконец должно выполниться:
 
 .. image:: /img/helloworld.png
 
-Success!
+Отлично!
 
 .. _doc_scenes_and_nodes-configuring_the_project:
 
-Configuring the project
+Конфигурация проекта
 -----------------------
 
-Ok, It's time to do some configuration to the project. Right now, the
-only way to run something is to execute the current scene. Projects,
-however, have several scenes so one of them must be set as the main
-scene. This scene is the one that will be loaded at the time the project
-is run.
+Ok, давайте немного конфигурируем проект. Пока единственный способ выполнить
+что-то это запустить текущую сцену. Проекты, однако, могут иметь множество сцен
+так что одна из них должна быть выбрана как главная - main scene. 
+Эта (и только эта) сцена будет загружена при запуске проекта.
 
-These settings are all stored in the engine.cfg file, which is a
-plaintext file in win.ini format, for easy editing. There are dozens of
-settings that can be changed in this file to alter how a project executes,
-so to make matters simpler, a project setting dialog exists, which is
-sort of a frontend to editing engine.cfg
+Все настройки сохраняются в файле engine.cfg , в обычном текстовом формате
+win.ini, для простоты редактирования. Есть десятки настроек которые можно менять
+в этом файле для настройки того как проект будет запускаться,
+чтобы все упростить, есть окно настройки проекта, своего рода интерфейс для 
+редактирования engine.cfg
 
-To access that dialog, simply go to Scene -> Project Settings.
+Открыть это окно просто, перейдите в Scene -> Project Settings.
 
-Once the window opens, the task will be to select a main scene. This can
-be done easily by changing the application/main_scene property and
-selecting 'hello.scn'.
+Когда окно откроется, task выделятся в main scene. Это можно сделать проще
+изменяя свойства application/main_scene и выбрав 'hello.scn'.
 
 .. image:: /img/main_scene.png
 
-With this change, pressing the regular Play button (or F5) will run the
-project, no matter which scene is being edited.
+С этими изменениями, нажатие кнопки Play (или F5) запустит проект, 
+вне зависимости от того какая сцена будет редактироваться.
 
-Going back to the project settings dialog. This dialog provides a lot
-of options that can be added to engine.cfg, and shows their default
-values. If the default value is ok, then there isn't any need to
-change it.
+Вернитесь в окно project settings. Это окно предоставляет множество опций
+которые можно добавить к engine.cfg, и показывает их дефолтные значения.
+Если дефолтные значения вас устраивают, то не меняйте их.
 
-When a value is changed, a tick is marked to the left of the name.
-This means that the property will be saved to the engine.cfg file and
-remembered.
+При изменении значений, tick появится слева от имени.
+Что значит что свойство было сохранено в файл engine.cfg.
 
-As a side note, for future reference and a little out of context (this
-is the first tutorial after all!), it is also possible to add custom
-configuration options and read them in run-time using the
-:ref:`Globals <class_Globals>` singleton.
+В качестве примечания, на будущее (в конце концов это первый урок!), 
+можно добавлять и собственные свойства конфигурации и читать их потом
+в run-time используя
+:ref:`Globals <class_Globals>` синглтон.
 
-To be continued...
+продолжение следует...
 ------------------
 
-This tutorial talks about "scenes and nodes", but so far there has been
+В этом уроке мы поговорили о "узлах и сценах", but so far there has been
 only *one* scene and *one* node! Don't worry, the next tutorial will
 deal with that...
