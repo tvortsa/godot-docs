@@ -38,24 +38,22 @@
 Последнее крайне важно. Узлы могут иметь другие узлы в качестве потомков.
 Узлы тогда можно представить как **дерево**.
 
-В Godot, the ability to arrange nodes in this way creates a powerful
-tool for organizing projects. Since different nodes have different
-functions, combining them allows for creation of more complex functions.
+В Godot, возможность расположить узлы таким образом, создает мощный
+инструментарий для организации проектов. Поскольку различные узлы обладают
+разными функциями, их сочетание позволяет создавать более сложные функции.
 
-This is probably not clear yet and makes little sense, but everything
-will click a few sections ahead. The most important fact to remember for
-now is that nodes exist and can be arranged this way.
+Пока это не очень понятно, но важно помнить о том что узлы можно компоновать
+таким вот образом.
 
 Сцены
 ------
 
 .. image:: /img/scene_tree_example.png
 
-Now that the concept of nodes has been defined, the next logical
-step is to explain what a Scene is.
+Итак концепция узлов обозначена, следующий логический шаг - Сцены.
 
-A scene is composed of a group of nodes organized hierarchically (in
-tree fashion). It has the following properties:
+Сцена состоит из группы узлов организованных иерархически (в виде дерева).
+Она имеет несколько особенностей:
 
 -  Сцена всегда имеет только один корневой узел.
 -  Сцены можно сохранить на диск и загрузить с диска.
