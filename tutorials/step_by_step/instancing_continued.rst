@@ -1,43 +1,42 @@
 .. _doc_instancing_continued:
 
-Instancing (continued)
+Инстанцирование (продолжение)
 ======================
 
-Recap
+Резюме
 -----
 
-Instancing has many handy uses. At a glance, with instancing you have:
+Мнстанцирование имеет множество удобных применений. На первый взгляд, с ним мы имеем:
 
--  The ability to subdivide scenes and make them easier to manage.
--  A more flexible alternative to prefabs (and much more powerful given
-   instances work at many levels).
--  A way to design more complex game flows or even UIs (UI Elements are
-   nodes in Godot too).
+-  Возможность подразделять сцену и упрощать управление ею.
+-  Более гибкую альтернативу префабам (и гораздо более мощную,
+   учитывая что экземпляры работают на многих уровнях).
+-  Способ разработки более сложных игровых процессов даже UI
+   (UI элементы в Godot тоже узлы).
 
-Design language
+Язык дизайна
 ---------------
 
-But the real strong point of instancing scenes is that it works as an
-excellent design language. This is pretty much what makes Godot special
-and different to any other engine out there. The entire engine was designed
-from the ground up around this concept.
+Но подлинная мощь инстанцирования сцен в том, что это является прекрасным
+языком дизайна. Это существенное отличие Godot от большинства других движков.
+Весь движок был разработан с нуля вокруг этой концепции.
 
-When making games with Godot, the recommended approach is to leave aside
-other design patterns such as MVC or Entity-Relationship diagrams and
-start thinking games in a more natural way. Start by imagining the
-visible elements in a game, the ones that can be named not by just a
-programmer but by anyone.
+Создавая игры в Godot, рекомендуется отбросить другие паттерны проектирования
+такие как MVC или диаграммы Сущность-Отношения и начать думать об игре
+в более естественном ключе. Начните представлять визуальные элементы в игре, 
+которые могут быть представлены не только программистом а кем угодно.
 
-For example, here's how a simple shooter game can be imagined:
+Вот например как можно представить простой шутер:
 
 .. image:: /img/shooter_instancing.png
 
-It's pretty easy to come up with a diagram like this for almost any kind
-of game. Just write down the elements that come to mind, and then the
-arrows that represent ownership.
+С такой диаграммой довольно просто представить почти любой тип игр.
+Просто записывайте те элементы которые приходят в голову,
+а затем стрелки которые определяют принадлежность.
 
-Once this diagram exists, making a game is about creating a scene for
-each of those nodes, and use instancing (either by code or from the editor) to represent ownership.
+Когда такая схема существует, создание игры это создание сцены
+для каждого узла в диаграмме, и использование инстанцирования 
+(кодом или редактором) для представления связей.
 
 Most of the time programming games (or software in general) is spent
 designing an architecture and fitting game components to that
