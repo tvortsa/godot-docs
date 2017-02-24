@@ -104,74 +104,69 @@ GDScript не использует имена классов в файле ск�
 
 .. image:: /img/script_added.png
 
-To edit the script, select either of the highlighted buttons. 
-This will bring you to the script editor where an existing template will
-be included by default:
+Редактировать этот скрипт можно либо выбрав подсвеченную кнопку. 
+Это перенесет вас в редактор скрипта в который включается шаблон по-умолчанию:
 
 .. image:: /img/script_template.png
 
-There is not much in there. The "_ready()" function is called when the
-node (and all its children) entered the active scene. (Remember, it's
-not a constructor, the constructor is "_init()" ).
+Там не так много. Функция "_ready()" вызывается когда узел (и все его потомки)
+вошли в активную сцену. (Помните, это НЕ конструктор !, конструктор это "_init()" ).
 
-The role of the script
+Роль скрипта
 ~~~~~~~~~~~~~~~~~~~~~~
 
-A script adds behavior to a node. It is used to control the
-node functions as well as other nodes (children, parent, siblings, etc).
-The local scope of the script is the node (just like in regular
-inheritance) and the virtual functions of the node are captured by the
-script.
+Скрипт добавляет узлу поведение. Его используют для управления
+функционалом узла или других узлов (дочерних, родительских, сродных (соседних), и т.п.).
+Локальная область действия скрипта это узел (также как в обычном наследовании) 
+и виртуальные функции узла захватываются скриптом.
 
 .. image:: /img/brainslug.jpg
 
-Handling a signal
+Обработка сигналов
 ~~~~~~~~~~~~~~~~~
 
-Signals are used mostly in GUI nodes (although other nodes have them
-too). Signals are "emitted" when some specific kind of action happens,
-and can be connected to any function of any script instance. In this
-step, the "pressed" signal from the button will be connected to a custom
-function.
+Сигналы больше всего используются в узлах GUI (хотя и другие узлы тоже их имеют).
+Сигналы "испускаются" когда происходят какие-то виды действиий,
+и могут быть подключены к любой функции любого экземпляра скрипта.
+На данном этапе, сигнал "pressed" из кнопки будет соединен с произвольной функцией.
 
-An interface for connecting signals to your scripts exists in the editor. 
-You can access this by selecting the node in the scene tree and then
-selecting the "Node" tab. Make sure that you have "Signals" selected.
+Интерфейс для соединения сигналов с вашим скриптом есть в редакторе. 
+Для доступа к нему выделите узел в дереве сцены затем вкладку "Node".
+Убедитесь что выделили "Signals".
 
 .. image:: /img/signals.png
 
-In any case, at this point it is clear that we are interested in
-the "pressed" signal. Instead of using the visual interface, we will opt
-to code the connection.
+В любом случае, сейчас понятно что мы заинтересованы в сигнале
+ "pressed". Вместо визуального интерфейса, мы выберем кодировать соединение.
 
-For this, a function exists that is probably the one most used by Godot
-programmers, namely :ref:`Node.get_node() <class_Node_get_node>`.
-This function uses paths to fetch nodes in the current tree or anywhere
-in the scene, relative to the node holding the script.
+Для чего, существует возможно самая используемая программистами Godot функция,
+по имени :ref:`Node.get_node() <class_Node_get_node>`.
+Эта функция использует пути для извлечения узлов из текущего дерева где угодно на сцене,
+по отношению к узлу со сценарием.
 
-To fetch the button, the following must be used:
+Чтобы извлечь кнопку, используйте:
 
 ::
 
     get_node("Button")
 
-Next, a callback will be added that will change the label's text when
-the button is pressed:
+Затем, будет добавлен обратный вызов который изменит текст метки при нажатии
+кнопки:
 
 ::
 
     func _on_button_pressed():  
         get_node("Label").set_text("HELLO!")
 
-Finally, the button "pressed" signal will be connected to that callback
-in _ready(), by using :ref:`Object.connect() <class_Object_connect>`.
+Наконец, сигнал "pressed" кнопки будет соединен с этим обратным вызовом
+in _ready(), используя :ref:`Object.connect() <class_Object_connect>`.
 
 ::
 
     func _ready():
         get_node("Button").connect("pressed",self,"_on_button_pressed")
 
-The final script should look like this:
+Итоговый скрипт будет выглядеть так:
 
 ::
 
@@ -188,22 +183,20 @@ The final script should look like this:
     func _ready():
         get_node("Button").connect("pressed",self,"_on_button_pressed")
 
-Running the scene should have the expected result when pressing the
-button:
+Запустите сцену и получите ожидаемый результат:
 
 .. image:: /img/scripting_hello.png
 
-**Note:** As it is a common misunderstanding in this tutorial, let's clarify
-again that get_node(path) works by returning the *immediate* children of
-the node controlled by the script (in this case, *Panel*), so *Button*
-must be a child of *Panel* for the above code to work. To give this
-clarification more context, if *Button* were a child of *Label*, the code
-to obtain it would be:
+**Note:** Есть распространенное заблуждение в данном руководстве, 
+давайте проясним еще раз что get_node(path) работает путем возврата *немедленно*
+потомка узла управляемого скриптом (в данном случае, *Panel*), поэтому *Button*
+должен быть потомком *Panel* чтобы код заработал. Поясним, если бы *Button*
+был потомком *Label*, то код был бы таким:
 
 ::
 
-    # not for this case
-    # but just in case
+    # не в нашем случае
+    # но где-то может быть так
     get_node("Label/Button") 
 
-Also, remember that nodes are referenced by name, not by type.
+Также помните что к узлам обращаются по имени а не по типу.
