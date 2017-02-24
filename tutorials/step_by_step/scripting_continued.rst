@@ -6,7 +6,7 @@ Scripting (продолжение)
 Процессинг
 ----------
 
-Некоторые действия в Godot обратными вызовами или виртуальными функциями,
+Некоторые действия в Godot выполняют обратными вызовами или виртуальными функциями,
 поэтому нет необходимости проверять написание кода запускаемого все время. 
 Кроме того, многоу может быть сделано с помощью анимаций игроков.
 
@@ -53,21 +53,21 @@ Fixed процессинг похож, но он необходим только
 ------
 
 Узлы можно добавлять в группы (сколько угодно для каждого узла).
-то простая но полезная функция для организации больших сцен. ЕСть два способа сделать это
-, первый из UI, по кнопке Groups в панели Node:
+это простая но полезная функция для организации больших сцен. 
+Есть два способа сделать это, первый из UI, по кнопке Groups в панели Node:
 
 .. image:: /img/groups_in_nodes.PNG
 
-And the second from code. One useful example would be to tag scenes
-which are enemies.
+А второй - в коде. Один из полезных примеров - 
+помечать сцены которые будут врагами.
 
 ::
 
     func _ready():
         add_to_group("enemies")
 
-This way, if the player is discovered sneaking into the secret base,
-all enemies can be notified about the alarm sounding, by using
+Так, если игрок проникнет на секрентую базу,
+все враги могут быть уведомлены звуком сирены, с помощью:
 :ref:`SceneTree.call_group() <class_SceneTree_call_group>`:
 
 ::
@@ -75,30 +75,29 @@ all enemies can be notified about the alarm sounding, by using
     func _on_discovered():
         get_tree().call_group(0, "guards", "player_was_discovered")
 
-The above code calls the function "player_was_discovered" on every
-member of the group "guards".
+Этот код вызывает функцию "player_was_discovered" каждого члена группы "guards".
 
-Optionally, it is possible to get the full list of "guards" nodes by
-calling
+Опционально, можно получить полный список узлов "guards" вызовом:
+
 :ref:`SceneTree.get_nodes_in_group() <class_SceneTree_get_nodes_in_group>`:
 
 ::
 
     var guards = get_tree().get_nodes_in_group("guards")
 
-More will be added about
+Больше будет добавлено позже
 :ref:`SceneTree <class_SceneTree>`
-later.
 
-Notifications
+
+Уведомления
 -------------
 
-Godot has a system of notifications. This is usually not needed for
-scripting, as it's too low level and virtual functions are provided for
-most of them. It's just good to know they exists. Simply
-add a
+Godot имеет систему уведомлений. Она обычно не нуждается в скриптинге,
+поскольку довольно низкоуровневая и и для большинства из них
+предусмотрены виртуальные функции. Просто хорошо знать что они есть.
+Просто
 :ref:`Object._notification() <class_Object__notification>`
-function in your script:
+ добавьте функцию в ваш скрипт:
 
 ::
 
