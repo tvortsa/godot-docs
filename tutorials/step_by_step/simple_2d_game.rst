@@ -1,31 +1,31 @@
 .. _doc_simple_2d_game:
 
-Simple 2D game
+Простая 2D игра
 ==============
 
 Pong
 ~~~~
 
-In this tutorial, a basic game of Pong will be created. There are plenty
-of more complex examples in the demos included with the engine, but this
-should get you introduced to the basic functionalities for 2D Games.
+В этом уроке, мы создадим простую иру пинг-понг (Pong). Есть много
+более сложных примеров в демо-комплекте движка, но этот
+должен ввести вас в основы функционирования 2D Игр.
 
-To begin with, run the Godot Engine and start a new project.
+Начнем с запуска Godot Engine и создания нового проекта.
 
-Assets
+Активы
 ~~~~~~
 
-Some assets are included for this tutorial:
-:download:`pong_assets.zip </files/pong_assets.zip>`. Unzip its content
-in your project folder.
+Некоторые активы включены в этот туториал:
+:download:`pong_assets.zip </files/pong_assets.zip>`. Распакуйте содержимое
+в папку вашего проекта.
 
-Scene setup
+Настройка сцены
 ~~~~~~~~~~~
 
-For the sake of the old times, the game will be in 640x400 pixels
-resolution. This can be configured in the Project Settings (see
-:ref:`doc_scenes_and_nodes-configuring_the_project`) under Scene/Project
-settings menu. The default background color should be set to black:
+В память о старых временах, игра будет с разрешением 640x400 пикселей
+Это можно сконфигурировать в Project Settings (см
+:ref:`doc_scenes_and_nodes-configuring_the_project`) в Scene/Project
+settings меню. Цвет фона по умолчанию оставим черный:
 
 .. image:: /img/clearcolor.png
 
