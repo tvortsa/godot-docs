@@ -52,9 +52,9 @@ Fixed процессинг похож, но он необходим только
 Группы
 ------
 
-Nodes can be added to groups (as many as desired per node). This is a
-simple yet useful feature for organizing large scenes. There are two
-ways to do this, the first is from the UI, from the Groups button under Node-panel:
+Узлы можно добавлять в группы (сколько угодно для каждого узла).
+то простая но полезная функция для организации больших сцен. ЕСть два способа сделать это
+, первый из UI, по кнопке Groups в панели Node:
 
 .. image:: /img/groups_in_nodes.PNG
 
