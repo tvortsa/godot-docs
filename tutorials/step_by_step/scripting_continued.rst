@@ -1,18 +1,18 @@
 .. _doc_scripting_continued:
 
-Scripting (continued)
+Scripting (продолжение)
 =====================
 
-Processing
+Процессинг
 ----------
 
-Several actions in Godot are triggered by callbacks or virtual
-functions, so there is no need to check for writing code that runs all
-the time. Additionally, a lot can be done with animation players.
+Некоторые действия в Godot обратными вызовами или виртуальными функциями,
+поэтому нет необходимости проверять написание кода запускаемого все время. 
+Кроме того, многоу может быть сделано с помощью анимаций игроков.
 
-However, it is still a very common case to have a script process on every
-frame. There are two types of processing, idle processing and fixed
-processing.
+Однако, все еще остается распротраненным ситуация когда нужен скрипт
+выполняющийся в каждом кадре. Есть два типа процессинга, idle процессинг
+и fixed процессинг.
 
 Idle processing is activated with the
 :ref:`Node.set_process() <class_Node_set_process>`
