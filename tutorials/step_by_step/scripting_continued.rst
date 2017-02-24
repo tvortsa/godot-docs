@@ -14,10 +14,10 @@ Scripting (продолжение)
 выполняющийся в каждом кадре. Есть два типа процессинга, idle процессинг
 и fixed процессинг.
 
-Idle processing is activated with the
+Idle процессинг активируется с помощью функции
 :ref:`Node.set_process() <class_Node_set_process>`
-function. Once active, the :ref:`Node._process() <class_Node__process>`
-callback will be called every frame. Example:
+После активации, обратный вызов:ref:`Node._process() <class_Node__process>`
+будет вызываться в каждом кадре. Пример:
 
 ::
 
@@ -27,13 +27,12 @@ callback will be called every frame. Example:
     func _process(delta):
         # do something...
 
-The delta parameter describes the time elapsed (in seconds, as
-floating point) since the previous call to _process().
-Fixed processing is similar, but only needed for synchronization with
-the physics engine.
+Параметр delta описывает время, прошедшее (в секундах, как значение 
+с плавающей точкой) с момента предыдущего вызова to _process().
+Fixed процессинг похож, но он необходим только для синхронизации с физическим движком.
 
-A simple way to test this is to create a scene with a single Label node,
-with the following script:
+Простой способ протестировать это - создать сцену с единственным узлом Label,
+со следующим скриптом:
 
 ::
 
@@ -48,9 +47,9 @@ with the following script:
         accum += delta
         set_text(str(accum))
 
-Which will show a counter increasing each frame.
+Мы увидим счетчик инкрементирующий в каждом кадре.
 
-Groups
+Группы
 ------
 
 Nodes can be added to groups (as many as desired per node). This is a
