@@ -39,38 +39,37 @@
 (кодом или редактором) для представления связей.
 
 Большую часть времени программирования игр (и вообще программ) тратится
-на разработку архитектуры fitting game components to that
-architecture. Designing based on scenes replaces that and makes
-development much faster and more straightforward, allowing to
-concentrate on the game itself. Scene/Instancing based design is
-extremely efficient at saving a large part of that work, since most of
-the components designed map directly to a scene. This way, none or
-little architectural code is needed.
+на разработку архитектуры шлифовку игровых компонентов для этой архитектуры.
+Разработка на основе сцен заменяет это делая все проще и быстрее, позволяя
+сконцентрироваться на самой игре. Дизайн основанный на Сцене/Экземпляре 
+чрезвычайно эффективен при сохранении значительной части этой работы, 
+так как большинство компонентов в карите разработки реализовано прямо на сцене. 
+Такой подход требует минимума архитектуры кода.
 
-The following is a more complex example, an open-world type of game with
-lots of assets and parts that interact:
+Следующий пример, посложнее, игры с открытым миром с большим количеством
+активов и взаимодействий:
 
 .. image:: /img/openworld_instancing.png
 
-Make some rooms with furniture, then connect them. Make a house later,
-and use those rooms as the interior.
+Создайте несколько комнат с мебелью, затем соедините их. Позднее сделайте дом,
+и используйте эти комнаты как интерьер дома.
 
-The house can be part of a citadel, which has many houses. Finally the
-citadel can be put on the world map terrain. Add also guards and other
-NPCs to the citadel by previously creating their scenes.
+Дом может стать частью цитадели, в которой много домов. Наконец цитадель может быть
+частью мирового ландшафта. Добавьте также охранников и других 
+NPC в цидатель так, как ранее создали саму сцену.
 
-With Godot, games can grow as quickly as desired, as all it needs is
-to create and instance more scenes. The editor UI is designed to be
-operated by non programmers too, so a typical team development process
-can involve 3D or 2D artists, level designers, game designers, animators,
-etc all working with the editor interface.
+С Godot, расти так быстро как требуется, так как все что нужно - 
+создавать новые экземпляры сцен. 
+Редактор UI также разработан так чтобы оперировать им без программирования,
+так типовой процесс разработки игры может включать в себя
+3D или 2D художников, дизайнеров уровней, гейм-дизайнеров, аниматоров,
+и все работают с интерфейсом редактора.
 
-Information overload!
+Информационная перегрузка!
 ---------------------
 
-Do not worry too much, the important part of this tutorial is to create
-awareness on how scenes and instancing are used in real life. The best
-way to understand all this is to make some games.
+Не волнуйтесь, важная часть этого урока осведомить вас о том
+как сцены и экземпляры используются в реальной жизни. 
+Лучший способ понять это сделать какую-либо игру.
 
-Everything will become very obvious when put to practice, so please do
-not scratch your head and go on to the next tutorial!
+На практике все станет понятнее, переходите у следующему уроку!
