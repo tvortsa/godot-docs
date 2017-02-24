@@ -8,7 +8,7 @@ Scripting (продолжение)
 
 Некоторые действия в Godot выполняют обратными вызовами или виртуальными функциями,
 поэтому нет необходимости проверять написание кода запускаемого все время. 
-Кроме того, многоу может быть сделано с помощью анимаций игроков.
+Кроме того, многое может быть сделано с помощью анимаций игроков.
 
 Однако, все еще остается распротраненным ситуация когда нужен скрипт
 выполняющийся в каждом кадре. Есть два типа процессинга, idle процессинг
@@ -108,126 +108,122 @@ Godot имеет систему уведомлений. Она обычно не
             var delta = get_process_time()
             print("This is the same as overriding _process()...")
 
-The documentation of each class in the :ref:`Class Reference <toc-class-ref>`
-shows the notifications it can receive. However, for most cases GDScript
-provides simpler overrideable functions.
+Документация по каждому классу :ref:`Class Reference <toc-class-ref>`
+содержит уведомления которые он может принимать. Но, для большинства случаев
+GDScript простые переписываемые функции.
 
-Overrideable functions
+Overrideable functions (переписываемые функции)
 ----------------------
 
-Nodes provide many useful overrideable functions, which are described as
-follows:
+Узлы предоставляют множество полезных переписываемых функций, 
+которые описываются как:
 
 ::
 
     func _enter_tree():
-        # When the node enters the _Scene Tree_, it becomes active 
-        # and  this function is called. Children nodes have not entered 
-        # the active scene yet. In general, it's better to use _ready() 
-        # for most cases.
+        # Когда узел попадает в _Scene Tree_, он становится активным 
+        # и эта функция вызывается. Дочерние узлы еще не вошли в активную сцену
+        # В общем лучше использовать _ready() 
+        # в большинстве случаев.
         pass
 
     func _ready():
-        # This function is called after _enter_tree, but it ensures 
-        # that all children nodes have also entered the _Scene Tree_, 
-        # and became active.
+        # Эта функция вызываетс япосле _enter_tree, но гарантирует 
+        # что все дочерние узлы также вошли в _Scene Tree_, 
+        # и стали активны.
         pass 
 
     func _exit_tree():
-        # When the node exits the _Scene Tree_, this function is called. 
-        # Children nodes have all exited the _Scene Tree_ at this point 
-        # and all became inactive.
+        # Когда узел выходит из _Scene Tree_, эта функция вызывается. 
+        # Все дочерние узлы также вышли _Scene Tree_ и с этого момента 
+        # неактивны.
         pass
 
     func _process(delta):
-        # When set_process() is enabled, this function is called every frame.
+        # Когда set_process() включен, эта функция вызывается каждый кадр.
         pass
 
     func _fixed_process(delta):
-        # When set_fixed_process() is enabled, this is called every physics 
-        # frame.
+        # Когда set_fixed_process() включен, она вызывается каждый физический кадр 
         pass
 
     func _paused():
-        # Called when game is paused. After this call, the node will not receive 
-        # any more process callbacks.
+        # Вызывается когда игра на паузе. После этого вызова, узел не получает 
+        # больше process callbacks.
         pass
 
     func _unpaused():
-        # Called when game is unpaused.
+        # Вызывается когда игра снимается с паузы.
         pass
 
-As mentioned before, it's best to use these functions.
+Как упоминалось ранее, лучше использовать эти функции.
 
-Creating nodes
+Создание узлов
 --------------
 
-To create a node from code, just call the .new() method (like for any
-other class based datatype). Example:
+Для создания узлов в коде, просто вызовите метод .new() (как для
+любых других классов базовых типов). Пример:
 
 ::
 
     var s
     func _ready():
-        s = Sprite.new() # create a new sprite!
-        add_child(s) # add it as a child of this node
+        s = Sprite.new() # создает новый спрайт!
+        add_child(s) # добавляет его к потомкам этого узла
 
-To delete a node, be it inside or outside the scene, free() must be
-used:
+Для удаления узла, будь то внутри сцены или снаружи, используйте free() :
 
 ::
 
     func _someaction():
-        s.free() # immediately removes the node from the scene and frees it
+        s.free() # немедленно удаляет узел из сцены и освобождает его
 
-When a node is freed, it also frees all its children nodes. Because of
-this, manually deleting nodes is much simpler than it appears. Just free
-the base node and everything else in the sub-tree goes away with it.
+Когда узел освобожден, он также освобождает всех своих потомков. 
+Поэтому ручное удаление узлов гораздо проще чем кажется. 
+Просто освободите базовый узел и все остальное в под-дереве уйдет вместе с ним.
 
-However, it might happen very often that we want to delete a node that
-is currently "blocked", because it is emitting a signal or calling a
-function. This will result in crashing the game. Running Godot
-in the debugger often will catch this case and warn you about it.
+Но, часто вы пытаетесь удалить узел который сейчас заблокирован
+потому что он испускает сигнал или вызывает функцию.
+Это крашит игру. Запуск Godot в режиме отладки часто перехватывает эту ситуацию
+и предупреждает вас об этом.
 
-The safest way to delete a node is by using
+Безопасный способ удаления узлов это:
 :ref:`Node.queue_free() <class_Node_queue_free>`.
-This erases the node safely during idle.
+Это безопасно стирает узлы во время простоя.
 
 ::
 
     func _someaction():
-        s.queue_free() # remove the node and delete it while nothing is happening
+        s.queue_free() # удаляет и уничтожает узел пока ничего не происходит
 
-Instancing scenes
+Инстанцирование сцен
 -----------------
 
-Instancing a scene from code is pretty easy and done in two steps. The
-first one is to load the scene from disk.
+Инстанцирование сцен из кода очень просто и выполняется в два шага. 
+Первый - загрузить сцену с диска.
 
 ::
 
-    var scene = load("res://myscene.scn") # will load when the script is instanced
+    var scene = load("res://myscene.scn") # будет загружаться когда скрипт инстанцирован
 
-Preloading it can be more convenient sometimes, as it happens at parse
-time.
+Иногда предзагрузка бывает более удачным, как например во время парсинга.
 
 ::
 
-    var scene = preload("res://myscene.scn") # will load when parsing the script
+    var scene = preload("res://myscene.scn") # загрузится при парсинге скрипта
 
-But 'scene' is not yet a node containing subnodes. It's packed in a
-special resource called :ref:`PackedScene <class_PackedScene>`.
-To create the actual node, the function
+Но 'scene' это не узел, соержащий под-узлы. Он упакован в специальный ресурс
+называемый :ref:`PackedScene <class_PackedScene>`.
+Для создания реального узла, нужно вызвать функцию
 :ref:`PackedScene.instance() <class_PackedScene_instance>`
-must be called. This will return the tree of nodes that can be added to
-the active scene:
+Она вернет дерево узлов которое может быть добавлено к активной сцене:
 
 ::
 
     var node = scene.instance()
     add_child(node)
 
-The advantage of this two-step process is that a packed scene may be
-kept loaded and ready to use, so it can be used to create as many
-instances as desired. This is especially useful to quickly instance
-several enemies, bullets, etc. in the active scene.
+Преимущество такого двух-этапного подхода в том упакованная сцена может
+быть загружена и готова к использованию, поэтому может быть использована для создания
+многих экземпляров. Это особенно полезно например для множества врагов, пуль и т.п.
+в активной сцене.
