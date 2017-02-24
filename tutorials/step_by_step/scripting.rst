@@ -1,121 +1,106 @@
 .. _doc_scripting:
 
-Scripting
+Скриптинг
 =========
 
-Introduction
+Введение
 ------------
 
-Much has been said about tools that allow users to create video games
-without programming. It's been a dream for many independent developers
-to create games without learning how to code. This need has been around
-for a long time, even inside companies, where game designers wish to
-have more control of the game flow.
+Мы много говорили об инструментах которые позволяют обойтись без программирования.
+Это мечта многих разработчиков - программировать игры без обучения кодингу.
+Эта потредность есть даже внутри компаний в которых разработчики хотели бы больше контроля
+над потоком игры .
 
-Many products have been shipped promising a no-programming environment,
-but the result is often incomplete, too complex or inefficient compared
-to traditional code. As a result, programming is here to stay for a long
-time. In fact, the general direction in game engines has been to add
-tools that try to reduce the amount of code that needs to be written for
-specific tasks, to speed up development.
+Многие обещают среду без программирования, но чаще всего результат оказывается неполным, 
+слишком сложным и неэффективным по сравнению с классическим кодингом. 
+Так что программирование сохраниться еще надолго. Общее направление развития
+игровых систем в том чтобы дать инструменты сокращающие необходимость написания кода
+для типовых задач.
 
-In that sense, Godot has taken some useful design decisions towards that
-goal. The first and most important is the scene system. The aim of it is
-not obvious at first, but works well later on. That is, to relieve
-programmers from the responsibility of architecting code.
+Поэтому, Godot принял пару важных решений. Во-первых система сцен. Она облегчает
+программисту зависимость от архитектуры.
 
-When designing games using the scene system, the whole project is
-fragmented into *complementary* scenes (not individual ones). Scenes
-complement each other, instead of being separate. There will be plenty
-of examples about this later on, but it's very important to remember it.
+При азработке игр с использованием системы сцен, весь проект фрагментирован на 
+*комплкментарные* сцены (а не отдельные). Сцены составляют друг друга,вместо того 
+чтобы быть раздельными. 
 
-For those with a good amount of programming expertise, this means a
-different design pattern to MVC. Godot promises efficiency at the
-expense of dropping the MVC habits, which are replaced by the *scenes as
-a complement* pattern.
+Имеющие опыт знают о чем-то вроде MVC. Godot обещает эффективность без привычного MVC
+заменяя его на паттерн *сцены как составляющие*.
 
-Godot also uses the `extend <http://c2.com/cgi/wiki?EmbedVsExtend>`__
-pattern for scripting, meaning that scripts extend from all the
-available engine classes.
+Godot также использует паттерн  `extend <http://c2.com/cgi/wiki?EmbedVsExtend>`__
+для скриптинга, это означает что скрипты доступны для всех доступных классов движка.
 
 GDScript
 --------
 
-:ref:`doc_gdscript` is a dynamically typed scripting language to fit
-inside Godot. It was designed with the following goals:
+:ref:`doc_gdscript` это динамически типизированный скриптовый язык работающий
+внутри Godot. Он разработан с прицелом на:
 
--  First and most importantly, making it simple, familiar and as easy to
-   learn as possible.
--  Making the code readable and error safe. The syntax is mostly
-   borrowed from Python.
+-  Быть простым и узнаваемым на сколько это возможно.
+-  Создаваемый код читабелен и безопасен. Синтаксис в основном заимствован из Python.
 
-Programmers generally take a few days to learn it, and within two weeks
-feel comfortable with it.
+Программистам обычно нужно пара дней чтобы выучить его, и пару недель на комфортное освоение.
 
-As with most dynamically typed languages, the higher productivity
-(code is easier to learn, faster to write, no compilation, etc) is
-balanced with a performance penalty. But most critical code is written
-in C++ already in the engine (vector ops, physics, math, indexing, etc),
-resulting in a more than sufficient performance for most types of
-games.
+Как и большинство типизированных языков, удобство
+(простота чтения кода, скорость написания, остутствие компиляции, и т.п.)
+это компромис с потерей производительности. Но основной критический код 
+написан на C++ прямо в движке (vector ops, physics, math, indexing, etc),
+в результате его производительности более чем достаточно для большинства
+типов игр.
 
-In any case, if more performance is required, critical sections can be
-rewritten in C++ and exposed transparently to the script. This allows
-the replacement of a GDScript class with a C++ class without altering
-the rest of the game.
+В любом случае, если необходимо больше производительности, критические разделы
+можно переписать на C++ и exposed прозрачно в script. Это позволяет заменить
+GDScript класс на C++ класс без изменения остальной игры.
 
-Scripting a scene
+Скриптинг сцены
 -----------------
 
-Before continuing, please make sure to read the :ref:`doc_gdscript` reference.
-It's a simple language and the reference is short, it will not take
-more than a few minutes to get an overview of the concepts.
+Перед тем как продолжить, обязательно прочтите справку по :ref:`doc_gdscript`.
+Это простой язык и справочное по нему короткое, это не займет дольше нескольких минут
+и позволит ознакомиться с основными концепциями.
 
-Scene setup
+Настройка сцены
 ~~~~~~~~~~~
 
-This tutorial will begin by scripting a simple GUI scene. Use the add
-node dialog to create the following hierarchy, with the following nodes:
+Урок начинается со скриптинга небольшой GUI сцены. Используйте окно добавления узла
+для создания следующей иерархии со следующими узлами:
 
 - Panel
 
   * Label
   * Button
 
-It should look like this in the scene tree:
+Это должно выглядеть примерно так:
 
 .. image:: /img/scripting_scene_tree.png
 
-Use the 2D editor to position and resize the button and label so that they
-look like the image below. You can set the text in the Inspector pane.
+Используйте 2D редактор чтобы расположить и масштабировать кнопку и label 
+так как на картинке. Можете задать text на панели Inspector.
 
 .. image:: /img/label_button_example.png
 
-Finally, save the scene, a fitting name could be "sayhello.scn"
+Сохраните сцену, с названием "sayhello.scn"
 
 .. _doc_scripting-adding_a_script:
 
-Adding a script
+Добавление скрипта
 ~~~~~~~~~~~~~~~
 
-Right click on the panel node, then select "Add Script" in the context
-menu:
+Правым кликом на панели node, в контекстном меню выберите "Add Script" :
 
 .. image:: /img/add_script.png
 
-The script creation dialog will pop up. This dialog allows to select
-the language, class name, etc. GDScript does not use class names in
-script files, so that field is not editable. The script should inherit
-from "Panel" (as it is meant to extend the node, which is of Panel type,
-this is automatically filled).
+Появится окно создания скрипта. Это окно позволяет выбрать язык, имя класса, и т.п.
+GDScript не использует имена классов в файле скрипта, так что это поле не редактируемо.
+Скрипт должен наследовать от "Panel" (это значит расширить узел, который имеет тип Panel,
+это заполняется автоматически).
 
-Enter a path name for the script and then select "Create":
+Введите path name для скрипта и затем нажмите "Create":
 
 .. image:: /img/script_create.png
 
-Once this is done, the script will be created and added to the node. You
-can see this both as an extra icon in the node, as well as in the script
-property:
+После чего, скрипт должен создасться и добавиться к узлу. 
+Это видно как дополнительный значок на узле, а также как свойство script:
 
 .. image:: /img/script_added.png
 
