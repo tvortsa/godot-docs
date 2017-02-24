@@ -29,64 +29,61 @@ settings меню. Цвет фона по умолчанию оставим че
 
 .. image:: /img/clearcolor.png
 
-Create a :ref:`class_Node2D` node for the project root. Node2D is the
-base type for the 2D engine. After this, add some sprites
-(:ref:`class_Sprite` node) for the left and right paddles, the separator
-and ball. You can set a custom name for each node, and set the texture
-for each sprite in the Inspector. 
+Создайте узел :ref:`class_Node2D` для корневого узла проекта. 
+Node2D это базовый тип узлов для 2D движка. После этого добавим спрайты, 
+(:ref:`class_Sprite` node) для левой и правой ракеток, разделителя и мяча.
+Вы можете задать произвольные имена для каждого узла, и зададим текстуру 
+для каждого спрайта в Inspector. 
 
 .. image:: /img/pong_nodes.png
 
-Set nodes positions:
+Задаем позиции узлов:
  - "left" node: (67, 183)
  - "right" node: (577, 187)
  - "separator" node: (320, 200)
  - "ball" node: (320, 188)
 
 
-The final scene layout should look similar to this (note: the ball is in
-the middle!):
+В итоге макет сцены должен выглядеть так (note: шар посредине!):
 
 .. image:: /img/pong_layout.png
 
 
-Save the scene as "pong.tscn" and set it as the main scene in the
-project
-properties.
+Сохраните сцену как "pong.tscn" и установите ее в качестве главной
+сцены проекта.
 
 .. _doc_simple_2d_game-input_actions_setup:
 
-Input actions setup
+Настройка действий ввода
 ~~~~~~~~~~~~~~~~~~~
 
-Video games can be played using various input methods: Keyboard, Joypad,
-Mouse, Touchscreen (multitouch)... Godot is able to use them all.
-However, it would be interesting to define the inputs as "Input Actions"
-instead of hardware actions that you'd manage separately. This way, any
-input method can be used: each of them only require the user to connect
-buttons to game actions that you defined. 
+В видео-игры можно играть многими устройствами ввода: Keyboard, Joypad,
+Mouse, Touchscreen (multitouch)... Godot может использовать их все.
+Но, было бы интересно определить ввод как "Input Actions"
+вместо аппаратных действий которыми вы моглибы управлять отдельно. 
+Так любой метод ввода может быть использован: каждый будет требовать только
+подключения пользователя к кнопкам игровых действий которые вы определили. 
 
-This is Pong. The only input that matters is for the pads going up and
-down.
+Это Pong. Единственный значимый ввод это движение ракетки вверх-вниз.
 
-Open the project properties dialog again (Scene/Project settings), but
-this time move to the
-"Input Map" tab.
+Откройте свойства проекта снова (Scene/Project settings), но теперь перейдите
+во вкладку
 
-In this tab, add 4 actions:
+"Input Map".
+
+В этой вкладке добавьте 4 действия:
 ``left_move_up``, ``left_move_down``, ``right_move_up``,
 ``right_move_down``.
-Assign the keys that you desire. A/Z (for the left player) and Up/Down
-(for the right player) as keys
-should work in most cases.
+Назначьте любую клавишу по вашему желанию. A/Z (для левого игрока) и Up/Down
+(для правого) должно подойти для большинства ситуаций.
 
 .. image:: /img/inputmap.png
 
-Script
+Скрипт
 ~~~~~~
 
-Create a script for the root node of the scene and open it (as explained
-in :ref:`doc_scripting-adding_a_script`). This script inherits Node2D:
+Создайте скрипт для корневого узла сцены и откройте его (как было показано в
+ :ref:`doc_scripting-adding_a_script`). Этот скрипт наследует от Node2D:
 
 ::
 
@@ -96,9 +93,9 @@ in :ref:`doc_scripting-adding_a_script`). This script inherits Node2D:
         pass
         
         
-First things first, we need to define some members for our script so it
-can store useful values. Such values are the dimensions of the screen, the pad
-and the initial direction of the ball.
+Перво наперво, надо определить некоторых участников для нашего скрипта
+которые будут хранить полезные значения. Такие как разрешение экрана,
+ракетку и начальное направление шарика.
 
 ::
 
