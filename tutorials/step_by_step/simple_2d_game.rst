@@ -60,7 +60,7 @@ Node2D это базовый тип узлов для 2D движка. Посл�
 В видео-игры можно играть многими устройствами ввода: Keyboard, Joypad,
 Mouse, Touchscreen (multitouch)... Godot может использовать их все.
 Но, было бы интересно определить ввод как "Input Actions"
-вместо аппаратных действий которыми вы моглибы управлять отдельно. 
+вместо аппаратных действий которыми вы могли бы управлять отдельно. 
 Так любой метод ввода может быть использован: каждый будет требовать только
 подключения пользователя к кнопкам игровых действий которые вы определили. 
 
@@ -110,17 +110,17 @@ Mouse, Touchscreen (multitouch)... Godot может использовать и�
         pass
 
 
-As you know, the ``_ready()`` function is the first function called
-(after ``_enter_tree()`` which we don't need here). In this function,
-two things have to be done. The first one is to enable
-processing: this is the purpose of the ``set_process(true)`` function.
-The second one is to initalize our two member variables.
+Как вы помните, функция ``_ready()`` это первая функция вызываемая
+(после ``_enter_tree()`` которая нам тут не нужна). В этой функции,
+должно дыть сделано две вещи. Во первых включить процессинг (processing):
+это делает функция ``set_process(true)``.
+Вторая это инициализировать две наши переменные члены.
 
 ::
 
     extends Node2D
 
-    # Member variables
+    # Переменные члены
     var screen_size
     var pad_size
     var direction = Vector2(1.0, 0.0)
@@ -130,29 +130,28 @@ The second one is to initalize our two member variables.
         pad_size = get_node("left").get_texture().get_size()
         set_process(true)
         
-We initialize the ``pad_size`` variable by getting one of the pads nodes
-(the left one here), and obtain its texture size. The ``screen_size`` is
-initialized using the ``get_viewport_rect()`` which returns a Rect
-object corresponding to the game window, and we store its size.
+Мы инициировали переменную ``pad_size`` получением одного из узлов ракетки
+(левой), и получили ее размер текстуры.  ``screen_size`` это
+инициализация с использованием ``get_viewport_rect()`` который возвращает объект Rect
+соответствующий окну игры, и мы сохраняем его размер.
 
 
-Now, we need to add some other members to our script in order to make
-our ball move.
+Теперь, нам нужно добавить еще несколько членов к нашему скрипту чтобы наш шар перемещался.
 
 ::
 
     extends Node2D
 
-    # Member variables
+    # Переменные члены
     var screen_size
     var pad_size
     var direction = Vector2(1.0, 0.0)
     
-    # Constant for pad speed (in pixels/second)
+    # Константа скорости ракетки (в пикселях/секунду)
     const INITIAL_BALL_SPEED = 80
-    # Speed of the ball (also in pixels/second)
+    # Скорость мяча (тоже пикселей в секунду)
     var ball_speed = INITIAL_BALL_SPEED
-    # Constant for pads speed
+    # Константа для скорости ракеток
     const PAD_SPEED = 150
 
     func _ready():
@@ -162,14 +161,13 @@ our ball move.
 
     
 
-Finally, the ``_process()`` function. All the code below is contained by
-this function.
+Наконец, функция ``_process()`` . Весь код ниже содержится в этой функции.
 
-We have to init some useful values for computation. The first one is the
-ball position (from the node), the second one is the rectangle
-(``Rect2``) for each pad. These rectangles will be used for collision
-tests between the ball and the pads. Sprites center their textures by
-default, so a small adjustment of ``pad_size / 2`` must be added.
+Нам нужно инициализировать некоторые полезные для вычислений значения. 
+Первая это положение шарика (from the node), второе это прямоугольник
+(``Rect2``) для каждой ракетки. Эти прямоугольники будут использоваться
+для анализа столкновений между мячом и ракетками. Спрайты по-умолчанию
+центрируют свои текстуры, так что нужна небольшая подстройка ``pad_size / 2`` .
 
 ::
 
@@ -178,18 +176,17 @@ default, so a small adjustment of ``pad_size / 2`` must be added.
         var left_rect = Rect2( get_node("left").get_pos() - pad_size*0.5, pad_size )
         var right_rect = Rect2( get_node("right").get_pos() - pad_size*0.5, pad_size )
 
-Now, let's add some movement to the ball in the ``_process()`` function.
-Since the ball position is stored in the ``ball_pos`` variable,
-integrating it is simple:
+Теперь добавим немного движения мячу в функции ``_process()`` .
+Поскольку положение мяча сохранено в переменной ``ball_pos``,
+интегрирование проста:
 
 ::
 
-        # Integrate new ball postion
+        # Интегрирование нового положения мяча
         ball_pos += direction * ball_speed * delta
 
-This code line is called at each iteration of the ``_process()``
-function. That means the ball position will be updated at each new
-frame.
+Эта строка кода вызывается каждую итерацию функции ``_process()``.
+Это значит что положение мяча будет обновлено для каждого следующего кадра.
 
 Now that the ball has a new position, we need to test if it
 collides with anything, that is the window borders and the pads. First,
