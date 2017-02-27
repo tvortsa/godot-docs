@@ -188,55 +188,51 @@ Mouse, Touchscreen (multitouch)... Godot может использовать и�
 Эта строка кода вызывается каждую итерацию функции ``_process()``.
 Это значит что положение мяча будет обновлено для каждого следующего кадра.
 
-Now that the ball has a new position, we need to test if it
-collides with anything, that is the window borders and the pads. First,
-the floor and the roof:
+Теперь когда мяч в новой позиции мы должны проверить не столкнулся ли он с чем ни будь,
+с границами окна или ракетками. Первое низ и верх:
 
 ::
 
-        # Flip when touching roof or floor
+        # Отразить при столкновении с крышей или полом
         if ((ball_pos.y < 0 and direction.y < 0) or (ball_pos.y > screen_size.y and direction.y > 0)):
             direction.y = -direction.y
 
-Second, the pads: if one of the pads is touched, we need to invert the
-direction of the ball on the X axis so it goes back, and define a new
-random Y direction using the ``randf()`` function. We also increase its
-speed a little.
+Второе, ракетки: если соприкосновение с одной из них произошло, инвертируем направление мяча по оси X
+чтобы он вернулся, и щзадаем новое рандомное направление по Y используя функцию ``randf()`` .
+А также немного ускоряем его.
 
 ::
 
-        # Flip, change direction and increase speed when touching pads
+        # Инвертируем направление и ускоряем при касании ракетки
         if ((left_rect.has_point(ball_pos) and direction.x < 0) or (right_rect.has_point(ball_pos) and direction.x > 0)):
             direction.x = -direction.x
             direction.y = randf()*2.0 - 1
             direction = direction.normalized()
             ball_speed *= 1.1
 
-Finally, if the ball went out of the screen, it's game over. That is, we test if
-the X position of the ball is less than 0 or greater than the screen
-width. If so, the game restarts:
+Наконец если мяч улетает за экран - game over. Для чего мы тестируем X положение мяча
+не меньше ли оно 0 или больше чем ширина экрана. Если так то перезапускаем игру:
 
 ::
 
-        # Check gameover
+        # Проверка на gameover
         if (ball_pos.x < 0 or ball_pos.x > screen_size.x):
             ball_pos = screen_size*0.5
             ball_speed = INITIAL_BALL_SPEED
             direction = Vector2(-1, 0)
 
-Once everything is done, the node is updated with the new position of
-the ball, which was computed before:
+Когда все готово, узел обновляется с новой позицией мяча, которая была вычислена ранее:
 
 ::
 
         get_node("ball").set_pos(ball_pos)
 
-Next, we allow the pads to move. We only update their position according
-to player input. This is done using the Input class:
+Далее, мы позволяем ракетке двигаться. Только мы обновляем ее положение в соответствии
+с вводом пользователя. Это делается с помощью класса Input:
 
 ::
 
-        # Move left pad
+        # Перемещаем левую ракетку
         var left_pos = get_node("left").get_pos()
 
         if (left_pos.y > 0 and Input.is_action_pressed("left_move_up")):
@@ -246,7 +242,7 @@ to player input. This is done using the Input class:
 
         get_node("left").set_pos(left_pos)
 
-        # Move right pad
+        # Перемещаем правую ракетку
         var right_pos = get_node("right").get_pos()
 
         if (right_pos.y > 0 and Input.is_action_pressed("right_move_up")):
@@ -256,10 +252,8 @@ to player input. This is done using the Input class:
 
         get_node("right").set_pos(right_pos)
         
-We use the four actions previously defined in the Input actions setup
-section above. When the player activates the respective key, the
-corresponding action is triggered. As soon as this happens, we simply
-compute a new position for the pad in the desired direction and apply it
-to the node.
+Мы используем четыре действия объявленных ранее в разделе Input actions setup.
+Когда игрок активирует соответствующую клавишу, включается соответствующее действие.
+Как только это происходит мы вычисляем новое положение ракетки в нужном направлении и применяем его к узлу.
 
-That's it! A simple Pong was written with a few lines of code.
+Вот и все! Простой пинг-понг готов.
