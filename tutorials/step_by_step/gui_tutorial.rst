@@ -1,42 +1,38 @@
 .. _doc_gui_tutorial:
 
-GUI tutorial
+GUI туториал
 ============
 
-Introduction
+Введение
 ~~~~~~~~~~~~
 
-If there is something that most programmers hate with passion, it is
-programming graphical user interfaces (GUIs). It's boring, tedious and
-unchallenging. Several aspects make matters worse, such as:
+Больше всего программисты не любят программировать GUI - графич.
+интерфейс пользователя. Это скучно, утомительно и невызывающе. 
 
--  Pixel alignment of UI elements is difficult (such that it looks just
-   like the designer intends).
--  UIs are changed constantly due to design and usability issues that
-   appear during testing.
--  Handling proper screen re-sizing for different display resolutions.
--  Animating several screen components, to make it look less static.
+Наиболее неприятные аспекты:
 
-GUI programming is one of the leading causes of programmer burnout.
-During the development of Godot (and previous engine iterations),
-several techniques and philosophies for UI development were put into
-practice, such as immediate mode, containers, anchors, scripting, etc.
-This was always done with the main goal of reducing the stress
-programmers had to face while putting together user interfaces.
+-  Пиксельное выравнивание UI элементов - сложно (особенно выдерживать
+   все таким как задумал дизайнер).
+-  UI постоянно меняется из-за соображений юзабилити, тестирования и т.п..
+-  Зоопарк разрешений экранов.
+-  Анимирование компонентов UI.
 
-In the end, the resulting UI subsystem in Godot is an efficient solution
-to this problem, and works by mixing together a few different
-approaches. While the learning curve is a little steeper than in other
-toolkits, developers can put together complex user interfaces in very
-little time, by sharing the same set of tools with designers and
-animators.
+GUI программирование лидирует среди причин выгорания программистов.
+Разрабатывая Godot мы попробовали несколько техник и философий,
+разработки UI таких как немедленный режим , контейнеры, якори, скриптинг etc.
+Главным образом для снижения стресса программистов работающих с GUI.
 
-Control
+В результате, подсистема UI в Godot это еффективная система соединяющая
+несколько различных подходов. Кривая обучения немного круче других,
+но разработчики могут создавать сложные интерфейсы очень быстро,
+разделяя один и тот же набор инструментов с дизайнерами и аниматорами.
+
+Элементы управления
 ~~~~~~~
 
-The basic node for UI elements is :ref:`Control <class_Control>`
-(sometimes called "Widget" or "Box" in other toolkits). Every node that
-provides user interface functionality descends from it.
+Базовый узел для UI элементов это :ref:`Control <class_Control>`
+(иногда называемый "Widget" или "Box" в других тулсетах). Каждый узел
+предоставляющий функционал интерфейса наследует от него.
 
 When controls are put in a scene tree as a child of another control,
 its coordinates (position, size) are always relative to the parent.
