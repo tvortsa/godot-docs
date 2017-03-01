@@ -73,7 +73,7 @@ GUI программирование лидирует среди причин в
 Мини-урок по собственным контролам
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Перед тем ка углубляться, создание собственного контрола
+Перед тем как углубляться, создание собственного контрола
 даст полнее почувствовать как работают контролы, поскольку это
 не так сложно как может показаться.
 
@@ -114,16 +114,15 @@ is pretty much how most controls work internally.
 
 .. image:: /img/ctrl_tapped.png
 
-UI complexity
+UI сложность
 ~~~~~~~~~~~~~
 
-As mentioned before, Godot includes dozens of controls ready for use
-in a user interface. Such controls are divided in two categories. The
-first is a small set of controls that work well for creating most game
-user interfaces. The second (and most controls are of this type) are
-meant for complex user interfaces and uniform skinning through styles. A
-description is presented as follows to help understand which one should
-be used in which case.
+Как говорили ранее, Godot включает множество UI готовых для использования в UI.
+Эти контролы делят на две категории. Первая это набор простых контролов
+которые используют для большинства интерфейсов игр.
+Вторая (большинство контролов именно этого типа) для более сложных UI
+единообразно скиняться через стили. Описание представлено следующим
+образом чтобы помочь понять, какой из них следует использовать в этом случае.
 
 Simplified UI controls
 ~~~~~~~~~~~~~~~~~~~~~~
