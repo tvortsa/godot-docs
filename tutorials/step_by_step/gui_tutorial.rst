@@ -34,62 +34,58 @@ GUI программирование лидирует среди причин в
 (иногда называемый "Widget" или "Box" в других тулсетах). Каждый узел
 предоставляющий функционал интерфейса наследует от него.
 
-When controls are put in a scene tree as a child of another control,
-its coordinates (position, size) are always relative to the parent.
-This sets the basis for editing complex user interfaces quickly and
-visually.
+Когда контролы помещают в дерево сцены как потомок другого контрола,
+его координаты (положение, размер) всегда относительно родителя.
+Это закладывает основу для редактирования сложных пользовательских
+интерфейсов быстро и визуально.
 
-Input and drawing
+Ввод и отрисовка
 ~~~~~~~~~~~~~~~~~
 
-Controls receive input events by means of the
+Контролы принимают события ввода посредством
 :ref:`Control._input_event() <class_Control__input_event>`
-callback. Only one control, the one in focus, will receive
-keyboard/joypad events (see
+коллбэка. Только один контрол, который в фокусе, принимает события
+клавиатуры/джойпада (см
 :ref:`Control.set_focus_mode() <class_Control_set_focus_mode>`
-and :ref:`Control.grab_focus() <class_Control_grab_focus>`).
+и :ref:`Control.grab_focus() <class_Control_grab_focus>`).
 
-Mouse motion events are received by the control directly below the mouse
-pointer. When a control receives a mouse button pressed event, all
-subsequent motion events are received by the pressed control until that
-button is released, even if the pointer moves outside the control
-boundary.
+События движения мыши принимаются контролом прямо с указателя мыши.
+Когда контрол принимает события нажатия кнопок мыши, все
+последующие события перемещения принимаются контролом который был нажат
+пока кнопка не будет отпущена, даже если указатель выйдет за пределы контрола.
 
-Like any class that inherits from :ref:`CanvasItem <class_CanvasItem>`
-(Control does), a :ref:`CanvasItem._draw() <class_CanvasItem__draw>`
-callback will be received at the beginning and every time the control
-needs to be redrawn (the programmer needs to call
+Как всякий класс наследующий от :ref:`CanvasItem <class_CanvasItem>`
+(Control does), и :ref:`CanvasItem._draw() <class_CanvasItem__draw>`
+коллбэк будет принимать вначале и каждый раз когда контрол должен быть
+перерисован (программист должен вызвать
 :ref:`CanvasItem.update() <class_CanvasItem_update>`
-to enqueue the CanvasItem for redraw). If the control is not visible
-(yet another CanvasItem property), the control does not receive any
-input.
+поставить в очередь CanvasItem для перерисовки). Если контрол невидим
+(yet another CanvasItem property), контрол не принимает никакой ввод.
 
-In general though, the programmer does not need to deal with drawing and
-input events directly when building UIs (that is more useful when
-creating custom controls). Instead, controls emit different kinds of
-signals with contextual information for when action occurs. For
-example, a :ref:`Button <class_Button>` emits
-a "pressed" signal when pressed, a :ref:`Slider <class_Slider>` will
-emit a "value_changed" when dragged, etc.
+В общем хотя, программист не должен иметь дело с отрисовкой и
+событиями ввода непосредственно при построении UI (это удобно при 
+создании собственных контролов). Вместо этого, controls выделяют различные виды 
+сигналов с контекстной информацией когда происходит действие. Например
+ :ref:`Button <class_Button>` испускает
+сигнал "pressed" при нажатии, :ref:`Slider <class_Slider>` будет испускать
+"value_changed" при перетаскивании, etc.
 
-Custom control mini tutorial
+Мини-урок по собственным контролам
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before going into more depth, creating a custom control will be a good
-way to get the picture on how controls works, as they are not as
-complex as it might seem.
+Перед тем ка углубляться, создание собственного контрола
+даст полнее почувствовать как работают контролы, поскольку это
+не так сложно как может показаться.
 
-Additionally, even though Godot comes with dozens of controls for
-different purposes, it happens often that it's easier to attain a
-specific functionality by creating a new one.
+Кроме того, хоть Godot поставляется с множеством контролов, 
+часто оказывается проще реализовать то что нужно в собственном.
 
-To begin, create a single-node scene. The node is of type "Control" and
-has a certain area of the screen in the 2D editor, like this:
+Для начала, создайте сцену с единственным узлом. Тип нода "Control" и
+имеет определенную область экрана в 2D редакторе, типа так:
 
 .. image:: /img/singlecontrol.png
 
-Add a script to that node, with the following code:
-
+Добавьте скрипт к этому узлу
 ::
 
     extends Control
