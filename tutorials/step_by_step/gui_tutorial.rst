@@ -127,17 +127,17 @@ UI сложность
 Simplified UI controls
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This set of controls is enough for most games, where complex
-interactions or ways to present information are not necessary. They can
-be skinned easily with regular textures.
+Этот тип контролов подходит для большинства игр, где не нужны сложные
+взаимодействия или способы представления информации. Они могут быть
+легко заскинены стандартными текстурами.
 
--  :ref:`Label <class_Label>`: Node used for showing text.
--  :ref:`TextureFrame <class_TextureFrame>`: Displays a single texture,
-   which can be scaled or kept fixed.
--  :ref:`TextureButton <class_TextureButton>`: Displays a simple textured
-   button, states such as pressed, hover, disabled, etc. can be set.
--  :ref:`TextureProgress <class_TextureProgress>`: Displays a single
-   textured progress bar.
+-  :ref:`Label <class_Label>`: Узел использующийся для отображения текста.
+-  :ref:`TextureFrame <class_TextureFrame>`: Отображение одной текстуры,
+   которая может масштабироваться или быть фиксированной.
+-  :ref:`TextureButton <class_TextureButton>`: Отображает простую текстурную
+кнопку, можно задавать такие состояния как pressed, hover, disabled, и т.д.
+-  :ref:`TextureProgress <class_TextureProgress>`: Отображает простой текстурированный
+прогресс-бар.
 
 Additionally, re-positioning of controls is most efficiently done with
 anchors in this case (see the :ref:`doc_size_and_anchors` tutorial for more
