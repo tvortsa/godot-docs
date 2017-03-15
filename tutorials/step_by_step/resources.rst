@@ -1,14 +1,14 @@
 .. _doc_resources:
 
-Resources
+Ресурсы
 =========
 
-Nodes and resources
+Узлы и ресурсы
 -------------------
 
-So far, :ref:`Nodes <class_Node>`
-have been the most important datatype in Godot, as most of the behaviors
-and features of the engine are implemented through them. There is
+До сих пор, :ref:`Nodes <class_Node>`
+был наиболее важным типом данных в Godot, поскольку большинство типов поведений
+и фич движка реализованы через него. There is
 another datatype that is equally important:
 :ref:`Resource <class_Resource>`.
 
