@@ -1,29 +1,29 @@
 .. _doc_filesystem:
 
-File system
+Файловая система
 ==========
 
-Introduction
+Введение
 ------------
 
-File systems are yet another hot topic in engine development. The
-file system manages how the assets are stored, and how they are accessed.
-A well designed file system also allows multiple developers to edit the
-same source files and assets while collaborating together.
+Файловые системы это еще одна горячая тема в разработке движков. Файловая система
+управляет хранением активов, и доступом к ним.
+Хорошо спроектированные файловые системы также позволяют нескольким разработикам
+сообща редактировать файлы ресурсов и активы при совместной работе.
 
-Initial versions of the Godot engine (and previous iterations before it was
+Начальные версии Godot движка (and previous iterations before it was
 named Godot) used a database. Assets were stored in it and assigned an
 ID. Other approaches were tried as well, such as local databases, files with
 metadata, etc. In the end the simple approach won and now Godot stores
 all assets as files in the file system.
 
-Implementation
+Реализация
 --------------
 
-The file system stores resources on disk. Anything, from a script, to a scene or a
-PNG image is a resource to the engine. If a resource contains properties
-that reference other resources on disk, the paths to those resources are also
-included. If a resource has sub-resources that are built-in, the resource is
+Файловая система хранит ресурсы на диске. Все, от скрипта до сцены или 
+PNG изображения это ресурсы с точки зрения движка. Если ресурс содержит свойства
+которые ссылаются на другие ресурсы на диске пути к этим ресурсам также включаются.
+If a resource has sub-resources that are built-in, the resource is
 saved in a single file together with all the bundled sub-resources. For
 example, a font resource is often bundled together with the font textures.
 
@@ -53,10 +53,10 @@ This file contains the project configuration in plain text, using the win.ini
 format. Even an empty engine.cfg can function as a basic definition of a blank
 project.
 
-Path delimiter
+символ - разделитель
 -------------------
 
-Godot only supports ``/`` as a path delimiter. This is done for
+Godot поддерживает только ``/`` в качестве разделителя пути. This is done for
 portability reasons. All operating systems support this, even Windows,
 so a path such as ``c:\project\engine.cfg`` needs to be typed as
 ``c:/project/engine.cfg``.
