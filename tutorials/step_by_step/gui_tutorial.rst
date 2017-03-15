@@ -106,9 +106,9 @@ GUI программирование лидирует среди причин в
             tapped=true
             update()
 
-Then run the scene. When the rectangle is clicked/tapped, it will change
-color from blue to red. That synergy between the events and the drawing
-is pretty much how most controls work internally.
+Теперь запустите сцену. При клике по прямоугольнику, он сменит
+цвет с синего на красный. Эта синергия между событием и отрисовкой
+и есть то, как большинство элементов управления работают на самом деле.
 
 .. image:: /img/ctrl_normal.png
 
@@ -139,9 +139,8 @@ Simplified UI controls
 -  :ref:`TextureProgress <class_TextureProgress>`: Отображает простой текстурированный
 прогресс-бар.
 
-Additionally, re-positioning of controls is most efficiently done with
-anchors in this case (see the :ref:`doc_size_and_anchors` tutorial for more
-information).
+Дополнительно, ре-позиционирование контролов наиболее эффективно выполняентся
+якорями  (см урок :ref:`doc_size_and_anchors` ).
 
 In any case, it will happen often that even for simple games, more
 complex UI behaviors are required. An example of this is a scrolling
