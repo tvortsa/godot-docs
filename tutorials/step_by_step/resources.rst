@@ -8,18 +8,17 @@
 
 До сих пор, :ref:`Nodes <class_Node>`
 был наиболее важным типом данных в Godot, поскольку большинство типов поведений
-и фич движка реализованы через него. There is
-another datatype that is equally important:
+и фич движка реализованы через него. Но есть и другой тип данных, который не менее важен:
 :ref:`Resource <class_Resource>`.
 
-Where *Nodes* focus on behaviors, such as drawing a sprite, drawing a
-3D model, physics, GUI controls, etc,
+Если *Nodes* фокусируется на поведениях, таких как отрисовка спрайтов, 
+3D моделей, физике, GUI контролах, и т.п.,
 
-**Resources** are mere **data containers**. This means that they don't
-do any action nor process any information. Resources just contain
-data.
+**Resources** это просто **data containers**. Это означает что они не делают
+никаких действий и не обрабатывают каких либо данных. Resources просто
+содержат данные.
 
-Examples of resources are
+Примеры resources 
 :ref:`Texture <class_Texture>`,
 :ref:`Script <class_Script>`,
 :ref:`Mesh <class_Mesh>`,
@@ -28,31 +27,30 @@ Examples of resources are
 :ref:`AudioStream <class_AudioStream>`,
 :ref:`Font <class_Font>`,
 :ref:`Translation <class_Translation>`,
-etc.
+и др.
 
-When Godot saves or loads (from disk) a scene (.scn or .xml), an image
-(png, jpg), a script (.gd) or pretty much anything, that file is
-considered a resource.
+Когда Godot сохраняет или загружает (с диска) сцену (.scn или .xml), изображения
+(png, jpg), скрипта (.gd) или почти все, является файлом считается ресурсом.
 
-When a resource is loaded from disk, **it is always loaded once**. That
-means, if there is a copy of that resource already loaded in memory,
-trying to load the resource again will just return the same copy again
-and again. This corresponds with the fact that resources are just data
-containers, so there is no need to have them duplicated.
+Когда resource загружается с диска, **он всегда загружается один раз**. Что означает,
+если есть копия этого ресурса уже загруженная в память,
+при попытке загрузить ресурс будет всегда возвращаться уже загруженная копия.
+это соответствует тому, что ресурсы это просто контейнеры данных,
+поэтому нет необходимости дублировать их.
 
-Typically, every object in Godot (Node, Resource, or anything else) can
-export properties, properties can be of many types (like a string,
-integer, Vector2, etc) and one of those types can be a resource. This
-means that both nodes and resources can contain resources as properties.
-To make it a little more visual:
+Обычно, каждый объект в Godot (Node, Resource, или что-то еще) может экспортировать свойства,
+pсвойства могут быть разных типов (string,
+integer, Vector2, и т.п) и один из этих типов может быть ресурс. Это означает что
+и nodes и ресурсы могут содержать ресурсы как свойства.
+Проиллюстрируем это:
 
 .. image:: /img/nodes_resources.png
 
-External vs built-in
+External или built-in
 --------------------
 
-The resource properties can reference resources in two ways,
-*external* (on disk) or **built-in**.
+Ресурсные свойства могут ссылаться на ресурсы двумя способами,
+*external* (на диске) или **built-in**.
 
 To be more specific, here's a :ref:`Texture <class_Texture>`
 in a :ref:`Sprite <class_Sprite>` node:
