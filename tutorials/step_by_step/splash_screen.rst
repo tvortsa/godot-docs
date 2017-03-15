@@ -6,38 +6,39 @@ Splash screen
 Tutorial
 --------
 
-This is a simple tutorial to establish the basic idea of how the GUI
-subsystem works. The goal is to create a really simple, static
+Это простой урок представляющий базовую идею функционирования
+подсистемы GUI. Его цель создать действительно простой, статический
 splash screen.
 
-Following is a file with the assets that will be used. These can be added directly to your project folder - no need to import them:
+Ниже приведен файл с используемыми активами. Вы можете его просто положить в папку проекта
+- не нужно его импортировать:
 
 :download:`robisplash_assets.zip </files/robisplash_assets.zip>`.
 
-Setting up
+Настройки
 ----------
 
-Set the display resolution to 800x450 in Project Settings, and set up a new scene like this:
+Задайте разрешение экрана 800x450 в Project Settings, и настройте новую сцену так:
 
 .. image:: /img/robisplashscene.png
 
 .. image:: /img/robisplashpreview.png
 
-The nodes "background" and "logo" are of :ref:`TextureFrame <class_TextureFrame>`
-type. These have a special property for setting the texture to be
-displayed, just load the corresponding file.
+Узлы "background" и "logo" имеют тип :ref:`TextureFrame <class_TextureFrame>`.
+Есть специальное свойство для установки текстуры которая должна отображаться,
+просто загрузите соответствующий файл.
 
 .. image:: /img/texframe.png
 
-The node "start" is a :ref:`TextureButton <class_TextureButton>`.
-It takes several images for different states, but only the normal and
-pressed will be supplied in this example:
+Узел "start" это :ref:`TextureButton <class_TextureButton>`.
+У него есть несколько изображений для разных состояний,Нов этом примере
+мы используем только normal и pressed:
 
 .. image:: /img/texbutton.png
 
-Finally, the node "copyright" is a :ref:`Label <class_Label>`.
-A custom font can be set for labels by editing the following property:
+Наконец, узел "copyright" это :ref:`Label <class_Label>`.
+Собственный шрифт можно указать для labels изменяя следующее свойство:
 
 .. image:: /img/label.png
 
-As a side note, the font was imported from a TTF, see :ref:`doc_importing_fonts`.
+В качестве примечания, шрифт был импортирован из TTF, см :ref:`doc_importing_fonts`.
