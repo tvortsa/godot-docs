@@ -1,67 +1,63 @@
 .. _doc_animations:
 
-Animations
+Анимации
 ==========
 
-Introduction
+Введение
 ------------
 
-This tutorial will explain how everything is animated in Godot. Godot's
-animation system is extremely powerful and flexible.
+Этот урок раскрывает то как все в Godot анимируется. 
+Система анимации Godot очень мощная и гибкая.
 
-To begin, let's just use the scene from the previous tutorial (:ref:`doc_splash_screen`).
-The goal is, to add a simple animation to it. Here's a copy
-just in case: :download:`robisplash.zip </files/robisplash.zip>`.
+Для начала, давайте просто используем сцену из предыдущего урока
+(:ref:`doc_splash_screen`).
+Задача в том чтобы, добавить ей простую анимацию.Вот копия на всякий случай:
+:download:`robisplash.zip </files/robisplash.zip>`.
 
-Creating the animation
+Создание анимации
 ----------------------
 
-First of all, add an :ref:`AnimationPlayer <class_AnimationPlayer>`
-node to the scene as a child of "bg" (the root node):
+Прежде всего, добавим узел :ref:`AnimationPlayer <class_AnimationPlayer>`
+в сцену как потомок "bg" (root node):
 
 .. image:: /img/animplayer.png
 
-When a node of this type is selected, the animation editor panel will
-appear:
+Когда выбран узел этого типа, появляется панель animation editor:
 
 .. image:: /img/animpanel.png
 
-So, it's time to create a new animation! Press the new animation button
-and name the animation "intro".
+Нажмите кнопку new animation и назовите анимацию "intro".
 
 .. image:: /img/animnew.png
 
-After the animation has been created, it's time to edit it, by
-pressing the "edit" button:
+После того как анимация была создана, отредактируем ее, нажав кнопку "edit":
 
 .. image:: /img/animedit.png
 
-Editing the animation
+Редактирование анимации
 ---------------------
 
-Now this is when the magic happens! Several things happen when the
-"edit" button is pressed, the first one is that the animation editor
-appears above the animation panel. (In Godot 2.x, this button has been
-removed, instead, click on the 'animation' toggle at the bottom right 
-for similar functionality.)
+При нажатии кнопки "edit" происходит несколько вещей, во первых
+над панелью animation появляется animation editor.
+(В Godot 2.x, эту кнопку удалили, вмсто нее кликайте 'animation' toggle справа внизу)
 
 .. image:: /img/animeditor.png
 
-The second and most important, is that the property editor enters
-"animation editing" mode. In this mode, a key icon appears next to
-every property of the property editor. This means that, in Godot, *any
-property of any object* can be animated:
+Во вторых, самое главное, это то что property editor входит в режим
+"animation editing". В этом режиме, возле каждого свойства в property editor
+появляется иконка ключа. Это значит что, в Godot, *любое
+свойство любого объекта* может быть анимировано:
 
 .. image:: /img/propertykeys.png
 
-Making the logo appear
+Появление лого
 ----------------------
 
-The logo will appear from the top of the screen. After selecting
-the animation player, the editor panel will stay visible until
-manually hidden (or the animation node is erased). Taking advantage of
-this, select the "logo" node and go to the "pos" property, move it up
-to position: 114,-400.
+Лого будет появляться сверху экрана. После выделения animation player,
+editor panel остается видимой пока не будет спрятана вручную
+(или узел animation будет удален). Пользуясь этим,
+выделите узел "logo" и перейдите к свойству "pos" , переместите его вверх
+в позицию: 114,-400.
 
 Once in this position, press the key button next to the property:
 
@@ -72,22 +68,22 @@ it!
 
 .. image:: /img/addtrack.png
 
-The keyframe will be added in the animation player editor:
+Ключевой кадр будет добавлен в рдактор animation player:
 
 .. image:: /img/keyadded.png
 
-Move the editor cursor to the end, by clicking here:
+Передвиньте курсор редвктора в конец, кликнув здесь:
 
 .. image:: /img/move_cursor.png
 
-Change the logo position to 114,0 and add a keyframe again. With two
-keyframes, the animation happens.
+Измените положение logo в 114,0 и снова добавьте ключевой кадр. С двуня ключами
+произойдет анимация.
 
 .. image:: /img/animation.png
 
-Pressing Play on the animation panel will make the logo descend. To test
-it by running the scene, the autoplay button can tag the animation to
-start automatically when the scene starts:
+Нажмите Play на animation panel произойдет спуск логотипа. Для проверки
+запуска этого при загрузке сцены, кнопкой autoplay button можно пометить анимацию
+чтобы анимация проигрывалась при старте сцены:
 
 .. image:: /img/autoplay.png
 
