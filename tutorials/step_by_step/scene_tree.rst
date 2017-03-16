@@ -3,14 +3,14 @@
 SceneTree
 =========
 
-Introduction
+Введение
 ------------
 
-This is where things start getting abstract, but don't panic, as
-there's not really more depth than this.
+Тут вещи начинают становиться абстрактными, но без паники, 
+на самом деле все не страшно.
 
-In previous tutorials, everything revolves around the concept of
-nodes, scenes are made of them, and they become active once they enter
+В предыдущих уроках, все крутилось вокруг концепции узлов,
+из них состоят сцены, and they become active once they enter
 the *scene tree*.
 
 This concept deserves going into a little more detail. In fact, the
