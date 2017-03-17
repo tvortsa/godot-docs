@@ -88,30 +88,29 @@ root :ref:`Viewport <class_Viewport>`
 Scene tree
 ----------
 
-When a node is connected, directly or indirectly, to the root
-viewport, it becomes part of the *scene tree*.
+Когда узел присоединен, напрямую или ненепосредственно, к root
+viewport, он становится частью *scene tree*.
 
-This means that, as explained in previous tutorials, it will get the
-_enter_tree() and _ready() callbacks (as well as _exit_tree()).
+Это означает что, как раскрывалось в предыдущем туториале, он получит
+коллбэки _enter_tree() и _ready() (а также _exit_tree()).
 
 .. image:: /img/activescene.png
 
-When nodes enter the *Scene Tree*, they become active. They get access
-to everything they need to process, get input, display 2D and 3D,
-notifications, play sound, groups, etc. When they are removed from the
-*scene tree*, they lose access.
+Когда узлы входят в *Scene Tree*, они активируются. Они получают доступ
+ко всему что им нужно для работы, получение input, display 2D и 3D,
+уведомления, воспроизведение звуков, группы, и т.д.. Когда они удаляются из
+*scene tree*, они теряют доступ.
 
 Tree order
 ----------
 
-Most node operations in Godot, such as drawing 2D, processing or getting
-notifications are done in tree order. This means that parents and
-siblings with a smaller rank in the tree order will get notified before
-the current node.
+Большинство операций с узлами в Godot, такими как отрисовка 2D, processing или
+получение уведомлений выполняются в tree order. Это означает что parents и
+siblings с меньшим рангом в tree order будут получать уведомления перед текущим узлом.
 
 .. image:: /img/toptobottom.png
 
-"Becoming active" by entering the *Scene Tree*
+"Становятся активными" через вхождение в *Scene Tree*
 ----------------------------------------------
 
 #. A scene is loaded from disk or created by scripting.
@@ -128,22 +127,22 @@ the current node.
    scene" notification ( _exit_tree() callback in GDScript) in
    bottom-to-top order
 
-Changing current scene
+Смена текущей сцены
 ----------------------
 
-After a scene is loaded, it is often desired to change this scene for
-another one. The simple way to do this is to use the
+После того как сцена загружена, часто надо заменить эту сцену на другую.
+Простой способ добиться этого - использовать функцию:
 :ref:`SceneTree.change_scene() <class_SceneTree_change_scene>`
-function:
+
 
 ::
 
     func _my_level_was_completed():
         get_tree().change_scene("res://levels/level2.scn")
 
-This is a quick and useful way to switch scenes, but has the drawback
-that the game will stall until the new scene is loaded and running. At
-some point in your game, it may be desired to create proper loading
+Это быстрый и простой способ сменить сцену, но недостаток в том,
+что игра остановиться пока новая сцена не загрузится и не запуститься. 
+At some point in your game, it may be desired to create proper loading
 screens with progress bar, animated indicators or thread (background)
 loading. This must be done manually using autoloads (see next chapter!)
 and :ref:`doc_background_loading`.
