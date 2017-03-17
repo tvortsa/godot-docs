@@ -37,53 +37,52 @@ AutoLoad
 Вы можете использовать AutoLoad для загрузки сцены, или скрипта который наследует от Node
 (node будет создан и для него будет установлен скрипт). 
 
-To autoload a scene or script, select Scene > Project Settings from the menu and switch
-to the AutoLoad tab. Each entry in the list requires a name, which is used as the name
-of the node, and the node is always added to the root viewport before any other scenes 
-are loaded.
+Для автозагрузки сцены или скрипта, выберите Scene > Project Settings из меню и переключитесб на
+вкладку AutoLoad. Каждой записи в списке требуется имя, которое используется как имя узла, 
+и узел всегда добавляется к root viewport до загрузки любой другой сцены.
 
 .. image:: /img/singleton.png
 
-This means that any node can access a singleton named "playervariables" with:
+Это означает что любой узел всегда будет иметь доступ к синглтону с именем "playervariables" с:
 
 ::
 
    var player_vars = get_node("/root/playervariables")
 
-Custom scene switcher
+Собственный переключатель сцен
 ---------------------
 
-This short tutorial will explain how to make a scene switcher using
-autoload. For simple scene switching, the
+Это краткое руководство по тому как создать свой переключатель сцен используя
+autoload. Для простого переключения сцен, достаточно метода 
 :ref:`SceneTree.change_scene() <class_SceneTree_change_scene>`
-method suffices (described in :ref:`doc_scene_tree`), so this method is for
-more complex behavior when switching between scenes.
+ (описан в :ref:`doc_scene_tree`), так что этот метод предназначен
+ для более сложного поведения при переключении между сценами.
 
-First download the template from here:
+Сперва загрузите шаблон отсюда:
 :download:`autoload.zip </files/autoload.zip>`, then open it.
 
-Two scenes are present, scene_a.scn and scene_b.scn on an otherwise
-empty project. Each are identical and contain a button connected to a
-callback for switching to the other scene. When the project runs, it
-starts in scene_a.scn. However, this currently does nothing and pressing the
-button does not work.
+Там есть две сцены, scene_a.scn и scene_b.scn или пустой проект.
+Они идентичны и каждая содержит кнопку, связанную с обратным вызовом
+для переключения на другую сцену. При запуске проекта, стартует сцена
+ scene_a.scn. Но, пока она ничего не делает и нажатие на кнопку
+ ни к чему не приводит.
 
 global.gd
 ---------
 
-First of all, create a global.gd script. The easy way to create a
-resource from scratch is from the new resource button in the inspector tab:
+Прежде всего, создадим скрипт global.gd. Простой способ создания
+ресурса с нуля - кнопкой нового ресурса на вкладке инспектора:
 
 .. image:: /img/newscript.png
 
-Save the script as `global.gd`:
+Сохраните скрипт как `global.gd`:
 
 .. image:: /img/saveasscript.png
 
-The script should open in the script editor. The next step is to add
-it to AutoLoad list. Select Scene > Project Settings from the menu,
-switch to the AutoLoad tab and add a new entry with name "global" that
-points to this file:
+Скрипт должен открыться в script editor. Следующий шаг это добавление его
+к списку AutoLoad. Выделите Scene > Project Settings из меню,
+переключитесь на панель AutoLoad и добавьте новую запись с именем "global" 
+указывающую на этот файл:
 
 .. image:: /img/addglobal.png
 
