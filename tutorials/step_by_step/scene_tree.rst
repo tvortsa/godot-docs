@@ -113,19 +113,17 @@ siblings с меньшим рангом в tree order будут получат�
 "Становятся активными" через вхождение в *Scene Tree*
 ----------------------------------------------
 
-#. A scene is loaded from disk or created by scripting.
-#. The root node of that scene (only one root, remember?) is added as
-   either a child of the "root" Viewport (from SceneTree), or to any
-   child or grand-child of it.
-#. Every node of the newly added scene, will receive the "enter_tree"
-   notification ( _enter_tree() callback in GDScript) in top-to-bottom
-   order.
-#. An extra notification, "ready" ( _ready() callback in GDScript) is
-   provided for convenience, when a node and all its children are
-   inside the active scene.
-#. When a scene (or part of it) is removed, they receive the "exit
-   scene" notification ( _exit_tree() callback in GDScript) in
-   bottom-to-top order
+#. Сцена загружается с диска или создается через скрипт.
+#. Узел root этой сцены (только один root, помните?) добавляется 
+   либо как потомок "root" Viewport (из SceneTree), либо как его потомок
+   или потомок-потомка.
+#. Каждый узел вновь добавленной сцены, будет принимать уведомления "enter_tree"
+   ( _enter_tree() коллбэк в GDScript) в порядке сверху-вниз.
+#. Экстра-уведомления, "ready" ( _ready() коллбэк в GDScript) 
+   предусмотрены для удобства, когда узел и все его потомки
+   попадают внутрь активной сцены.
+#. Когда сцена (или ее часть) удаляется, они принимают уведомление "exit
+   scene" ( _exit_tree() коллбэк в GDScript) в порядке снизу- вверх
 
 Смена текущей сцены
 ----------------------
@@ -142,7 +140,7 @@ siblings с меньшим рангом в tree order будут получат�
 
 Это быстрый и простой способ сменить сцену, но недостаток в том,
 что игра остановиться пока новая сцена не загрузится и не запуститься. 
-At some point in your game, it may be desired to create proper loading
-screens with progress bar, animated indicators or thread (background)
-loading. This must be done manually using autoloads (see next chapter!)
-and :ref:`doc_background_loading`.
+В некоторых моментах вашей игры, может быть полезно создать экран загрузки
+с соответствующим прогресс-баром, анимированные индикаторы или потоки (фоновой)
+загрузки. Это можно сделать вручную используя autoloads (см. следующую главу!)
+и :ref:`doc_background_loading`.
