@@ -86,15 +86,14 @@ global.gd
 
 .. image:: /img/addglobal.png
 
-Now, whenever you run any of your scenes, the script is always loaded.
+Теперь, когда бы вы ни запустили любую из ваших сцен, скрипт всегда будет загружаться.
 
-Returning to our script, the current scene needs to be fetched in the 
-`_ready()` function. Both the current scene and `global.gd` are children of
-root, but the autoloaded nodes are always first. This means that the
-last child of root is always the loaded scene.
+Вернемся к нашему скрипту, текущая сцена должна быть выбрана функцией 
+`_ready()` . И текущая сцена и `global.gd` являются потомками
+root, но узлы autoloaded всегда первее. Это значит что последний потомок
+у root всегда является загруженной сценой.
 
-Note: Make sure that global.gd extends Node, otherwise it won't be
-loaded!
+Note: Убедитесь что global.gd расширяет Node, иначе он не будет загружен!
 
 ::
 
