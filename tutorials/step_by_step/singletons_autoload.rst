@@ -105,18 +105,18 @@ Note: Убедитесь что global.gd расширяет Node, иначе о
             var root = get_tree().get_root()
             current_scene = root.get_child( root.get_child_count() -1 )
 
-Next up is the function for changing the scene. This function frees the
-current scene and replaces it with the requested one.
+Далее идет функция переключения сцены. Эта функция освобождает текущую сцену
+и заменяет ее запрошенной.
 
 ::
 
     func goto_scene(path):
 
-        # This function will usually be called from a signal callback,
-        # or some other function from the running scene.
-        # Deleting the current scene at this point might be
-        # a bad idea, because it may be inside of a callback or function of it.
-        # The worst case will be a crash or unexpected behavior.
+        # Эта функция обычно вызывается из обратного вызова сигнала,
+        # или из какой-то другой функции из текущей сцены.
+        # Удаление текущей сцены в этом месте может быть
+        # плохой идеей, поскольку она может находится внутри обратного вызова или его функции.
+        # В худшем случае произойдет крушение с неопределенными последствиями.
 
         # The way around this is deferring the load to a later time, when
         # it is ensured that no code from the current scene is running:
