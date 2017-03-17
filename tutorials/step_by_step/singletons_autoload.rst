@@ -118,59 +118,59 @@ Note: Убедитесь что global.gd расширяет Node, иначе о
         # плохой идеей, поскольку она может находится внутри обратного вызова или его функции.
         # В худшем случае произойдет крушение с неопределенными последствиями.
 
-        # The way around this is deferring the load to a later time, when
-        # it is ensured that no code from the current scene is running:
+        # Выход из ситуации в отложенной загрузке, 
+        # на момент когда будет гарантия того что не запущен никакой код из данной сцены:
 
         call_deferred("_deferred_goto_scene",path)
 
 
     func _deferred_goto_scene(path):
 
-        # Immediately free the current scene,
-        # there is no risk here.    
+        # немедленное освобождение текущей сцены,
+        # здесь нет риска.    
         current_scene.free()
 
-        # Load new scene
+        # Загружаем тщвую сцену
         var s = ResourceLoader.load(path)
 
-        # Instance the new scene
+        # Инстанцируем новую сцену
         current_scene = s.instance()
 
-        # Add it to the active scene, as child of root
+        # Добавляем ее к активной сцене, как потомк у root
         get_tree().get_root().add_child(current_scene)
 
-        # optional, to make it compatible with the SceneTree.change_scene() API
+        # опционально, делаем ее совместимой с API SceneTree.change_scene() 
         get_tree().set_current_scene( current_scene )
 
-As mentioned in the comments above, we really want to avoid the
-situation of having the current scene being deleted while being used
-(code from functions of it being run), so using
+Как упомянуто в комментариях выше, мы хотим избежать ситуации
+при которой удаляется сцена которая все еще используется
+(код ее функций все еще выполняется), так что использование
 :ref:`Object.call_deferred() <class_Object_call_deferred>`
-is desired at this point. The result is that execution of the commands
-in the second function will happen at a later time when no code from
-the current scene is running.
+здесь желательно.Результатом является то, что выполнение команд
+Во второй функции произойдет в более позднее время, когда 
+никакой код текущей сцены не запущен.
 
-Finally, all that is left is to fill the empty functions in scene_a.gd
-and scene_b.gd:
+Наконец, осталось только заполнить пустые функции в scene_a.gd
+и scene_b.gd:
 
 ::
 
-    #add to scene_a.gd
+    #добавить к scene_a.gd
 
     func _on_goto_scene_pressed():
             get_node("/root/global").goto_scene("res://scene_b.scn")
 
-and
+и
 
 ::
 
-    #add to scene_b.gd
+    #добавить в scene_b.gd
 
     func _on_goto_scene_pressed():
             get_node("/root/global").goto_scene("res://scene_a.scn")
 
-Now if you run the project, you can switch between both scenes by pressing
-the button!
+Теперь если вы щапустите проект, то сможете переключаться между сценами
+нажимая на кнопку!
 
-To load scenes with a progress bar, check out the next tutorial,
+Для загрузки сцен с прогресс-баром, посмотрите следующий урок,
 :ref:`doc_background_loading`
