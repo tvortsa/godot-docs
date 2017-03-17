@@ -3,39 +3,39 @@
 Singletons (AutoLoad)
 =====================
 
-Introduction
+Введение
 ------------
 
-Scene singletons are very useful, catering to a common use case where you need
-to store persistent information between scenes.
+Синглтоны сцен очень полезны, обслуживая частые ситуации когда вам нужно
+сохранить информацию при переходе между сценами.
 
-Albeit very powerful, the scene system by itself has a few drawbacks:
+Несмотря на то что система сцен очень мощная, у нее есть некоторые недостатки:
 
--  There is no common place to store information (e.g. a player's items etc.)
-   required by more than one scene.
--  While it is possible for a scene that loads and unloads other scenes as 
-   its children to store information common to these child scenes, it is no 
-   longer possible to run these scenes by themselves and expect them to work 
-   correctly.
--  While information can be stored to disk in \`user://\` and this information 
-   can be loaded by scenes that require it, continuously saving and loading this 
-   data when changing scenes is cumbersome and may be slow.
+-  Нет общего места для хранения информации (такой как предметы пользователя и т.п.)
+   нужной в разных сценах.
+-  Хотя та сцена которая загружает и выгружает другие сцены как своих потомков может
+   сохранять информацию общую для них, нельзя ожидать что их самостоятельное 
+   использование будет работать корректно.
+-  Конечно информацию можно сохранять на диск \`user://\` и эта информация может быть
+   загружена сценами которым она нужна, но непрерывное сохранение 
+   и загрузка данных во время смены сцен громоздка и может быть медленной.
 
-However there is still a need in Godot to create parts of a scene that:
+Однако до сих пор существует необходимость создания в Godot частей сцен которые:
 
--  Are always loaded, no matter which scene is opened from the editor
--  Can store global variables, such as player information, items, money
-   etc. and share information between scenes
--  Can handle switching scenes and transitions
--  Acts like a singleton, since GDScript does not support global variables by design.
+-  Загружаются всегда, независимо от того какая сцена открыта в редакторе
+-  Могут хранить глобальные переменные, такие как информация об игроке, предметах, валюте
+   и разделять эту информацию между сценами
+-  Могут обрабатывать переключение между сценами и переходы между ними
+-  Служить синглтоном, поскольку дизайн GDScript не поддерживает
+   глобальные переменные по дизайну.
 
-Auto-loading nodes and scripts caters to this need.
+Auto-loading узлов и скриптов удовлетворяют этой потребности.
 
 AutoLoad
 --------
 
-You can use AutoLoad to load a scene, or a script that inherits from Node (a node
-will be created and the script will be set to it). 
+Вы можете использовать AutoLoad для загрузки сцены, или скрипта который наследует от Node
+(node будет создан и для него будет установлен скрипт). 
 
 To autoload a scene or script, select Scene > Project Settings from the menu and switch
 to the AutoLoad tab. Each entry in the list requires a name, which is used as the name
