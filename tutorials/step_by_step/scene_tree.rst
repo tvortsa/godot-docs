@@ -10,84 +10,80 @@ SceneTree
 на самом деле все не страшно.
 
 В предыдущих уроках, все крутилось вокруг концепции узлов,
-из них состоят сцены, and they become active once they enter
-the *scene tree*.
+из них состоят сцены, и они становятся активны как только они входят в
+ *scene tree*.
 
-This concept deserves going into a little more detail. In fact, the
-scene system is not even a core component of Godot, as it is possible to
-skip it and write a script (or C++ code) that talks directly to the
-servers. But making a game that way would be a lot of work.
+Фактически, система сцен даже не является ядром Godot, поскольку можно написать скрипт
+(или код на C++) который будет непосредственно контактировать с серверами. 
+Но создание игры потребует куда больше усилий.
 
-MainLoop
+MainLoop (главный цикл)
 --------
 
-The way Godot works internally is as follows. There is the
-:ref:`OS <class_OS>` class,
-which is the only instance that runs at the beginning. Afterwards, all
-drivers, servers, scripting languages, scene system, etc are loaded.
+Внутри Godot работает is as follows. Есть класс
+:ref:`OS <class_OS>` ,
+который является единственным экземпляром который выполняется вначале.
+После него загружаются все драйверы, серверы, языки скриптинга, система сцен, и т.п.
 
-When initialization is complete, :ref:`OS <class_OS>` needs to be
-supplied a :ref:`MainLoop <class_MainLoop>`
-to run. Up to this point, all this is internals working (you can check
-main/main.cpp file in the source code if you are ever interested to
-see how this works internally).
+По завершении инициализации, :ref:`OS <class_OS>` должен предоставить
+:ref:`MainLoop <class_MainLoop>`
+для запуска. До этого момента, все происходит внутри (можете посмотреть
+файл main/main.cpp в исходниках если вас интересует что происходит внутри).
 
-The user program, or game, starts in the MainLoop. This class has a few
-methods, for initialization, idle (frame-syncronized callback), fixed
-(physics-synchronized callback), and input. Again, this is really low
-level and when making games in Godot, writing your own MainLoop does not
-even make sense.
+Пользовательское приложение, или игра, стратует в MainLoop. Этот класс имеет несколько методов,
+для инициализации, idle (коллбэк синхронизации кадров), fixed
+(коллбэк синхронизации физики), и input. Повторюсь, все это действительно
+низкоуровневые вещи и при создании игр в Godot, написание собственного MainLoop не имеет смысла.
 
 SceneTree
 ---------
 
-One of the ways to explain how Godot works, is that it's a high level
-game engine over a low level middleware.
+Одним из способов разобраться с тем как работает Godot, в том что это 
+высоко-уровневый игровой движок поверх низкоуровневого middleware.
 
-The scene system is the game engine, while the :ref:`OS <class_OS>`
-and servers are the low level API.
+Система сцен это game engine, а :ref:`OS <class_OS>`
+и servers это низкоуровневые API.
 
-In any case, the scene system provides its own main loop to OS,
+В любом случае, система сцен предоставляет свой собственный main loop для OS,
 :ref:`SceneTree <class_SceneTree>`.
-This is automatically instanced and set when running a scene, no need
-to do any extra work.
+Он автоматически инстанцируется и настраивается при запуске сцены, 
+не требуя никакой дополнительной работы.
 
-It's important to know that this class exists because it has a few
-important uses:
+Важно знать что этот класс существует потому что он имеет несколько
+важных использований:
 
--  It contains the root :ref:`Viewport <class_Viewport>`, to which a
-   scene is added as a child when it's first opened, to become
-   part of the *Scene Tree* (more on that next)
--  It contains information about the groups, and has means to call all
-   nodes in a group, or get a list of them.
--  It contains some global state functionality, such as setting pause
-   mode, or quitting the process.
+-  Он содержит root :ref:`Viewport <class_Viewport>`, к которому 
+   добавляется сцена как потомок при первом открытии, становясь частью *Scene Tree*
+   (подробнее об этом)
+-  Он содержит информацию о группах, и имеет средства для вызова всех узлов в группе,
+   или их списка.
+-  Он содержит некоторые функции глобального состояния, такие как режим установки паузы, 
+   или процесс выхода.
 
-When a node is part of the Scene Tree, the
+Если узел является частью Scene Tree, синглтон
 :ref:`SceneTree <class_SceneTree>`
-singleton can be obtained by simply calling
+можно получить простым вызовом
 :ref:`Node.get_tree() <class_Node_get_tree>`.
 
 Root viewport
 -------------
 
-The root :ref:`Viewport <class_Viewport>`
-is always at the top of the scene. From a node, it can be obtained in
-two different ways:
+root :ref:`Viewport <class_Viewport>`
+всегда вверху сцены. From a node, он может быть получен двумя разными способами:
 
 ::
 
-        get_tree().get_root() # access via scenemainloop
-        get_node("/root") # access via absolute path
+        get_tree().get_root() # доступ через scenemainloop
+        get_node("/root") # доступ через абсолютный путь
 
-This node contains the main viewport, anything that is a child of a
+Этот узел содержит основной main viewport, все что является потомком
 :ref:`Viewport <class_Viewport>`
-is drawn inside of it by default, so it makes sense that the top of all
-nodes is always a node of this type, otherwise nothing would be seen!
+отрисовывается внутри него по-умолчанию, поэтому имеет смысл то что выше всех
+узлов в иерархии всегда узел этого типа, иначе ничего не будет видно!
 
-While other viewports can be created in the scene (for split-screen
-effects and such), this one is the only one that is never created by the
-user. It's created automatically inside SceneTree.
+В то время как другие вьюпорты могут быть созданы в сцене (например для
+сплит-скрина), только этот один никогда не создается пользователем.
+Он создается автоматически внутри  SceneTree.
 
 Scene tree
 ----------
