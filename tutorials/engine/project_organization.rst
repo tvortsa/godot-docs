@@ -1,42 +1,39 @@
 .. _doc_project_organization:
 
-Project organization
+Структура проекта
 ====================
 
-Introduction
+Введение
 ------------
 
-This tutorial is aimed to propose a simple workflow on how to organize
-projects. Since Godot allows the programmer to use the file-system as he
-or she pleases, figuring out a way to organize the projects when
-starting to use the engine can be a little challenging. Because of this,
-a simple workflow will be described, which can be used or not, but
-should work as a starting point.
+Это руководство по простому рабочему процессу организации проектов.
+Поскольку Godot не накладывает ограничений на структуру файлов проекта
+определиться с формой организации проекта бывает не просто.
+Начинать использование движка может быть небольшим вызовом. 
+Поэтому мы опишем примерный путь, который можно принять или не принять.
 
-Additionally, using version control can be challenging so this
-proposition will include that too.
+А также упомянем о системах контроля версий.
 
-Organization
+Организация
 ------------
 
-Other game engines often work by having an asset database, where you can
-browse images, models, sounds, etc. Godot is more scene-based in nature
-so most of the time the assets are bundled inside the scenes or just
-exist as files but are referenced from scenes.
+Другие игровые движки часто работают, имея базу данных активов, где вы можете
+просматривать картинки, модели, звуки, и т.д.. Godot больше ориентирован на сцены
+поскольку большую часть времени активы группируются внутри сцен или просто существуют
+в виде файлов, но ссылаются на сцены.
 
-Importing & game folder
+Импортирование и папка игры
 -----------------------
 
-It is very often necessary to use asset importing in Godot. As the
-source assets for importing are also recognized as resources by the
-engine, this can become a problem if both are inside the project folder,
-because at the time of export the exporter will recognize them and
-export both.
+Очень часто необходимо использовать импорт активо в Godot. Поскольку
+source assets для импорта также распознаются движком как resources,
+это может стать проблеммой если и то и то лежит в папке проекта,
+потому что во время экспорта, экспортер будет видеть и экспортирует и то и то.
 
-To solve this, it is a good practice to have your game folder inside
-another folder (the actual project folder). This allows to have the game
-assets separated from the source assets, and also allows to use version
-control (such as svn or git) for both. Here is an example:
+Решение в том, чтобы разместить папку проекта внтри другой папки
+(the actual project folder). Это позволяет разделить game
+assets от source assets, и использовать систему контроля версий 
+(такую как svn или git). Например:
 
 ::
 
