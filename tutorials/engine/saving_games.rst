@@ -1,9 +1,9 @@
 .. _doc_saving_games:
 
-Saving games
+Сохранение игр
 ============
 
-Introduction
+Введение
 ------------
 
 Save games can be complicated. It can be desired to store more
