@@ -43,7 +43,7 @@ assets от source assets, и использовать систему контр
     myproject/sound/door_close.wav
     myproject/translations/sheet.csv
 
-Then also, the game itself is, in this case, inside a game/ folder:
+Тогда также, сама игра, в этом случае, внутри папки game/ :
 
 ::
 
@@ -55,28 +55,27 @@ Then also, the game itself is, in this case, inside a game/ folder:
     myproject/game/translations/sheet.en.xl
     myproject/game/translations/sheet.es.xl
 
-Following this layout, many things can be done:
+Следуя этому макету, можно многое сделать:
 
--  The whole project is still inside a folder (myproject/).
--  Exporting the project will not export the .wav and .png files which
-   were imported.
--  myproject/ can be put directly inside a VCS (like svn or git) for
-   version control, both game and source assets are kept track of.
--  If a team is working on the project, assets can be re-imported by
-   other project members, because Godot keeps track of source assets
-   using relative paths.
+-  Весь проект все еще находится в папке (myproject/).
+-  Экспорт проекта не будет экспортировать файлы .wav и .png, которые были импортированы.
+-  myproject/ можно поместить прямо в VCS (типа svn или git) под
+   версионный контроль, отслеживаться будут и игровые и исходные активы.
+-  Если над проектом работает команда, активы могут быть заново импортированы
+    другими участниками проекта, поскольку Godot отслеживет исходные активы
+   используя относительные пути.
 
-Scene organization
+Организация сцены
 ------------------
 
-Inside the game folder, a question that often arises is how to organize
-the scenes in the filesystem. Many developers try asset-type based
-organization and end up having a mess after a while, so the best answer
-is probably to organize them based on how the game works and not based
-on asset type. Here are some examples.
+Внутри папки игры, частый вопрос iScene organizations как организовать сцены
+в файловой системе. Некоторые разработчики пытаются использовать asset-type based
+организацию что в конечном итоге приводит к беспорядку, 
+поэтому лучше организовывать сцены по тому как игра работает а не по активам. 
 
-If you were organizing your project based on asset type, it would look
-like this:
+Например:
+
+Если вы организуете свой проект на основе типа активов, он будет выглядеть так::
 
 ::
 
@@ -89,12 +88,11 @@ like this:
     game/sounds/sound2.wav
     game/music/music1.ogg
 
-Which is generally a bad idea. When a project starts growing beyond a
-certain point, this becomes unmanageable. It's really difficult to tell
-what belongs to what.
+И обычно это плохая идея. Как только прокт разрастется, все станет неуправляемым.
+Трудно определить что кому принадлежит.
 
-It's generally a better idea to use game-context based organization,
-something like this:
+Лучше использовать game-context based организацию,
+например так:
 
 ::
 
@@ -113,18 +111,17 @@ something like this:
     game/gui/main_screen/main_sceen.scn
     game/gui/options/options.scn
 
-This model or similar models allows projects to grow to really large
-sizes and still be completely manageable. Notice that everything is
-based on parts of the game that can be named or described, like the
-settings screen or the valley. Since everything in Godot is done with
-scenes, and everything that can be named or described can be a scene,
-this workflow is very smooth and easygoing.
+Эта модель позволяет проектам расти и при этом оставаться управляемыми.
+Обратите внимание что все основано на частях игры которые можно назвать
+или описать, как экран настроек или долина. 
+Поскольку в Godot все делается в сценах, и все что может быть названо
+или описано может быть сценой, этот подход удобен и прост.
 
-Cache files
+Файлы кэша
 -----------
 
-Godot uses a hidden file called ".fscache" at the root of the project.
-On it, it caches project files and is used to quickly know when one is
-modified. Make sure to **not commit this file** to git or svn, as it
-contains local information and might confuse another editor instance in
-another computer.
+Godot использует скрытый файл ".fscache" в корневой папке проекта.
+On it, это кэш файлов проекта и используется чтобы быстро узнавать
+о том что они изменились Отметьте **not commit this file** в git или svn, поскольку он
+содержит локальную информацию и может сконфузить другой экземпляр редактора
+на другом компьютере.
