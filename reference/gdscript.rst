@@ -635,15 +635,15 @@ if/else/elif
     else:
         statement(s)
 
-Short statements can be written on the same line as the condition::
+Короткие операторы могут быть написаны в той же строке, что и условие::
 
     if (1 + 1 == 2): return 2 + 2
     else:
         var x = 3 + 3
         return x
 
-Sometimes you might want to assign a different initial value based on a
-boolean expression. In this case ternary-if expressions come in handy
+Иногда вам может понадобиться назначить другое начальное значение, 
+основанное на логическом выражении. В таком случае удобно тернарное-if выражение
 (Godot 2.2+)::
 
     var x = [true-value] if [expression] else [false-value]
@@ -652,49 +652,48 @@ boolean expression. In this case ternary-if expressions come in handy
 while
 ^^^^^
 
-Simple loops are created by using ``while`` syntax. Loops can be broken
-using ``break`` or continued using ``continue``:
+Простые циклы создают с помощью синтаксиса ``while``. Циклы можно прерывать
+оператором ``break`` и продолжать оператором ``continue``:
 
 ::
 
-    while [expression]:
-        statement(s)
+    while [выражение]:
+        оператор(ы)
 
 for
 ^^^
 
-To iterate through a range, such as an array or table, a *for* loop is
-used. When iterating over an array, the current array element is stored in
-the loop variable. When iterating over a dictionary, the *index* is stored
-in the loop variable.
+Для итераций в диапазоне, таком как массив или таблица, используют цикл *for*.
+При обходе массива, текущий элемент массива сохраняется в переменной цикла.
+При итерации по словарю, в переменной цикла сохраняется *index* .
 
 ::
 
     for x in [5, 7, 11]:
-        statement  # loop iterates 3 times with x as 5, then 7 and finally 11
+        statement  # цикл повторится три раза со значениями x как 5, затем 7 и наконец 11
 
     var dict = {"a":0, "b":1, "c":2}
     for i in dict:
-        print(dict[i])  # loop provides the keys in an arbitrary order; may print 0, 1, 2, or 2, 0, 1, etc...
+        print(dict[i])  # цикл предоставляет ключи в произвольном порядке; может быть напечатано 0, 1, 2, или 2, 0, 1, и т.п...
 
     for i in range(3):
-        statement  # similar to [0, 1, 2] but does not allocate an array
+        statement  # похоже на [0, 1, 2] но не выделяет массив
 
     for i in range(1,3):
-        statement  # similar to [1, 2] but does not allocate an array
+        statement  # похоже на [1, 2] но не выделяет массив
 
     for i in range(2,8,2):
-        statement  # similar to [2, 4, 6] but does not allocate an array
+        statement  # похоже на [2, 4, 6] но не выделяет массив
 
     for c in "Hello":
-        print(c)   # iterate through all characters in a String, print every letter on new line
+        print(c)   # итерация по всем символам в String, печатает каждый символ на новой строке
 match
 ^^^^^
 
-A ``match`` statement is used to branch execution of a program.
-It's the equivalent of the ``switch`` statement found in many other languages but offers some additional features.
+Оператор ``match`` используют для ветвления потока выполнения программы.
+Эквивалентно оператору ``switch`` из большинства других языков но обладает некоторым доп. функционалом.
 
-Basic syntax:
+Базовый синтаксис:
 ::
     
     match [expression]:
@@ -703,7 +702,7 @@ Basic syntax:
         [pattern](s): [block]
 
 
-**Crash-course for people who are familiar to switch statements**:
+**Crash-course для тех кто знаком с оператором switch**:
 
 1) replace ``switch`` with ``match``
 2) remove ``case``
@@ -916,10 +915,10 @@ the ``extends`` keyword can be used as an operator instead:
 Классы как ресурсы
 ^^^^^^^^^^^^^^^^^^^^
 
-Classes stored as files are treated as :ref:`resources <class_GDScript>`. They
-must be loaded from disk to access them in other classes. This is done using
-either the ``load`` or ``preload`` functions (see below). Instancing of a loaded
-class resource is done by calling the ``new`` function on the class object::
+Classes храняться как файлы доступные как :ref:`resources <class_GDScript>`. 
+Они должны быть загружены с диска чтобы быть доступными для других классов.
+Это достигается с помощью функций ``load`` или ``preload`` (см. ниже). 
+Инстанцирование загруженного класса осуществляется функцией ``new`` on on the class object::
 
     # Load the class resource when calling load()
     var MyClass = load("myclass.gd")
