@@ -3,20 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Document for Godot Engine (master branch)
+Документация по Godot Engine (главная ветка)
 =========================================
 
-Looking for the documentation of the current **stable** version? `Have a look here
+Ищите документацию по текущей **stable** версии? Посмотрите
 <http://docs.godotengine.org/en/stable>`_.
 
-**Note:** Godot Engine is an open source project developed by a community of volunteers.
-It means that the documentation team can always use your feedback and help to improve our
-tutorials and class reference. So if you don't manage to understand something, or can't find
-what you are looking for in the docs, help us make the documentation better and let us know!
+**Note:** Godot Engine это опен-сурс проект разрабатываемый сообществом волонтеров.
+Это значит что команда документации всегда может исользовать ваш фидбэк и помочь в развитии
+уроков и class reference. So if you don't manage to understand something, or can't find
+what you are looking for in the docs, помогите нам сделать документацию лучше и дайте нам знать!
 Submit an issue `to the GitHub repository <https://github.com/godotengine/godot-docs/issues>`_,
 or annoy us at the #godotengine-devel IRC channel!
 
-The main documentation for the site is organized into a few sections:
+Основная документация на этом сайте организована в несколько разделов:
 
 * :ref:`sec-tutorials`
 * :ref:`sec-reference`
