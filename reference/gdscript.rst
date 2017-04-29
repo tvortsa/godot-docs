@@ -721,17 +721,17 @@ match
 
 Есть 6 типов паттернов:
 
-- constant pattern
-    constant primitives, like numbers and strings ::
+- константный паттерн
+    константы примитивов, такие как числа и строки ::
     
         match x:
-            1:      print("We are number one!")
-            2:      print("Two are better than one!")
-            "test": print("Oh snap! It's a string!")
+            1:      print("Мы номер один!")
+            2:      print("Второй лучше чем первый!")
+            "test": print("Харош! Это строка!")
 
 
-- variable pattern
-    matches the contents of a variable/enum ::
+- паттерн переменных
+    соответствие содержимому переменной/enum ::
     
         match typeof(x):
             TYPE_FLOAT:  print("float")
@@ -739,15 +739,15 @@ match
             TYPE_ARRAY:  print("array")
 
 
-- wildcard pattern
-    This pattern matches everything. It's written as a single underscore.
+- паттерн подстановки (wildcard)
+    Этот шаблон соответствует всем. Он записывается как единичное нижнее подчеркивание.
     
     It can be used as the equivalent of the ``default`` in a ``switch`` statement in other languages. ::
     
         match x:
-            1: print("it's one!")
-            2: print("it's one times two!")
-            _: print("it's not 1 or 2. I don't care tbh.")
+            1: print("Это один!")
+            2: print("это один раз два!")
+            _: print("это не один и не два. Мне всеравно tbh.")
 
 
 - binding pattern
@@ -1037,11 +1037,11 @@ Integers используют как битовые флаги которые м
 
 ::
 
-    # Individually edit the bits of an integer
+    # Индивидуальное редактирование битов целого числа
     export(int, FLAGS) var spell_elements = ELEMENT_WIND | ELEMENT_WATER 
 
-Restricting the flags to a certain number of named flags is also
-possible. The syntax is very similar to the enumeration syntax:
+Ограничение флагов определенным числом именованных флагов также возможно.
+Синтаксис очень похож на синтаксис enumeration:
 
 ::
 
@@ -1053,26 +1053,26 @@ possible. The syntax is very similar to the enumeration syntax:
 should be defined accordingly (e.g. ``const ELEMENT_WIND = 8`` and so
 on).
 
-Using bit flags requires some understanding of bitwise operations. 
+Использование битовых флагов требует некоторого понимания побитовых операций. 
 Если не уверены, используйте в экспорте вместо этого булевы переменные.
 
 Экспорт массивов
 ^^^^^^^^^^^^^^^^
-
-Exporting arrays works but with an important caveat: While regular
-arrays are created local to every class instance, exported arrays are *shared*
-between all instances. This means that editing them in one instance will
+Экспорт массивов работает, но с важной оговоркой: Хотя
+регулярные массивы создаются локально для каждого экземпляра класса,
+экспортируемые массивы *разделяются* между всеми экземплярами.
+This means that editing them in one instance will
 cause them to change in all other instances. Exported arrays can have
 initializers, but they must be constant expressions.
 
 ::
 
-    # Exported array, shared between all instances.
-    # Default value must be a constant expression.
+    # Экспортирование массива, разделяется между всеми экземплярами.
+    # Значение по умолчанию должно быть константным выражением.
 
     export var a=[1,2,3]
 
-    # Typed arrays also work, only initialized empty:
+    # Типизированные массивы также работают, только с пустой инициализацией:
 
     export var vector3s = Vector3Array()
     export var strings = StringArray()
@@ -1087,11 +1087,13 @@ initializers, but they must be constant expressions.
 Сеттеры/геттеры
 ~~~~~~~~~~~~~~~
 
-It is often useful to know when a class' member variable changes for 
-whatever reason. It may also be desired to encapsulate its access in some way. 
+Часто бывает полезно знать, когда изменяется переменная-член класса for 
+whatever reason. Также может быть желательно инкапсулировать доступ к ним
+каким-либо способом. 
 
-For this, GDScript provides a *setter/getter* syntax using the ``setget`` keyword. 
-It is used directly after a variable definition:
+Для этого, GDScript предоставляет синтаксис *setter/getter* использующий 
+ключевое слово ``setget``. 
+Его используют сразу после объявления переменной:
 
 ::
 
@@ -1160,46 +1162,47 @@ placed at the top of the file:
 Управление памятью
 ~~~~~~~~~~~~~~~~~
 
-If a class inherits from :ref:`class_Reference`, then instances will be
-freed when no longer in use. No garbage collector exists, just simple
-reference counting. By default, all classes that don't define
-inheritance extend **Reference**. If this is not desired, then a class
-must inherit :ref:`class_Object` manually and must call instance.free(). To
-avoid reference cycles that can't be freed, a ``weakref`` function is
-provided for creating weak references.
+Если класс наследует от :ref:`class_Reference`,то его экземпляры
+будут freed(удалены) если они больше не используются. 
+Сборщика мусора не существует, только простой подсчет ссылок. 
+По умолчанию, для всех классов которые не объявляют нследование от
+ **Reference**. Если это не желательно, то класс должен наследовать
+ :ref:`class_Object` вручную и должен вызывать instance.free(). To
+avoid reference cycles that can't be freed, функция ``weakref`` 
+служит для создания weak references.
 
 
 Сигналы
 ~~~~~~~
 
-It is often desired to send a notification that something happened in an
-instance. GDScript supports creation of built-in Godot signals.
-Declaring a signal in GDScript is easy using the `signal` keyword. 
+Часто бывает необходимо отправить уведомление о том, что что-то произошло
+в экземпляре. GDScript поддерживает создание встроенных Godot сигналов.
+Объявление сигнала в GDScript просто используя ключевое слово `signal`. 
 
 ::
 
-    # No arguments
+    # Без аргументов
     signal your_signal_name
-    # With arguments
+    # С аргументами
     signal your_signal_name_with_args(a,b)
 
-These signals, just like regular signals, can be connected in the editor
-or from code. Just take the instance of a class where the signal was
-declared and connect it to the method of another instance:
+Сигналы, как и regular signals, можно соединить в редакторе
+или в коде. Просто получите экземпляр класса в котором был объявлен сигнал
+и connect it к методу другого экземпляра:
 
 ::
 
     func _callback_no_args():
-        print("Got callback!")
+        print("Получен коллбэк!")
 
     func _callback_args(a,b):
-        print("Got callback with args! a: ",a," and b: ",b)
+        print("Получен коллбэк с аргументами! a: ",a," и b: ",b)
 
     func _at_some_func():
         instance.connect("your_signal_name",self,"_callback_no_args")
         instance.connect("your_signal_name_with_args",self,"_callback_args")
 
-It is also possible to bind arguments to a signal that lacks them with
+Можно также биндить аргументы к сигналам that lacks them with
 your custom values:
 
 ::
@@ -1207,8 +1210,8 @@ your custom values:
     func _at_some_func():
         instance.connect("your_signal_name",self,"_callback_args",[22,"hello"])
 
-This is very useful when a signal from many objects is connected to a
-single callback and the sender must be identified:
+Это полезно когда signal от многих объектов присоединен к одному
+коллбэку and the sender must be identified:
 
 ::
 
@@ -1311,10 +1314,10 @@ signal is received, execution will recommence. Here are some examples:
 ключевое слово Onready 
 ~~~~~~~~~~~~~~~
 
-When using nodes, it's very common to desire to keep references to parts
-of the scene in a variable. As scenes are only warranted to be
-configured when entering the active scene tree, the sub-nodes can only
-be obtained when a call to Node._ready() is made.
+При использовании узлов, часто нужно хранить ссылку на часть сцены
+в переменной. As scenes are only warranted to be
+configured when entering the active scene tree, под-узлы 
+могут быть получены только когда взов Node._ready() сделан.
 
 ::
 
@@ -1323,10 +1326,10 @@ be obtained when a call to Node._ready() is made.
     func _ready():
         mylabel = get_node("MyLabel")
 
-This can get a little cumbersome, specially when nodes and external
-references pile up. For this, GDScript has the ``onready`` keyword, that
-defers initialization of a member variable until _ready is called. It
-can replace the above code with a single line:
+Это может стать немного громоздким, Особенно когда узлы и внешние ссылки накапливаются.
+Для этого, GDScript имеет ключевое слово ``onready``, что отменяет
+инициализацию переменной-члена пока _ready не будет вызван. 
+Что заменяет код выше одной строкой:
 
 ::
 
