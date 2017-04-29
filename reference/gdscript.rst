@@ -554,7 +554,7 @@ Enums основан на константах, и очень полезны, е
 Приоритет области действия для поиска переменной: 
 локальная → член класса → глобальная. Переменная ``self`` всегда доступна
 и представляется как опция для доступа к членам класса, но не всегда требуется
-(and should *not* be sent as the function's first argument, unlike Python).
+(и *не* должна передаваться как первый аргумент функции, в отличие от Python).
 
 ::
 
@@ -563,7 +563,7 @@ Enums основан на константах, и очень полезны, е
         print(b)
         return a + b  # return опционален; без него вернется null 
 
-Функция может ``return`` в любом местеt. Дефолтное возвращаемое значение ``null``.
+Функция может ``return`` в любом месте. Дефолтное возвращаемое значение ``null``.
 
 Referencing Functions
 ^^^^^^^^^^^^^^^^^^^^^
@@ -580,8 +580,8 @@ Referencing Functions
 переданы как аргумент другим функциям или озвращены из других функций.
 Это все из соображений производительности.
 
-Для обращения к функции в рантайме, (e.g. to store it in a variable, or
-pass it to another function as an argument) one нужно использовать ``call`` или
+Для обращения к функции в рантайме, (т.е. сохранения их в переменных, или
+передача функции в другие функции как аргумент) нужно использовать ``call`` или
 ``funcref`` хелперы::
    
     # Вызов функции по-имени в один шаг
@@ -704,22 +704,22 @@ match
 
 **Crash-course для тех кто знаком с оператором switch**:
 
-1) replace ``switch`` with ``match``
-2) remove ``case``
-3) remove any ``break``'s. If you don't want to ``break`` by default you can use ``continue`` for a fallthrough.
-4) change ``default`` to a single underscore.
+1) замените ``switch`` на ``match``
+2) удалите ``case``
+3) удалите все ``break``. Если вам не нужен ``break`` по умолчанию можете использовать ``continue`` для прохода.
+4) замените ``default`` на единичное нижнее подчеркивание.
 
 
-**Control flow**:
+**Управление потоком**:
 
-The patterns are matched from top to bottom.
-If a pattern matches, the corresponding block will be executed. After that, the execution continues below the ``match`` statement.
-If you want to have a fallthrough you can use ``continue`` to stop execution in the current block and check the ones below it.
-
-
+Шаблоны сопоставляются сверху вниз.
+Если паттерн совпадает, выполняется соответствующий блок. После чего, выполнение продолжится следующим за ``match`` оператором.
+Если вам нужен fallthrough используйте ``continue`` чтобы остановить выполнение в текущем блоке и проверить идущие за ним.
 
 
-There are 6 pattern types:
+
+
+Есть 6 типов паттернов:
 
 - constant pattern
     constant primitives, like numbers and strings ::
@@ -863,8 +863,8 @@ Multipatterns:
     extends "somefile.gd".SomeInnerClass
 
 
-To check if a given instance inherits from a given class 
-the ``extends`` keyword can be used as an operator instead:
+Чтобы проверить наследует ли передаваемый экземпляр от данного класса
+ключевое слово ``extends`` можно использовать как оператор :
 
 ::
 
@@ -901,13 +901,13 @@ the ``extends`` keyword can be used as an operator instead:
 
     # внутри файла класса
 
-    # An inner class in this class file
+    # внутренний класс в файле класса
     class SomeInnerClass:
         var a = 5
         func print_value_of_a():
             print(a)
 
-    # This is the constructor of the class file's main class
+    # Это конструктор главного класса файла
     func _init():
         var c = SomeInnerClass.new() 
         c.print_value_of_a()
@@ -918,25 +918,25 @@ the ``extends`` keyword can be used as an operator instead:
 Classes храняться как файлы доступные как :ref:`resources <class_GDScript>`. 
 Они должны быть загружены с диска чтобы быть доступными для других классов.
 Это достигается с помощью функций ``load`` или ``preload`` (см. ниже). 
-Инстанцирование загруженного класса осуществляется функцией ``new`` on on the class object::
+Инстанцирование загруженного класса осуществляется функцией ``new`` объекта класса::
 
-    # Load the class resource when calling load()
+    # загрузка ресурса класса вызовом load()
     var MyClass = load("myclass.gd")
 
-    # Preload the class only once at compile time
+    # Предзагрузка класса только во время компиляции
     var MyClass2 = preload("myclass.gd")
 
     func _init():
         var a = MyClass.new()
         a.somefunction()
 
-Exports
+Экспорт
 ~~~~~~~
 
-Class members can be exported. This means their value gets saved along
-with the resource (e.g. the :ref:`scene <class_PackedScene>`) they're attached
-to. They will also be available for editing in the property editor. Exporting
-is done by using the ``export`` keyword::
+Члены класса могут быть экспортированы. Это означает что их значения 
+сохраняются вместе с ресурсом к которому они присоединены( :ref:`scene <class_PackedScene>`).
+Они также будут доступны для редактирования в редакторе свойств. 
+Экспортирование выполняют ключевым словом  ``export`` ::
 
     extends Button
 
