@@ -52,30 +52,30 @@ External или built-in
 Ресурсные свойства могут ссылаться на ресурсы двумя способами,
 *external* (на диске) или **built-in**.
 
-To be more specific, here's a :ref:`Texture <class_Texture>`
-in a :ref:`Sprite <class_Sprite>` node:
+Более конкретно, вот :ref:`Texture <class_Texture>`
+в :ref:`Sprite <class_Sprite>` узле:
 
 .. image:: /img/spriteprop.png
 
-Pressing the ">" button on the right side of the preview allows to
-view and edit the resources properties. One of the properties (path)
-shows where it comes from. In this case, it comes from a png image.
+Нажмите кнопку предварительного просмотра ">" справа позволяющую
+просматривать и редактировать ресурсные свойства. Одно из свойств (path)
+показывает, откуда он. В этом случае, он пришел из png изображения.
 
 .. image:: /img/resourcerobi.png
 
-When the resource comes from a file, it is considered an *external*
-resource. If the path property is erased (or it never had a path to
-begin with), it is considered a built-in resource.
+Когда ресурс приходит из файла, Он считается *external* (внешним)
+ресурсом. Если свойство path стереть (или если его и небыло), 
+то ресурс считается встроенным (built-in).
 
-For example, if the path \`"res://robi.png"\` is erased from the "path"
-property in the above example, and then the scene is saved, the resource
-will be saved inside the .scn scene file, no longer referencing the
-external "robi.png". However, even if saved as built-in, and even though
+Например, если путь \`"res://robi.png"\` стереть в свойстве "path"
+в примере выше, и сохранить сцену, то ресурс будет сохранен внутри
+ .scn файла, и болше не будет ссылаться на "robi.png". 
+ Тем не менее, даже если сохранить ресурс как встроенный, and even though
 the scene can be instanced multiple times, the resource will always
 be loaded only once. That means, different Robi robot scenes instanced
 at the same time will still share the same image.
 
-Loading resources from code
+Загрузка ресурса в коде
 ---------------------------
 
 Loading resources from code is easy. There are two ways to do it. The
