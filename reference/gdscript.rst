@@ -915,7 +915,7 @@ Multipatterns:
 Классы как ресурсы
 ^^^^^^^^^^^^^^^^^^^^
 
-Classes храняться как файлы доступные как :ref:`resources <class_GDScript>`. 
+Classes хранятся как файлы доступные как :ref:`resources <class_GDScript>`. 
 Они должны быть загружены с диска чтобы быть доступными для других классов.
 Это достигается с помощью функций ``load`` или ``preload`` (см. ниже). 
 Инстанцирование загруженного класса осуществляется функцией ``new`` объекта класса::
@@ -942,98 +942,98 @@ Classes храняться как файлы доступные как :ref:`res
 
     export var number = 5  # значение будет сохранено и видимо в редакторе свойств
 
-An exported variable must be initialized to a constant expression or have an
-export hint in the form of an argument to the export keyword (see below).
+Экспортируемая переменная должна быть инициализирована константным выражением or have an
+export hint в форме агрумента to the export keyword (see below).
 
-One of the fundamental benefits of exporting member variables is to have
-them visible and editable in the editor. This way artists and game designers
-can modify values that later influence how the program runs. For this, a
-special export syntax is provided.
+Одно из основных преимуществ экспортирования переменных членов в том
+что они видимы и редактируемы в редакторе. Так художники и гейм-дизайнеры
+могут изменять значения которые потом влияют на то как запускается программа.
+Для этого предоставляется специальный синтаксис экспорта.
 
 ::
 
-    # If the exported value assigns a constant or constant expression, 
-    # the type will be inferred and used in the editor
+    # Если экспортируемому значению присвоена константа или констнтное выражение, 
+    # тип будет выводиться и использоваться в редакторе
 
     export var number = 5
 
-    # Export can take a basic data type as an argument which will be 
-    # used in the editor
+    # Экспорт может принимать азовые типы данных как аргументы 
+    # которые будут использоваться в редакторе
 
     export(int) var number
 
-    # Export can also take a resource type to use as a hint
+    # Export может также принимать тип resource используемый как hint
 
     export(Texture) var character_face
 
-    # Integers and strings hint enumerated values
+    # Integers и strings hint enumerated values
 
     # Editor will enumerate as 0, 1 and 2
     export(int, "Warrior", "Magician", "Thief") var character_class   
     # Editor will enumerate with string names 
     export(String, "Rebecca", "Mary", "Leah") var character_name 
 
-    # Strings as paths
+    # Strings как paths
 
-    # String is a path to a file
+    # String это путь к файлу
     export(String, FILE) var f  
-    # String is a path to a directory
+    # String это путь к папке
     export(String, DIR) var f  
-    # String is a path to a file, custom filter provided as hint
+    # String это путь к файлу, настраиваемый фильтр представлен как hint
     export(String, FILE, "*.txt") var f  
 
-    # Using paths in the global filesystem is also possible, 
-    # but only in tool scripts (see further below)
+    # Использование paths в глобальной файловой системе также доступно, 
+    # но только в tool scripts (см. далее)
 
-    # String is a path to a PNG file in the global filesystem
+    # String это path к PNG файлу в глобальной ФС
     export(String, FILE, GLOBAL, "*.png") var tool_image 
-    # String is a path to a directory in the global filesystem
+    # String это path к папке в глобальной ФС
     export(String, DIR, GLOBAL) var tool_dir
 
-    # The MULTILINE setting tells the editor to show a large input 
-    # field for editing over multiple lines
+    # Настройка MULTILINE говорит редактору отображать large input 
+    # field для редактирования нескольких строк
     export(String, MULTILINE) var text
 
-    # Limiting editor input ranges
+    # Ограничение диапазона ввода в редакторе
 
-    # Allow integer values from 0 to 20
+    # Допустимы целые от 0 до 20
     export(int, 20) var i  
-    # Allow integer values from -10 to 20 
+    # Допустимы целые от -10 до 20 
     export(int, -10, 20) var j 
-    # Allow floats from -10 to 20, with a step of 0.2
+    # Допустимы дробные от -10 до 20, с шагом 0.2
     export(float, -10, 20, 0.2) var k 
-    # Allow values y = exp(x) where y varies betwee 100 and 1000 
-    # while snapping to steps of 20. The editor will present a 
-    # slider for easily editing the value. 
+    # Допустимы значения y = exp(x) где y меняется между 100 и 1000 
+    # с шагом 20. Редактор предоставит слайдер 
+    # чтобы было проще задавать значения. 
     export(float, EXP, 100, 1000, 20) var l 
 
-    # Floats with easing hint
+    # Дробные с easing hint
 
     # Display a visual representation of the ease() function 
     # when editing
     export(float, EASE) var transition_speed 
 
-    # Colors
+    # Цвета
 
-    # Color given as Red-Green-Blue value
-    export(Color, RGB) var col  # Color is RGB
-    # Color given as Red-Green-Blue-Alpha value
+    # Цвет представлен как Red-Green-Blue значение
+    export(Color, RGB) var col  # Color это RGB
+    # Color представлен как Red-Green-Blue-Alpha значение
     export(Color, RGBA) var col  # Color is RGBA
    
-    # another node in the scene can be exported too
+    # другой узел в сцене также может быть экспортирован
     
     export(NodePath) var node
 
-It must be noted that even if the script is not being run while at the
-editor, the exported properties are still editable (see below for
-"tool").
+Нужно отметить что даже если script не будет запущен в редакторе,
+экспортированные свойства остаются редактируемыми (см. дальше "tool").
 
 Экспорт битовых флагов
 ^^^^^^^^^^^^^^^^^^^
 
-Integers used as bit flags can store multiple ``true``/``false`` (boolean)
-values in one property. By using the export hint ``int, FLAGS``, they
-can be set from the editor:
+Integers используют как битовые флаги которые могут храниться как множество
+ ``true``/``false`` (булевых) значений в одном свойстве.
+С использованием экспорт-хинта (hint) ``int, FLAGS``, 
+они могут быть заданы в редакторе:
 
 ::
 
@@ -1045,16 +1045,16 @@ possible. The syntax is very similar to the enumeration syntax:
 
 ::
 
-    # Set any of the given flags from the editor
+    # Установка любого переданного флага в редакторе
     export(int, FLAGS, "Fire", "Water", "Earth", "Wind") var spell_elements = 0 
 
-In this example, ``Fire`` has value 1, ``Water`` has value 2, ``Earth``
-has value 4 and ``Wind`` corresponds to value 8. Usually, constants
+В этом примере, ``Fire`` имеет значение 1, ``Water`` значение 2, ``Earth``
+значение 4 и ``Wind`` соответствует значению 8. Usually, constants
 should be defined accordingly (e.g. ``const ELEMENT_WIND = 8`` and so
 on).
 
-Using bit flags requires some understanding of bitwise operations. If in
-doubt, boolean variables should be exported instead.
+Using bit flags requires some understanding of bitwise operations. 
+Если не уверены, используйте в экспорте вместо этого булевы переменные.
 
 Экспорт массивов
 ^^^^^^^^^^^^^^^^
