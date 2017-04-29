@@ -11,11 +11,11 @@
 Хорошо спроектированные файловые системы также позволяют нескольким разработикам
 сообща редактировать файлы ресурсов и активы при совместной работе.
 
-Начальные версии Godot движка (and previous iterations before it was
-named Godot) used a database. Assets were stored in it and assigned an
-ID. Other approaches were tried as well, such as local databases, files with
-metadata, etc. In the end the simple approach won and now Godot stores
-all assets as files in the file system.
+Начальные версии Godot движка (и предыдущие итерации до того как он сатл называться Godot)
+использовали базу данных. Активы сохранялись в ней и получали ID.
+Пробовались и другие подходы, такие как локальные базы данных, файлы с метаданными
+и т.п.. В конце концов победила простота и теперь Godot хранит все активы
+как файлы в файловой системе.
 
 Реализация
 --------------
@@ -23,16 +23,16 @@ all assets as files in the file system.
 Файловая система хранит ресурсы на диске. Все, от скрипта до сцены или 
 PNG изображения это ресурсы с точки зрения движка. Если ресурс содержит свойства
 которые ссылаются на другие ресурсы на диске пути к этим ресурсам также включаются.
-If a resource has sub-resources that are built-in, the resource is
-saved in a single file together with all the bundled sub-resources. For
-example, a font resource is often bundled together with the font textures.
+Если ресурс имеет под-ресурс встроенный в него, то ресурс сохраняется в
+одном файле вместе со всеми под-ресурсами. 
+Например, ресурс шрифт часто комплектуют в сборку с font textures.
 
-In general the Godot file system avoids using metadata files. The reason for
+Обычно Godot в файловой системе избегает метаданных в файлах. The reason for
 this is simple, existing asset managers and VCSs are simply much better than
 anything we can implement, so Godot tries the best to play along with SVN,
 Git, Mercurial, Perforce, etc.
 
-Example of a file system contents:
+Пример файловой системы:
 
 ::
 
@@ -45,44 +45,42 @@ Example of a file system contents:
 engine.cfg
 ----------
 
-The engine.cfg file is the project description file, and it is always found at
-the root of the project. In fact its location defines where the root is. This
-is the first file that Godot looks for when opening a project.
+Файл engine.cfg это описание проекта, он всегда находится в корневой папке проекта.
+Фактически его местоположение определяет, где корень. Это первый файл, который ищет Godot
+при открытии проекта.
 
-This file contains the project configuration in plain text, using the win.ini
-format. Even an empty engine.cfg can function as a basic definition of a blank
-project.
+Этот файл содержит конфигурацию проекта в plain text, используя формат win.ini.
+Даже пустой engine.cfg может выполнять функцию инициализации пустого проекта.
 
 символ - разделитель
 -------------------
 
-Godot поддерживает только ``/`` в качестве разделителя пути. This is done for
-portability reasons. All operating systems support this, even Windows,
-so a path such as ``c:\project\engine.cfg`` needs to be typed as
+Godot поддерживает только ``/`` в качестве разделителя пути. 
+Это так по причинам портируемости. Все операционные системы его поддерживают,
+даже Windows, так path типа ``c:\project\engine.cfg`` должен быть заисан как
 ``c:/project/engine.cfg``.
 
 Resource path
 -------------
 
-When accessing resources, using the host OS file system layout can be
-cumbersome and non-portable. To solve this problem, the special path
-``res://`` was created.
+При обращении к ресурсам, использование файловой системы операционной системы
+может быть громоздко и непортируемо. Для решения этой проблемы, введен специальный путь
+``res://``.
 
-The path ``res://`` will always point at the project root (where
-engine.cfg is located, so in fact ``res://engine.cfg`` is always
-valid).
+Путь ``res://`` всегда указывает на project root (где расположен
+engine.cfg, так что фактически ``res://engine.cfg`` всегда валиден).
 
-This file system is read-write only when running the project locally from
-the editor. When exported or when running on different devices (such as
-phones or consoles, or running from DVD), the file system will become
-read-only and writing will no longer be permitted.
+Эта ФС всегда read-write только если проект запущен локально из редактора.
+При экспорте или запуске на другом устройстве (консоли или телефоне
+или с DVD), файловая система станет доступной только для чтения и запись
+больше не будет разрешена.
 
 User path
 ---------
 
 Writing to disk is often still needed for various tasks such as saving game
 state or downloading content packs. To this end, the engine ensures that there is a
-special path ``user://`` that is always writable.
+special path ``user://`` он всегда доступен для записи.
 
 Host file system
 ---------------
@@ -92,20 +90,20 @@ for a released product as these paths are not guaranteed to work on all platform
 However, using host file system paths can be very useful when writing development
 tools in Godot!
 
-Drawbacks
+Недостатки
 ---------
 
-There are some drawbacks to this simple file system design. The first issue is that
-moving assets around (renaming them or moving them from one path to another inside
-the project) will break existing references to these assets. These references will
-have to be re-defined to point at the new asset location.
+В этом простом файловом дизайне есть и недостатки. Первая проблема
+связана с перемещением активов (переименование и перемещение их внутри проекта
+из одного пути в другой) разрушает существующие ссылки на активы. Эти ссылки нужно
+переопределять на новое положение активов.
 
-The second is that under Windows and OSX file and path names are case insensitive.
-If a developer working in a case insensitive host file system saves an asset as "myfile.PNG",
-but then references it as "myfile.png", it will work just fine on their platorm, but not
-on other platforms, such as Linux, Android, etc. This may also apply to exported binaries,
+Вторая в том что в Windows и OSX имена путей и файлов регистро-зависимы.
+Если разработчик работает в регистро-независимой системе и у него актив типа "myfile.PNG",
+но ссылка на "myfile.png", то это сработает в его системе но не в других,
+таких как Linux, Android, и т.п.. This may also apply to exported binaries,
 which use a compressed package to store all files.
 
 It is recommended that your team clearly defines a naming convention for files when
-working with Godot! One simple fool-proof convention is to only allow lowercase
-file and path names.
+working with Godot! Одно простое правило - защита от дурака: использовать **только** маленькие
+символы в именах активов.
