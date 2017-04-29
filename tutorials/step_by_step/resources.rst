@@ -70,16 +70,16 @@ External или built-in
 Например, если путь \`"res://robi.png"\` стереть в свойстве "path"
 в примере выше, и сохранить сцену, то ресурс будет сохранен внутри
  .scn файла, и болше не будет ссылаться на "robi.png". 
- Тем не менее, даже если сохранить ресурс как встроенный, and even though
-the scene can be instanced multiple times, the resource will always
-be loaded only once. That means, different Robi robot scenes instanced
-at the same time will still share the same image.
+ Тем не менее, даже если сохранить ресурс как встроенный, и даже если сцена,
+будет инстанцирована несколько раз, ресурс будет загружен лишь однажды.
+Это означает, что, различные сцены Robi robot инстанцированные в одно и то же время
+будут разделять одно и то-же изображение.
 
 Загрузка ресурса в коде
 ---------------------------
 
-Loading resources from code is easy. There are two ways to do it. The
-first is to use load(), like this:
+Загружать ресурсы из кода - просто. Есть два способа сделать это. 
+Первый это использовать функцию load(), вот так:
 
 ::
 
@@ -87,25 +87,24 @@ first is to use load(), like this:
             var res = load("res://robi.png") # resource is loaded when line is executed
             get_node("sprite").set_texture(res)
 
-The second way is more optimal, but only works with a string constant
-parameter, because it loads the resource at compile-time.
+Второй способ более оптимальный, но работает только со строковыми константами
+в параметре, поскольку загружает ресурсы во время компиляции.
 
 ::
 
     func _ready():
-            var res = preload("res://robi.png") # resource is loaded at compile time
+            var res = preload("res://robi.png") # ресурс загружается во время компиляции
             get_node("sprite").set_texture(res)
 
-Loading scenes
+Загрузка сцен
 --------------
 
-Scenes are also resources, but there is a catch. Scenes saved to disk
-are resources of type :ref:`PackedScene <class_PackedScene>`,
-this means that the scene is packed inside a resource.
+Сцены также являются ресурсами, but there is a catch. Сцены сохраненные на диск,
+являются ресурсами типа :ref:`PackedScene <class_PackedScene>`,
+что означает что сцена упакована внутри ресурса.
 
-To obtain an instance of the scene, the method
-:ref:`PackedScene.instance() <class_PackedScene_instance>`
-must be used.
+Для получения экземпляра сцены, нужно использовать метод
+:ref:`PackedScene.instance() <class_PackedScene_instance>`.
 
 ::
 
@@ -113,30 +112,28 @@ must be used.
             var bullet = preload("res://bullet.scn").instance()
             add_child(bullet)                  
 
-This method creates the nodes in hierarchy, configures them (sets all
-the properties) and returns the root node of the scene, which can be
-added to any other node.
+Этот метод создает иерархию узлов, конфигурирует их (устанавливает все свойства)
+и возвращает корневой узел сцены, который можно добавлять к любому другому узлу.
 
-The approach has several advantages. As the
+Этот подход имеет ряд преимуществ. Поскольку функция
 :ref:`PackedScene.instance() <class_PackedScene_instance>`
-function is pretty fast, adding extra content to the scene can be done
-efficiently. New enemies, bullets, effects, etc can be added or
-removed quickly, without having to load them again from disk each
-time. It is important to remember that, as always, images, meshes, etc
-are all shared between the scene instances.
+работает довольно быстро, добавление контента в сцену происходит эффективно.
+Новые враги, пули, эффекты, и т.п. могут быть быстро добавлены или убраны
+, без необходимости загружать их с диска снова всякий раз.
+Важно помнить, что как и всегда, изображения, меши, и т.п.
+все разделяемы между экземплярами сцены.
 
-Freeing resources
+Освобождение ресурсов
 -----------------
 
-Resource extends from :ref:`Reference <class_Reference>`.
-As such, when a resource is no longer in use, it will automatically free
-itself. Since, in most cases, Resources are contained in Nodes, scripts
+Resource extends от :ref:`Reference <class_Reference>`.
+As such, когда ресурс больше неиспользуется, он автоматически освобождается.
+Since, in most cases, Resources are contained in Nodes, scripts
 or other resources, when a node is removed or freed, all the children
 resources are freed too.
 
-Scripting
+Скриптинг
 ---------
 
-Like any object in Godot, not just nodes, resources can be scripted,
-too. However, there isn't generally much of an advantage, as resources
-are just data containers.
+Как любой объект в Godot, не только узлы, ресурсы тоже можно скриптить.
+Однако, обычно это не дает преимуществ поскольку ресурсы это только контейнеры данных.
