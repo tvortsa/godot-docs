@@ -172,7 +172,7 @@ in _ready(), используя :ref:`Object.connect() <class_Object_connect>`.
 
     extends Panel
 
-    # member variables here, example:
+    # переменные-члены здесь, пример:
 
     # var a=2
     # var b="textvar"
