@@ -1,164 +1,161 @@
 .. _doc_viewports:
 
-Viewports
+Вьюпорты
 =========
 
-Introduction
+Введение
 ------------
 
-Godot has a small but very useful feature called viewports. Viewports
-are, as they name implies, rectangles where the world is drawn. They
-have three main uses, but can flexibly adapted to a lot more. All this
-is done via the :ref:`Viewport <class_Viewport>` node.
+В Godot небольшая но очень полезная функция - вьюпорты. Вьюпорты
+кк подразумевает название, прямоугольники в которых отрисовывается мир.
+Они имеют три основных назначения, но могут гибко адаптироваться к гораздо большему. 
+Все это делают через узел :ref:`Viewport <class_Viewport>`.
 
 .. image:: /img/viewportnode.png
 
-The main uses in question are:
+Основными видами использования являются:
 
--  **Scene Root**: The root of the active scene is always a Viewport.
-   This is what displays the scenes created by the user. (You should
-   know this by having read previous tutorials!)
+-  **Scene Root**: root активной сцены всегда Viewport.
+   Это то, что отображает сцены, созданные пользователем. (Вы должны 
+   уже знать об этом из предыдущих уроков!)
 -  **Sub-Viewports**: These can be created when a Viewport is a child of
    a :ref:`Control <class_Control>`.
--  **Render Targets**: Viewports can be set to "RenderTarget" mode. This
-   means that the viewport is not directly visible, but its contents
-   can be accessed via a :ref:`Texture <class_Texture>`.
+-  **Render Targets**: Вьюпорты могут быть установлены в "RenderTarget" режиме.
+   это значит что видовое окно невидимо напрямую, но к его содержимому
+   можно обратиться через :ref:`Texture <class_Texture>`.
 
-Input
+Ввод
 -----
 
-Viewports are also responsible of delivering properly adjusted and
-scaled input events to all its children nodes. Both the root viewport
-and sub-viewports do this automatically, but render targets do not.
-Because of this, the user must do it manually via the
-:ref:`Viewport.input() <class_Viewport_input>` function if needed.
+Вьюпорты are also responsible of delivering properly adjusted and
+scaled событий ввода ко всем его дочерним узлам. И root viewport
+и sub-viewports делают это автоматически, но render targets нет.
+Поэтому, пользователи должны делать это вручную через функцию
+:ref:`Viewport.input() <class_Viewport_input>` если нужно.
 
-Listener
+Слушатель
 --------
 
-Godot supports 3D sound (in both 2D and 3D nodes), more on this can be
-found in another tutorial (one day..). For this type of sound to be
-audible, the viewport needs to be enabled as a listener (for 2D or 3D).
-If you are using a custom viewport to display your world, don't forget
-to enable this!
+Godot поддерживает 3D звук (и в 2D и в 3D узлах), больше об этом
+мы узнаем в следующих уроках (one day..). Чтобы слышать такой тип звука,
+вьюпорт должен быть включен как слушатель (для 2D или 3D).
+Если вы используете custom viewport для отображения вашего мира, не забудьте
+включить это!
 
-Cameras (2D & 3D)
+Камеры (2D и 3D)
 -----------------
 
-When using a 2D or 3D :ref:`Camera <class_Camera>` /
-:ref:`Camera2D <class_Camera2D>`, cameras will always display on the
-closest parent viewport (going towards the root). For example, in the
-following hierarchy:
+При использовании 2D или 3D :ref:`Camera <class_Camera>` /
+:ref:`Camera2D <class_Camera2D>`, камеры всегда отображают ближайший
+родительский вьюпорт (восходящий к root). Например, в след. иерархии:
 
 -  Viewport
 
    -  Camera
 
-Camera will display on the parent viewport, but in the following one:
+Камера отобразится в родительском видовом экране, но в следующем:
 
 -  Camera
 
    -  Viewport
 
-It will not (or may display in the root viewport if this is a subscene).
+Нет (или может отображаться в корневом окне просмотра, если это под-сцена).
 
-There can be only one active camera per viewport, so if there is more
-than one, make sure that the desired one has the "current" property set,
-or make it the current camera by calling:
+В окне просмотра может быть только одна активная камера, так что,
+если их больше чем одна, убедитесь что у желаемой камеры активировано
+свойство "current" или сделать камеру текущей вызовом:
 
 ::
 
     camera.make_current()
 
-Scale & stretching
+Масштаб и растяжение
 ------------------
 
-Viewports have a "rect" property. X and Y are often not used (only the
-root viewport really uses them), while WIDTH AND HEIGHT represent the
-size of the viewport in pixels. For Sub-Viewports, these values are
-overridden by the ones from the parent control, but for render targets
-this sets their resolution.
+У вьюпортов есть свойства "rect". X и Y часто не используют (только
+root вьюпорт реально их использует), а WIDTH и HEIGHT представляют
+размер вьюпорта в пикселях. Для Sub-Viewports, эти значения
+перекрываются тем что установлено в parent control, но для render targets
+это задает их разрешение.
 
-It is also possible to scale the 2D content and make it believe the
-viewport resolution is other than the one specified in the rect, by
-calling:
+2D содержимое также можно масштабировать and make it believe the
+viewport resolution is other than the one specified in the rect, 
+вызовом:
 
 ::
 
-    viewport.set_size_override(w,h) #custom size for 2D
-    viewport.set_size_override_stretch(true/false) #enable stretch for custom size
+    viewport.set_size_override(w,h) #кастомный размер для 2D
+    viewport.set_size_override_stretch(true/false) #enable stretch для кастомного размера
 
-The root viewport uses this for the stretch options in the project
-settings.
+Root вьюпорт использует это для параметров растяжения в настройках проекта.
 
-Worlds
+Миры
 ------
 
-For 3D, a Viewport will contain a :ref:`World <class_World>`. This
-is basically the universe that links physics and rendering together.
-Spatial-base nodes will register using the World of the closest
-viewport. By default, newly created viewports do not contain a World but
-use the same as a parent viewport (root viewport does contain one
+Для 3D, вьюпорт будет содержать :ref:`World <class_World>`. 
+Это базовая вселенная которая связывает физику и рендер.
+Spatial-base узлы регистрируют с помощью World ближайшего вьюпорта.
+По умолчанию, вновь созданные вьпорты не содержат World но
+используют тот же что и родительский вьюпорт (root вьюпорт does contain one
 though, which is the one objects are rendered to by default). A world can
 be set in a viewport using the "world" property, and that will separate
 all children nodes of that viewport from interacting with the parent
 viewport world. This is specially useful in scenarios where, for
-example, you might want to show a separate character in 3D imposed over
-the game (like in Starcraft).
+example, вам может понадобиться показать отдельного персонажа в 3D наложенного
+поверх игры (как в Starcraft).
 
 As a helper for situations where you want to create viewports that
 display single objects and don't want to create a world, viewport has
-the option to use its own World. This is very useful when you want to
-instance 3D characters or objects in the 2D world.
+the option to use its own World. Это очень пригодиться когда вы хотите
+инстанцировать 3D персонаж или объект в 2D мире.
 
-For 2D, each Viewport always contains its own :ref:`World2D <class_World2D>`.
-This suffices in most cases, but in case sharing them may be desired, it
+Для 2D, каждый Viewport всегда содержит свои собственные :ref:`World2D <class_World2D>`.
+Этого достаточно в большинстве случаев, but in case sharing them may be desired, it
 is possible to do so by calling the viewport API manually.
 
-Capture
+Захват содержимого экрана
 -------
 
-It is possible to query a capture of the viewport contents. For the root
-viewport this is effectively a screen capture. This is done with the
-following API:
+Можно запросить захват содержимого вьюпорта. Для root
+viewport это фактически захват экрана. Это выполняют
+следующим API:
 
 ::
 
     # queues a screen capture, will not happen immediately
     viewport.queue_screen_capture() 
 
-After a frame or two (check _process()), the capture will be ready,
-get it back by using:
+После кадра или двух (check _process()), захват будет готов,
+верните его используя:
 
 ::
 
     var capture = viewport.get_screen_capture()
 
-If the returned image is empty, capture still didn't happen, wait a
-little more, as this API is asyncronous.
+Если возвращенное изображение пусто, захват все еще не произошел, 
+подождите немного дольше, поскольку это API асинхронно.
 
 Sub-viewport
 ------------
 
-If the viewport is a child of a control, it will become active and
-display anything it has inside. The layout is something like this:
+Если вьюпорт является потомком control, он станет активным
+и покажет все, что есть внутри. Макет выглядит примерно так:
 
 -  Control
 
    -  Viewport
 
-The viewport will cover the area of its parent control completely.
+Область вьюпорта полностью покрывает область родительского control.
 
 .. image:: /img/subviewport.png
 
 Render target
 -------------
 
-To set as a render target, just toggle the "render target" property of
-the viewport to enabled. Note that whatever is inside will not be
-visible in the scene editor. To display the contents, the render target
-texture must be used. This can be requested via code using (for
-example):
+Чтобы настроить как render target, просто переключите свойство "render target" 
+tвьюпорта. Заметьте, что все, что находится внутри, не будет отображаться
+в редакторе сцен. Для отображения содержимого, нужно использовать render target
+texture. Это можно запросить с помощью кода (например):
 
 ::
 
