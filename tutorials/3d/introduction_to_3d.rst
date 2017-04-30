@@ -1,15 +1,14 @@
 .. _doc_introduction_to_3d:
 
-Introduction to 3D
+Введение в 3D
 ==================
 
-Creating a 3D game can be challenging. That extra Z coordinate makes
-many of the common techniques that helped to make 2D games simple no
-longer work. To aid in this transition, it is worth mentioning that
-Godot uses very similar APIs for 2D and 3D. Most nodes are the same and
-are present in both 2D and 3D versions. In fact, it is worth checking
-the 3D platformer tutorial, or the 3D kinematic character tutorials,
-which are almost identical to their 2D counterparts.
+Создание 3D игры может быть сложным. Эта дополнительная Z координата
+делает то что было просто в 2D играх - сложнее.
+Чтобы помочь в этом переходе, Godot использует схожие API и для 2D и для 3D.
+Большинство узлов одинаковы и присутствуют и в 2D и в 3D версиях.
+Фактически стоит проверить урок по 3D platformer , или 3D kinematic character tutorials,
+которые почти идентичны их 2D вариантам.
 
 In 3D, math is a little more complex than in 2D, so also checking the
 :ref:`doc_vector_math` in the wiki (which were specially created for game
@@ -19,10 +18,10 @@ efficiently developing 3D games.
 Spatial node
 ~~~~~~~~~~~~
 
-:ref:`Node2D <class_Node2D>` is the base node for 2D.
-:ref:`Control <class_Control>` is the base node for everything GUI.
-Following this reasoning, the 3D engine uses the :ref:`Spatial <class_Spatial>`
-node for everything 3D.
+:ref:`Node2D <class_Node2D>` базовый узел для 2D.
+:ref:`Control <class_Control>` базовый узел для всего в GUI.
+Следуя этой логике, 3D engine использует :ref:`Spatial <class_Spatial>`
+node для всего в 3D.
 
 .. image:: /img/tuto_3d1.png
 
@@ -41,8 +40,8 @@ scale.
 Unlike 2D, where loading image content and drawing is straightforward,
 3D is a little more difficult. The content needs to be created with
 special 3D tool (usually referred to as DCCs) and exported to an
-exchange file format in order to be imported in Godot (3D formats are
-not as standardized as images).
+exchange file format in order to be imported in Godot (3D форматы не
+стандартизованы как форматы изображений).
 
 DCC-created models
 ------------------
@@ -80,7 +79,7 @@ will be updated often, Godot provides a special node,
 which provides an OpenGL 1.x style immediate-mode API to create points,
 lines, triangles, etc.
 
-2D in 3D
+2D в 3D
 --------
 
 While Godot packs a powerful 2D engine, many types of games use 2D in a
