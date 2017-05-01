@@ -10,10 +10,10 @@
 Фактически стоит проверить урок по 3D platformer , или 3D kinematic character tutorials,
 которые почти идентичны их 2D вариантам.
 
-In 3D, math is a little more complex than in 2D, so also checking the
-:ref:`doc_vector_math` in the wiki (which were specially created for game
-developers, not mathematicians or engineers) will help pave the way into
-efficiently developing 3D games.
+В 3D, немного более сложная чем в 2D, так что сперва посмотрите
+:ref:`doc_vector_math` в wiki (статья специально создана для
+разработчиков игр, не математико или инженеров) Поможет проложить путь в
+эффективную разработку 3D игр.
 
 Spatial node
 ~~~~~~~~~~~~
@@ -25,161 +25,156 @@ node для всего в 3D.
 
 .. image:: /img/tuto_3d1.png
 
-Spatial nodes have a local transform, which is relative to the parent
-node (as long as the parent node is also **or inherits** of type
-Spatial). This transform can be accessed as a 4x3
-:ref:`Transform <class_Transform>`, or as 3 :ref:`Vector3 <class_Vector3>`
-members representing location, Euler rotation (x,y and z angles) and
-scale.
+Spatial nodes обладает локальными трансформциями, которые относятся
+к родительскому узлу (до тех пор, пока родительский узел тоже является **или наследует** 
+типа Spatial). Эти трансформации доступны как 4x3
+:ref:`Transform <class_Transform>`, или как 3 :ref:`Vector3 <class_Vector3>`
+члена представляющие расположение, эйлеровское вращение (x,y и z углы) и
+масштабирование.
 
 .. image:: /img/tuto_3d2.png
 
 3D content
 ~~~~~~~~~~
 
-Unlike 2D, where loading image content and drawing is straightforward,
-3D is a little more difficult. The content needs to be created with
-special 3D tool (usually referred to as DCCs) and exported to an
-exchange file format in order to be imported in Godot (3D форматы не
-стандартизованы как форматы изображений).
+В отличие от 2D, где загрузка содержимого изображения и рисования проста,
+3D немного сложнее. Контент должен быть создан в специальной программе
+3D редакторе (обычно называемый DCCs) и экспортировани в формат обмена
+чтобы быть импортированным в Godot (3D форматы не стандартизованы как
+форматы изображений).
 
-DCC-created models
+DCC-создание моделей
 ------------------
 
-There are two pipelines to import 3D models in Godot. The first and most
-common one is through the :ref:`doc_importing_3d_scenes` importer, which allows to import
-entire scenes (just as they look in the DCC), including animation,
-skeletal rigs, blend shapes, etc.
+Есть два пайплайна для импорта моделей 3D в Godot. Первый и наиболее используемый
+через импортер :ref:`doc_importing_3d_scenes` который позволяет импортировать
+сцену целиком (так же, как они выглядят в DCC), включая анимацию,
+скелетные оснастки, blend shapes, и т.п.
 
-The second pipeline is through the :ref:`doc_importing_3d_meshes` importer. This
-second method allows importing simple .OBJ files as mesh resources,
-which can be then put inside a :ref:`MeshInstance <class_MeshInstance>`
-node for display.
+Второй способ - через импортер :ref:`doc_importing_3d_meshes`. 
+позволяет просто импортировать каркасы в .OBJ файлах,
+которые затем могут быть помещены в узел :ref:`MeshInstance <class_MeshInstance>`
+nдля отображения.
 
-Generated geometry
+Генерация геометрии
 ------------------
 
-It is possible to create custom geometry by using the
-:ref:`Mesh <class_Mesh>` resource directly, simply create your arrays
-and use the :ref:`Mesh.add_surface() <class_Mesh_add_surface>`
-function. A helper class is also available, :ref:`SurfaceTool <class_SurfaceTool>`,
-which provides a more straightforward API and helpers for indexing,
-generating normals, tangents, etc.
+Можно создавать и кастомную геометрию используя ресурс
+:ref:`Mesh <class_Mesh>` напрямую, просто создавать массивы
+и используя функцию :ref:`Mesh.add_surface() <class_Mesh_add_surface>`.
+Также доступен вспомогательный класс, :ref:`SurfaceTool <class_SurfaceTool>`,
+который обеспечивает более прямолинейный API и помощники для индексирования,
+создания нормалей, касательных и т.п.
 
-In any case, this method is meant for generating static geometry (models
-that will not be updated often), as creating vertex arrays and
-submitting them to the 3D API has a significant performance cost.
+В любом случае, этот метод предназначен для создания статической геометрии 
+(модели, которые не будут обновляться часто), поскольку создание массивов вершин и
+и представления их в 3D API требуют значительных ресурсов.
 
-Immediate geometry
+Быстрая геометрия
 ------------------
 
-If, instead, there is a requirement to generate simple geometry that
-will be updated often, Godot provides a special node,
-:ref:`ImmediateGeometry <class_ImmediateGeometry>`
-which provides an OpenGL 1.x style immediate-mode API to create points,
-lines, triangles, etc.
+Если, нужна простая часто изменяемая геометрия, Godot предоставляет
+специяльный узел :ref:`ImmediateGeometry <class_ImmediateGeometry>`
+в формате стиля OpenGL 1.x immediate-mode API для создания точек,
+линий, треугольников, и т.п.
 
 2D в 3D
 --------
 
-While Godot packs a powerful 2D engine, many types of games use 2D in a
-3D environment. By using a fixed camera (either orthogonal or
-perspective) that does not rotate, nodes such as
-:ref:`Sprite3D <class_Sprite3D>` and
+While Godot packs a powerful 2D engine, многие типы игр используют 2D в
+3D окружении. Используя фиксированную камеру (ортогональную или
+перспективную) которая не вращатся, такие узлы как
+:ref:`Sprite3D <class_Sprite3D>` и
 :ref:`AnimatedSprite3D <class_AnimatedSprite3D>`
-can be used to create 2D games that take advantage of mixing with 3D
-backgrounds, more realistic parallax, lighting/shadow effects, etc.
+могут быть использованы для создания 2D игр используя преимущество 
+смешения с 3D фоном, более реалистичным параллаксом, освещением/тенями эффектами, и т.п.
 
-The disadvantage is, of course, that added complexity and reduced
-performance in comparison to plain 2D, as well as the lack of reference
-of working in pixels.
+Недостатком является, дополнительная сложность и потеря производительности
+в сравнении с plain 2D, а также потеря возможности работы с пикселями.
 
-Environment
+Окружение
 ~~~~~~~~~~~
 
-Besides editing a scene, it is often common to edit the environment.
-Godot provides a :ref:`WorldEnvironment <class_WorldEnvironment>`
-node that allows changing the background color, mode (as in, put a
-skybox), and applying several types of built-in post-processing effects.
-Environments can also be overridden in the Camera.
+Помимо редактирования сцены, часто необходимо редактирование окружения.
+Godot предлагает узел :ref:`WorldEnvironment <class_WorldEnvironment>`
+который позволяет изменять цвет фона, режим (as in, put a
+skybox), и применять несколько типов встроенных эффектов пост-обработки.
+Окружение также может быть переопределено в Camera.
 
-3D viewport
+3D вьюпорт
 ~~~~~~~~~~~
 
-Editing 3D scenes is done in the 3D tab. This tab can be selected
-manually, but it will be automatically enabled when a Spatial node is
-selected.
+Редактирование 3D сцен происходит во вкладке 3D. Эту вкладку можно
+выбрать вручную, но она также будет автоматически активирована при
+выборе Spatial узла.
 
 .. image:: /img/tuto_3d3.png
 
-Default 3D scene navigation controls are similar to Blender (aiming to
+Дефолтная навигация в 3D сцене похожа на ту что в Blender (aiming to
 have some sort of consistency in the free software pipeline..), but
 options are included to customize mouse buttons and behavior to be
 similar to other tools in Editor Settings:
 
 .. image:: /img/tuto_3d4.png
 
-Coordinate system
+Система координат
 -----------------
 
-Godot uses the `metric <http://en.wikipedia.org/wiki/Metric_system>`__
-system for everything. 3D Physics and other areas are tuned for this, so
-attempting to use a different scale is usually a bad idea (unless you
-know what you are doing).
+Godot использует `metric <http://en.wikipedia.org/wiki/Metric_system>`__
+для всего. 3D Физика и другие области настроены на это, так что
+испоьзовать другие системы обычно плохая идея (только если вы не
+уверены в том что знаете что делаете).
 
-When working with 3D assets, it's always best to work in the correct
-scale (set your DCC to metric). Godot allows scaling post-import and,
+Работая с 3D активами, всегда лучше работать в корректном масштабе
+(установите ваш DCC в метры). Godot allows scaling post-import and,
 while this works in most cases, in rare situations it may introduce
 floating point precision issues (and thus, glitches or artifacts) in
 delicate areas such as rendering or physics. So, make sure your artists
 always work in the right scale!
 
-The Y coordinate is used for "up", though for most objects that need
+Координата Y используется как направление "вверх", though for most objects that need
 alignment (like lights, cameras, capsule collider, vehicle, etc.), the Z
-axis is used as a "pointing towards" direction. This convention roughly
-means that:
+axis is used as a "pointing towards" direction. Грубо говоря:
 
--  **X** is sides
--  **Y** is up/down
--  **Z** is front/back
+-  **X** это всторону
+-  **Y** это верх/низ
+-  **Z** это пере/назад
 
-Space and manipulation gizmos
+Space и гизмо манипуляций
 -----------------------------
 
-Moving objects in the 3D view is done through the manipulator gizmos.
-Each axis is represented by a color: Red, Green, Blue represent X,Y,Z
+Перемещение объектов в 3D виде осуществляется с помощью гизмо трансформаций.
+Каждая ось представлена цветом: Красный, Зеленый, Голубой соответствует X,Y,Z.
 respectively. This convention applies to the grid and other gizmos too
-(and also to the shader language, ordering of components for
-Vector3,Color,etc.).
+(а также к языку шейдинга, для компонентов Vector3,Color, и т.п.).
 
 .. image:: /img/tuto_3d5.png
 
-Some useful keybindings:
+Некоторые полезные хоткеи:
 
--  To snap motion or rotation, press the "s" key while moving, scaling
-   or rotating.
--  To center the view on the selected object, press the "f" key.
+-  Для привязки вращения или перемещения, нажмите "s" во время вращения/перемещения.
+-  Для центрирования вида по объекту, нажмите "f".
 
-View menu
+Меню View
 ---------
 
-The view options are controlled by the "[ view ]" menu. Pay attention to
-this little menu inside the window because it is often overlooked!
+Опции вида управляются в меню "[ view ]". Обратите внимание на
+это маленькое меню внутри окна поскольку оно часто упускается из виду!
 
 .. image:: /img/tuto_3d6.png
 
-Default lighting
+Дефолтное освещение
 ----------------
 
-The 3D view has by some default options on lighting:
+3D вид имеет некоторые параметры освещения по умолчанию:
 
--  There is a directional light that makes objects visible while editing
-   turned on by default. It is no longer visible when running the game.
+-  Есть направленный свет, который делает объекты видимыми во время
+   редактирования включенный по-умолчанию. Он отключается при запуске игры.
 -  There is subtle default environment light to avoid places not reached
-   by the light to remain visible. It is also no longer visible when
-   running the game (and when the default light is turned off).
+   by the light to remain visible. Он также отключается при запуске игры
+   (и когда дефолтный свет отключают).
 
-These can be turned off by toggling the "Default Light" option:
+Его можно отключить опцией "Default Light":
 
 .. image:: /img/tuto_3d8.png
 
