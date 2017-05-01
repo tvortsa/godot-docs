@@ -178,17 +178,17 @@ respectively. This convention applies to the grid and other gizmos too
 
 .. image:: /img/tuto_3d8.png
 
-Customizing this (and other default view options) is also possible via
-the settings menu:
+Настройка этого (и другие дефолтные view опции) таже доступны через
+меню settings:
 
 .. image:: /img/tuto_3d7.png
 
-Which opens this window, allowing to customize ambient light color and
-default light direction:
+Которое открывает это окно, Позволяя настраивать цвет и
+дефолтное направление света:
 
 .. image:: /img/tuto_3d9.png
 
-Cameras
+Камеры
 -------
 
 No matter how many objects are placed in 3D space, nothing will be
