@@ -3,105 +3,106 @@
 InputEvent
 ==========
 
-What is it?
------------
+Что это?
+---------
 
-Managing input is usually complex, no matter the OS or platform. To ease
-this a little, a special built-in type is provided, :ref:`InputEvent <class_InputEvent>`.
-This datatype can be configured to contain several types of input
-events. Input Events travel through the engine and can be received in
-multiple locations, depending on the purpose.
+Управление вводом обычно сложно, вне зависимости от OS или платформы. Чтобы
+немного это упростить, предоставлен специальный встроенный тип, :ref:`InputEvent <class_InputEvent>`.
+Этот тип данных может быть сконфигурирован так, чтобы содержать несколько типов
+событий ввода. Input Events проходят через движок и могут быть приняты в
+разных местах, в зависимости от целей.
 
-How does it work?
+Как это работает?
 -----------------
 
-Every input event is originated from the user/player (though it's
-possible to generate an InputEvent and feed them back to the engine,
-which is useful for gestures). The OS object for each platform will read
-events from the device, then feed them to MainLoop. As :ref:`SceneTree <class_SceneTree>`
-is the default MainLoop implementation, events are fed to it. Godot
-provides a function to get the current SceneTree object :
+Каждое событие ввода возникает от пользователя/игрока (но можно
+генерировать InputEvent и направлять их обратно в движок,
+это полезно для жестов). Объект OS для каждой платформы будет считывать
+события с устройства, и затем передавать их в MainLoop. Поскольку :ref:`SceneTree <class_SceneTree>`
+дефолтная реализация MainLoop, события попадают в нее. Godot
+предлагает функцию для получения текущего объекта SceneTree :
 **get_tree()**.
 
-But SceneTree does not know what to do with the event, so it will give
-it to the viewports, starting by the "root" :ref:`Viewport <class_Viewport>` (the first
-node of the scene tree). Viewport does quite a lot of stuff with the
-received input, in order:
+Но SceneTree не знает что делать с событиями, так что передаст их
+во viewports, начиная с "root" :ref:`Viewport <class_Viewport>` (первый
+из узлов в scene tree). Viewport делает довольно много с принятым вводом,
+по порядку:
 
 .. image:: /img/input_event_flow.png
 
-1. First of all, the standard _input function
-   will be called in any node with input processing enabled (enable with
+1. Прежде всего, будет вызвана стандартная функция _input
+   в любом узле с включенной обработкой ввода (с включенной
    :ref:`Node.set_process_input() <class_Node_set_process_input>` and override
-   :ref:`Node._input() <class_Node__input>`). If any function consumes the event, it can
-   call :ref:`SceneTree.set_input_as_handled() <class_SceneTree_set_input_as_handled>`, and the event will
-   not spread any more. This ensures that you can filter all events of interest, even before the GUI. 
-   For gameplay input, the _unhandled_input() is generally a better fit, because it allows the GUI to intercept the events.
-2. Second, it will try to feed the input to the GUI, and see if any
-   control can receive it. If so, the :ref:`Control <class_Control>` will be called via the
-   virtual function :ref:`Control._input_event() <class_Control__input_event>` and the signal
-   "input_event" will be emitted (this function is re-implementable by
-   script by inheriting from it). If the control wants to "consume" the
-   event, it will call :ref:`Control.accept_event() <class_Control_accept_event>` and the event will
-   not spread any more.
-3. If so far no one consumed the event, the unhandled input callback
-   will be called (enable with
-   :ref:`Node.set_process_unhandled_input() <class_Node_set_process_unhandled_input>` and override
-   :ref:`Node._unhandled_input() <class_Node__unhandled_input>`). If any function consumes the
-   event, it can call :ref:`SceneTree.set_input_as_handled() <class_SceneTree_set_input_as_handled>`, and the
-   event will not spread any more. The unhandled input callback is ideal for full-screen gameplay events, so they are not received when a GUI is active.
-4. If no one wanted the event so far, and a :ref:`Camera <class_Camera>` is assigned
-   to the Viewport, a ray to the physics world (in the ray direction from
-   the click) will be cast. If this ray hits an object, it will call the
+   :ref:`Node._input() <class_Node__input>`). Если какая то функция потребляет событие, она может вызвать :ref:`SceneTree.set_input_as_handled() <class_SceneTree_set_input_as_handled>`,
+   и событие больше не будет распространяться. Это гарантирует что вы можете 
+   фильтровать все интересующие события, даже прежде GUI. 
+   Для геймплейного ввода, _unhandled_input() обычно подходит лучше, 
+   поскольку позволяет GUI перехватывать события.
+2. Во-вторых, Viewport пытается передать событие в GUI, и смотрит может ли
+   control принять его. Если да, то будет вызван :ref:`Control <class_Control>` 
+   через виртуальную функцию :ref:`Control._input_event() <class_Control__input_event>` 
+   и сгенерирован сигнал "input_event" (эта функция повторно реализуется через скрипт
+   наследуя от него). Если GUI элемент (control) хочет потребить "consume" событие,
+   он вызовет :ref:`Control.accept_event() <class_Control_accept_event>` 
+   и событие не будет больше распространяться.
+3. Если до сих пор никто не использовал событие, вызывается коллбэк unhandled input
+    (enable with
+   :ref:`Node.set_process_unhandled_input() <class_Node_set_process_unhandled_input>` и override
+   :ref:`Node._unhandled_input() <class_Node__unhandled_input>`). Если какая-либо функция потребляет 
+   событие, она вызовет :ref:`SceneTree.set_input_as_handled() <class_SceneTree_set_input_as_handled>`, и
+   событие перестает распространяться. Коллбэк unhandled input идеален для игровых событий в полно-экранном режиме,
+   поскольку они не принимаются когда GUI активен.
+4. Если никто не хотел события до сих пор, и :ref:`Camera <class_Camera>` назначен
+   Viewport`у, будет испущен луч в physics world (в направлении луча от клика) будет испущен.
+   если этот луч попадет в объект, он вызовет функцию
    :ref:`CollisionObject._input_event() <class_CollisionObject__input_event>` function in the relevant
-   physics object (bodies receive this callback by default, but areas do
-   not. This can be configured through :ref:`Area <class_Area>` properties).
-5. Finally, if the event was unhandled, it will be passed to the next
-   Viewport in the tree, otherwise it will be ignored.
+   physics object (по-умолчанию этот коллбэк принимают тела (bodies), но не areas. 
+   Это можно сконфигурировать через свойства :ref:`Area <class_Area>`).
+5. Наконец, если событие так и не было обработано, оно передается в следующий
+   Viewport в дереве, или будет проигнорировано.
 
-Anatomy of an InputEvent
-------------------------
+Анатомия InputEvent
+--------------------
 
-:ref:`InputEvent <class_InputEvent>` is just a base built-in type, it does not represent
-anything and only contains some basic information, such as event ID
-(which is increased for each event), device index, etc.
+:ref:`InputEvent <class_InputEvent>` это только базовый встроенный тип, он ничего не представляет
+кроме того что содержит некоторую базовую информацию, такую как event ID
+(который увеличивается для каждого следующего события), индекс устройства и т.п.
 
-InputEvent has a "type" member. By assigning it, it can become
-different types of input event. Every type of InputEvent has different
-properties, according to its role.
+InputEvent имеет член "type". Назначая его, событие может стать разного типа.
+Каждый тип InputEvent имеет различные свойства, соответствующие его роли.
 
-Example of changing event type.
+Пример изменения типа события.
 
 ::
 
-    # create event
+    # создаем событие
     var ev = InputEvent()
-    # set type index
+    # задаем тип индекс
     ev.type = InputEvent.MOUSE_BUTTON
-    # button_index is only available for the above type
+    # button_index единственно доступный для этого типа
     ev.button_index = BUTTON_LEFT
 
-There are several types of InputEvent, described in the table below:
+Вот различные типы InputEvent, описанные в таблице:
 
 +-------------------------------------------------------------------+--------------------+-----------------------------------------+
-| Event                                                             | Type Index         | Description                             |
+| Событие                                                           | Type Index         | Описание                                |
 +-------------------------------------------------------------------+--------------------+-----------------------------------------+
-| :ref:`InputEvent <class_InputEvent>`                              | NONE               | Empty Input Event.                      |
+| :ref:`InputEvent <class_InputEvent>`                              | NONE               | Пустое событие ввода                    |
 +-------------------------------------------------------------------+--------------------+-----------------------------------------+
-| :ref:`InputEventKey <class_InputEventKey>`                        | KEY                | Contains a scancode and unicode value,  |
-|                                                                   |                    | as well as modifiers.                   |
+| :ref:`InputEventKey <class_InputEventKey>`                        | KEY                | Содержит значение scancode и unicode,   |
+|                                                                   |                    | а также modifiers.                      |
 +-------------------------------------------------------------------+--------------------+-----------------------------------------+
-| :ref:`InputEventMouseButton <class_InputEventMouseButton>`        | MOUSE_BUTTON       | Contains click information, such as     |
-|                                                                   |                    | button, modifiers, etc.                 |
+| :ref:`InputEventMouseButton <class_InputEventMouseButton>`        | MOUSE_BUTTON       | Содержит информацию о клике, такую как  |
+|                                                                   |                    | кнопка, modifiers, и т.п.               |
 +-------------------------------------------------------------------+--------------------+-----------------------------------------+
-| :ref:`InputEventMouseMotion <class_InputEventMouseMotion>`        | MOUSE_MOTION       | Contains motion information, such as    |
-|                                                                   |                    | relative, absolute positions and speed. |
+| :ref:`InputEventMouseMotion <class_InputEventMouseMotion>`        | MOUSE_MOTION       | Содержит информацию о перемещении,      |
+|                                                                   |                    | относит. и абсолютн. позиции и скорость |
 +-------------------------------------------------------------------+--------------------+-----------------------------------------+
-| :ref:`InputEventJoystickMotion <class_InputEventJoystickMotion>`  | JOYSTICK_MOTION    | Contains Joystick/Joypad analog axis    |
-|                                                                   |                    | information.                            |
+| :ref:`InputEventJoystickMotion <class_InputEventJoystickMotion>`  | JOYSTICK_MOTION    | Информация об осях аналогового          |
+|                                                                   |                    | Joystick/Joypad.                        |
 +-------------------------------------------------------------------+--------------------+-----------------------------------------+
-| :ref:`InputEventJoystickButton <class_InputEventJoystickButton>`  | JOYSTICK_BUTTON    | Contains Joystick/Joypad button         |
-|                                                                   |                    | information.                            |
+| :ref:`InputEventJoystickButton <class_InputEventJoystickButton>`  | JOYSTICK_BUTTON    | Информация о кнопках Joystick/Joypad    |
+|                                                                   |                    |                                         |
 +-------------------------------------------------------------------+--------------------+-----------------------------------------+
 | :ref:`InputEventScreenTouch <class_InputEventScreenTouch>`        | SCREEN_TOUCH       | Contains multi-touch press/release      |
 |                                                                   |                    | information. (only available on mobile  |
@@ -115,25 +116,25 @@ There are several types of InputEvent, described in the table below:
 |                                                                   |                    | as feedback. (more on this below)       |
 +-------------------------------------------------------------------+--------------------+-----------------------------------------+
 
-Actions
--------
+Actions (действия)
+------------------
 
-An InputEvent may or may not represent a pre-defined action. Actions are
-useful because they abstract the input device when programming the game
-logic. This allows for:
+InputEvent могут (или могут не-) представлять пред-установленное действие. 
+Actions полезны потому, что они абстрактнее устройств ввода при программировании 
+игровой логики. Это позволяет:
 
--  The same code to work on different devices with different inputs (e.g.,
-   keyboard on PC, Joypad on console).
+-  Работать одному и тому же коду на разных устройствах с разным вводом (e.g.,
+   клавиатура на PC, Joypad на консоли).
 -  Input to be reconfigured at run-time.
 
-Actions can be created from the Project Settings menu in the Actions
-tab. Read :ref:`doc_simple_2d_game-input_actions_setup` for an
-explanation on how the action editor works.
+Actions можно создавать в меню Project Settings во вкладке Actions.
+Читайте :ref:`doc_simple_2d_game-input_actions_setup` о том
+как работает редактор действий.
 
-Any event has the methods :ref:`InputEvent.is_action() <class_InputEvent_is_action>`,
-:ref:`InputEvent.is_pressed() <class_InputEvent_is_pressed>` and :ref:`InputEvent <class_InputEvent>`.
+Любое событие имеет методы :ref:`InputEvent.is_action() <class_InputEvent_is_action>`,
+:ref:`InputEvent.is_pressed() <class_InputEvent_is_pressed>` и :ref:`InputEvent <class_InputEvent>`.
 
-Alternatively, it may be desired to supply the game back with an action
+Альтернативно, it may be desired to supply the game back with an action
 from the game code (a good example of this is detecting gestures).
 SceneTree (derived from MainLoop) has a method for this:
 :ref:`MainLoop.input_event() <class_MainLoop_input_event>`. You would normally use it like this:
