@@ -159,20 +159,20 @@ texture. Это можно запросить с помощью кода (нап
     var rtt = viewport.get_render_target_texture() 
     sprite.set_texture(rtt)
 
-By default, re-rendering of the render target happens when the render
-target texture has been drawn in a frame. If visible, it will be
-rendered, otherwise it will not. This behavior can be changed to manual
-rendering (once), or always render, no matter if visible or not.
+По-умолчанию, пере-рендеринг render target происходит когда render
+target texture отрисовывается в кадре. Если видимый, то все будет отрендерено,
+в противном случае - нет. Это поведение можно изменить вручную
+rendering (один раз), или постоянно рендерить, вне зависимости visible или нет.
 
-A few classes are created to make this easier in most common cases
-inside the editor:
+Несколько классов созданы, чтобы сделать это проще в большинстве 
+распространенных случаев внутри редактора:
 
 -  :ref:`ViewportSprite <class_ViewportSprite>` (for 2D).
 -  ViewportQuad (for 3D).
 -  ViewportFrame (for GUI).
 
-*TODO: Review the doc, ViewportQuad and ViewportFrame don't exist in 2.0.*
+*TODO: Review the doc, ViewportQuad и ViewportFrame не существуют в in 2.0.*
 
-Make sure to check the viewport demos! Viewport folder in the demos
-archive available to download, or
+Проверьте viewport demos! Viewport папка в архиве demos
+доступна для загрузки или
 https://github.com/godotengine/godot-demo-projects/tree/master/viewport
