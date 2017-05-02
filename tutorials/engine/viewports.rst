@@ -1,4 +1,4 @@
-ть .. _doc_viewports:
+.. _doc_viewports:
 
 Вьюпорты
 =========
