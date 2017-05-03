@@ -1,68 +1,67 @@
 .. _doc_custom_drawing_in_2d:
 
-Custom drawing in 2D
-====================
+Собственное рисование в 2D
+==========================
 
-Why?
-----
-
-Godot has nodes to draw sprites, polygons, particles, and all sort of
-stuff. For most cases this is enough, but not always. If something
-desired is not supported, and before crying in fear, angst and range
-because a node to draw that-specific-something does not exist... it would
-be good to know that it is possible to easily make any 2D node (be it
-:ref:`Control <class_Control>` or :ref:`Node2D <class_Node2D>`
-based) draw custom commands. It is *really* easy to do it too.
-
-But...
+Зачем?
 ------
 
-Custom drawing manually in a node is *really* useful. Here are some
-examples why:
+Godot обладает узлами для отрисовки спрайтов, полигонов, частиц, и
+всего остального. Для большинства ситуаций этого достаточно, но не всегда.
+Если что-то из того что вам нужно не поддерживается, не расстраивайтесь
+из-за того что нет узла делающего-то-что-вам-надо... 
+Все можно нарисовать просто создав 2D node (будь это
+:ref:`Control <class_Control>` или :ref:`Node2D <class_Node2D>`
+based) и задав пользовательские команды рисования. 
+Это *действительно* не сложно.
 
--  Drawing shapes or logic that is not handled by nodes (example: making
-   a node that draws a circle, an image with trails, a special kind of
-   animated polygon, etc).
--  Visualizations that are not that compatible with nodes: (example: a
-   tetris board). The tetris example uses a custom draw function to draw
-   the blocks.
--  Managing drawing logic of a large amount of simple objects (in the
-   hundreds of thousands). Using a thousand nodes is probably not nearly
-   as efficient as drawing, but a thousand of draw calls are cheap.
-   Check the "Shower of Bullets" demo as example.
--  Making a custom UI control. There are plenty of controls available,
-   but it's easy to run into the need to make a new, custom one.
+Но...
+------
 
-OK, how?
+Пользовательский рисунок вручную в узле *реально* здорово. И вот почему:
+
+-  Отрисовка форм или логики которая не обрабатывается узлами (пример: 
+   создание узла который рисует круг, изображение со следом (типа хвост кометы),
+   особые случаи анимированных полигонов, и т.п.).
+-  Визуализации, которые не совместимы с узлами: (пример: доска тетриса).
+   Пример тетриса использует собственную функцию отрисовки блоков.
+-  Управление логикой рисования большого количества простых объектов
+   (сотни и тысячи). Использование тысяч узлов далеко не так эффективно
+   как отрисовка, но тысяча вызовов отрисовки это не много.
+   Посмотрите пример демо "Shower of Bullets".
+-  Создание собственного UI control. Есть много готовых элементов управления,
+   Но можно легко столкнуться с необходимостью создания нового, нестандартного.
+
+OK, как?
 --------
 
-Add a script to any :ref:`CanvasItem <class_CanvasItem>`
-derived node, like :ref:`Control <class_Control>` or
-:ref:`Node2D <class_Node2D>`. Override the _draw() function.
+Добавьте скрипт к любому :ref:`CanvasItem <class_CanvasItem>`
+derived node, типа :ref:`Control <class_Control>` или
+:ref:`Node2D <class_Node2D>`. Замените функцию _draw().
 
 ::
 
     extends Node2D
 
     func _draw():
-        #your draw commands here
+        #ваши собственные команды отрисовки
         pass
 
-Draw commands are described in the :ref:`CanvasItem <class_CanvasItem>`
-class reference. There are plenty of them.
+Команды рисования описаны здесь :ref:`CanvasItem <class_CanvasItem>`.
+Их много.
 
-Updating
---------
+Обновление
+----------
 
-The _draw() function is only called once, and then the draw commands
-are cached and remembered, so further calls are unnecessary.
+Функция _draw() вызывается лишь однажды, затем команды рисования
+кэшируются и запоминаются, поэтому повторные вызовы не нужны.
 
-If re-drawing is required because a state or something else changed,
-simply call :ref:`CanvasItem.update() <class_CanvasItem_update>`
-in that same node and a new _draw() call will happen.
+Если нужно пере-рисовать потому что что-то изменилось,
+просто вызовите :ref:`CanvasItem.update() <class_CanvasItem_update>`
+в этом же узле и произойдет новый вызов _draw().
 
-Here is a little more complex example. A texture variable that will be
-redrawn if modified:
+Вот немного более сложный пример. Текстурная переменная, которая будет
+перерисовываться при изменении:
 
 ::
 
@@ -71,16 +70,16 @@ redrawn if modified:
     export var texture setget _set_texture
 
     func _set_texture(value):
-        #if the texture variable is modified externally,
-        #this callback is called.
-        texture=value #texture was changed
-        update() #update the node
+        #если текстурная переменная изменена извне,
+        #вызываем этот коллбэк.
+        texture=value #текстура была изменена
+        update() #обновление этого узла
 
     func _draw():
         draw_texture(texture,Vector2())
 
-In some cases, it may be desired to draw every frame. For this, just
-call update() from the _process() callback, like this:
+Иногда бывает нужно перерисовывать в каждом кадре. Для этого, просто
+вызывайте update() из коллбэка _process() , вот так:
 
 ::
 
@@ -96,12 +95,12 @@ call update() from the _process() callback, like this:
     func _ready():
         set_process(true)
 
-An example: drawing circular arcs
-----------------------------------
+Например: рисуем круговую арку
+-------------------------------
 
 We will now use the custom drawing functionality of Godot Engine to draw something Godot doesn't provide functions for. As an example, Godot provides a draw_circle() function that draws a whole circle. However, what about drawing a portion of a circle? You will have to code a function to perform this, and draw it yourself.
 
-Arc function
+Функция арки
 ^^^^^^^^^^^^
 
 
