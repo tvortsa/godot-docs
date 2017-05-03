@@ -1,67 +1,65 @@
 .. _doc_viewport_and_canvas_transforms:
 
-Viewport and canvas transforms
+Вьюпорт и трансформации холста
 ==============================
 
-Introduction
-------------
+Введение
+---------
 
-This tutorial is created after a topic that is a little dark for most
-users, and explains all the 2D transforms going on for nodes from the
-moment they draw their content locally to the time they are drawn into
-the screen.
+Этот учебник создан после темы, которая является немного непонятной для
+большинства, и раскрывает все 2D преобразования происходящие с узлами
+от момента когда их содержимое отрисовано локально до до момента
+когда они отрисованы на экране.
 
-Canvas transform
-----------------
+Трансформация холста
+--------------------
 
-As mentioned in the previous tutorial, :ref:`doc_canvas_layers`, every
-CanvasItem node (remember that Node2D and Control based nodes use
-CanvasItem as their common root) will reside in a *Canvas Layer*. Every
-canvas layer has a transform (translation, rotation, scale, etc.) that
-can be accessed as a :ref:`Matrix32 <class_Matrix32>`.
+Как упоминалось в прошлом уроке, :ref:`doc_canvas_layers`, каждый узел
+CanvasItem (помните что базовые узлы Node2D и Control используют
+CanvasItem как их общий корень)Будет находиться в *Canvas Layer*.
+Каждый слой холста имеет трансформации (translation, rotation, scale, etc.) 
+к которым можно получить доступ как к :ref:`Matrix32 <class_Matrix32>`.
 
-Also covered in the previous tutorial, nodes are drawn by default in Layer 0,
-in the built-in canvas. To put nodes in a different layer, a :ref:`CanvasLayer
-<class_CanvasLayer>` node can be used.
+Также рассмотрено в предыдущем руководстве, что узлы отрисовываются
+по-умолчанию на слое Layer 0, встроенного canvas. Чтобы поместить узлы
+на другой слой, используйте узел :ref:`CanvasLayer <class_CanvasLayer>`.
 
-Global canvas transform
------------------------
+Трансформации глобального холста
+--------------------------------
 
-Viewports also have a Global Canvas transform (also a
-:ref:`Matrix32 <class_Matrix32>`). This is the master transform and
-affects all individual *Canvas Layer* transforms. Generally this
-transform is not of much use, but is used in the CanvasItem Editor
-in Godot's editor.
+Вьюпорты также имеют глобальные трансформации холста (Global Canvas
+transform (также :ref:`Matrix32 <class_Matrix32>`). Это главные трансформации
+применяющиеся ко всем отдельным трансформациям *Canvas Layer*. Обычно его не
+очень используют, но его использует CanvasItem Editor в Godot редакторе.
 
-Stretch transform
------------------
+Трансформация растяжения
+------------------------
 
-Finally, viewports have a *Stretch Transform*, which is used when
-resizing or stretching the screen. This transform is used internally (as
-described in :ref:`doc_multiple_resolutions`), but can also be manually set
-on each viewport.
+Наконец, вьюпорты имеют *Stretch Transform*, которая используется для
+ресайза или растяжения экрана. Эта трансформация используется внутренне (как
+описано в :ref:`doc_multiple_resolutions`), но также может быть задана вручную
+для каждого вьюпорта.
 
-Input events received in the :ref:`MainLoop._input_event() <class_MainLoop__input_event>`
-callback are multiplied by this transform, but lack the ones above. To
-convert InputEvent coordinates to local CanvasItem coordinates, the
-:ref:`CanvasItem.make_input_local() <class_CanvasItem_make_input_local>`
-function was added for convenience.
+События ввода принятое в :ref:`MainLoop._input_event() <class_MainLoop__input_event>`
+коллбэк умножается на эту трансформацию, but lack the ones above. 
+Для преобразования координат InputEvent в локальные координаты CanvasItem, 
+добавлена удобная функция :ref:`CanvasItem.make_input_local() <class_CanvasItem_make_input_local>`.
 
-Transform order
----------------
+Порядок трансформаций
+---------------------
 
-For a coordinate in CanvasItem local properties to become an actual
-screen coordinate, the following chain of transforms must be applied:
+Для координат в локальных параметрах CanvasItem чтобы они стали действительными
+координатами экрана, должна быть применена следующая цепочка преобразований:
 
 .. image:: /img/viewport_transforms2.png
 
-Transform functions
--------------------
+Функции преобразования
+----------------------
 
-Obtaining each transform can be achieved with the following functions:
+Получение каждого преобразования может быть достигнуто с помощью следующих функций:
 
 +----------------------------------+--------------------------------------------------------------------------------------+
-| Type                             | Transform                                                                            |
+| Тип                              | Трансформация                                                                        |
 +==================================+======================================================================================+
 | CanvasItem                       | :ref:`CanvasItem.get_global_transform() <class_CanvasItem_get_global_transform>`     |
 +----------------------------------+--------------------------------------------------------------------------------------+
@@ -70,24 +68,24 @@ Obtaining each transform can be achieved with the following functions:
 | CanvasLayer+GlobalCanvas+Stretch | :ref:`CanvasItem.get_viewport_transform() <class_CanvasItem_get_viewport_transform>` |
 +----------------------------------+--------------------------------------------------------------------------------------+
 
-Finally then, to convert a CanvasItem local coordinates to screen
-coordinates, just multiply in the following order:
+В конце, для конвертирования локальных координат CanvasItem в координаты экрана
+, просто умножьте в следующем порядке:
 
 ::
 
     var screen_coord = get_viewport_transform() * ( get_global_transform() * local_pos )
 
-Keep in mind, however, that it is generally not desired to work with
-screen coordinates. The recommended approach is to simply work in Canvas
-coordinates (``CanvasItem.get_global_transform()``), to allow automatic
-screen resolution resizing to work properly.
+Помните, что обычно не желательно работать с координатами экрана.
+Рекомендуемый подход просто работать в координатах Canvas
+(``CanvasItem.get_global_transform()``), позволяющих автоматически
+масштабировать разрешение экрана для корректной работы.
 
-Feeding custom input events
----------------------------
+Подача собственных событий ввода
+--------------------------------
 
-It is often desired to feed custom input events to the scene tree. With
-the above knowledge, to correctly do this, it must be done the following
-way:
+Часто бывает желательно передавать пользовательские события ввода в 
+дерево сцены. Зная вышесказанное, чтобы сделать это корректно, 
+это нужно делать следующим образом:
 
 ::
 
