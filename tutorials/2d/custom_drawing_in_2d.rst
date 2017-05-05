@@ -98,15 +98,15 @@ derived node, типа :ref:`Control <class_Control>` или
 Например: рисуем круговую арку
 -------------------------------
 
-We will now use the custom drawing functionality of Godot Engine to draw something Godot doesn't provide functions for. As an example, Godot provides a draw_circle() function that draws a whole circle. However, what about drawing a portion of a circle? You will have to code a function to perform this, and draw it yourself.
+Теперь мы будем использовать пользовательские функции рисования Godot Engine для отрисовки чего в Godot нет готовой функции. Как например, Godot имеет функцию draw_circle() которая рисует полный круг. Но, что если вам нужна только часть круга? Для этого мы напишем собственный код и функцию, и сами отрисуем все.
 
-Функция арки
+Функция дуги
 ^^^^^^^^^^^^
 
 
-An arc is defined by its support circle parameters, that is: the center position, and the radius. And the arc itself is then defined by the angle it starts from, and the angle it stops at. These are the 4 parameters we have to provide to our drawing. We'll also provide the color value so we can draw the arc in different colors if we wish.
+Дуга определяется своими параметрами опорного круга, то есть: позиция центра, и радиус. А также значение угла с которого она начинает рисоваться и угла на котором заканчивается. Вот те 4 параметра которые понадобяться нашей функции отрисовки. Мы также предоставим значение цвета, чтобы можно было рисовать дугу разным цветом.
 
-Basically, drawing a shape on screen requires it to be decomposed into a certain number of points linked one to the following one. As you can imagine, the more points your shape is made of, the smoother it will appear, but the heavier it will be in terms of processing cost. In general, if your shape is huge (or in 3D, close to the camera), it will require more points to be drawn without showing angular-looking. On the contrary, if you shape is small (or in 3D, far from the camera), you may reduce its number of points to save processing costs. This is called *Level of Detail (LoD)*. In our example, we will simply use a fixed number of points, no matter the radius.
+В основе своей, рисование фигур на экране требует ее разложения на определенное количество точек выстроенных одна за другой. Чем больше точек требуется вашей фоме тем более гладкой она выглядит, но тем сложнее процессору ее вычислять. Обычно, если форма огромная (или в 3D, ближе к камере), тем больше точек она потребует без учета вида под углом. С другой стороны, если ваша форма маленькая (или в 3D,  далеко от камеры), вы можете сократить количество точек и удешевить отрисовку формы. Это называют уровнем детализации *Level of Detail (LoD)*. В нашем примере, мы будем просто использовать фиксированное количество точек, вне зависимости от радиуса.
 
 ::
 
@@ -122,11 +122,11 @@ Basically, drawing a shape on screen requires it to be decomposed into a certain
         for indexPoint in range(nb_points):
             draw_line(points_arc[indexPoint], points_arc[indexPoint+1], color)
 
-Remember the number of points our shape has to be decomposed into? We fixed this number in the nb_points variable to a value of 32. Then, we initialize an empty Vector2Array, which is simply an array of Vector2.
+Помните про точки на которые нам надо было разложить форму? Мы зададим их количество в переменной nb_points используя фиксированное значение - 32. Затем инициализирцем пустой массив Vector2Array, это просто массив типа Vector2.
 
-Next step consists in computing the actual positions of these 32 points that compose arc. This is done in the first for-loop: we iterate over the number of points we want to compute the positions, plus one to include the last point. We first determine the angle of each point, between the starting and ending angles. 
+Следующим шагом будет вычисление реальных координат этих 32 точек составляющих нашу дугу. Это выполняется в первом цикле for: мы проходим по всем точкам позиции которых хотим вычислить, плюс одна последняя точка. Сперва мы вычисляем угол каждой точки между стартовым и конечным углами. 
 
-The reason why each angle is reduced of 90° is that we will compute 2D positions out of each angle using trigonometry (you know, cosine and sine stuff...). However, to be simple, cos() and sin() use radians, not degrees. The angle of 0° (0 radian) starts at 3 o'clock, although we want to start counting at 0 o'clock. So, we just reduce each angle of 90° in order to start counting from 0'clock.
+Причина, почему каждый угол уменьшается на 90° в том, что мы будем вычислять 2D позиции для каждого угла с помощью тригонометрии (ну, знаете, синус-косинус...). Но чтобы упростить, cos() и sin() используют радианы, не градусы. Угол в 0° (0 радиан) начинается на три часа, а мы хотим начать отсчет от ноль часов. Поэтому мы просто сокращаем каждый угол на 90° чтобы отсчет шел от ноля часов.
 
 The actual position of a point located on a circle at angle 'angle' (in radians) is given by Vector2(cos(angle), sin(angle)). Since cos() and sin() return values between -1 and 1, the position is located on a circle of radius 1. To have this position on our support circle, which has a radius of 'radius', we simply need to multiply the position by 'radius'. Finally, we need to position our support circle at the 'center' position, which is performed by adding it to our Vector2 value. Finally, we insert the point in the Vector2Array which was previously defined.
 
