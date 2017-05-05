@@ -128,13 +128,13 @@ derived node, типа :ref:`Control <class_Control>` или
 
 Причина, почему каждый угол уменьшается на 90° в том, что мы будем вычислять 2D позиции для каждого угла с помощью тригонометрии (ну, знаете, синус-косинус...). Но чтобы упростить, cos() и sin() используют радианы, не градусы. Угол в 0° (0 радиан) начинается на три часа, а мы хотим начать отсчет от ноль часов. Поэтому мы просто сокращаем каждый угол на 90° чтобы отсчет шел от ноля часов.
 
-The actual position of a point located on a circle at angle 'angle' (in radians) is given by Vector2(cos(angle), sin(angle)). Since cos() and sin() return values between -1 and 1, the position is located on a circle of radius 1. To have this position on our support circle, which has a radius of 'radius', we simply need to multiply the position by 'radius'. Finally, we need to position our support circle at the 'center' position, which is performed by adding it to our Vector2 value. Finally, we insert the point in the Vector2Array which was previously defined.
+Фактическое положение точки, расположенной по кругу под углом 'angle' (в радианах) задается в Vector2(cos(angle), sin(angle)). Поскольку cos() и sin() возвращают значение между -1 и 1, позиция задается на круге с радиусом 1. Чтобы получить позицию на заданном опорном круге, радиус которого задан в 'radius', нужно просто умножить позицию на 'radius'. Наконец, нам нужно расположитьнаш опорный круг в позицию 'center', что достигается сложением его с нашим значением Vector2. Наконец, мы вставим точку в Vector2Array который объявили ранее.
 
-Now, we need to actually draw our points. As you can imagine, we will not simply draw our 32 points: we need to draw everything that is between each of them. We could have computed every point ourselves using the previous method, and draw it one by one, but this it too complicated and inefficient (except if explicitly needed). So, we simply draw lines between each pair of points. Unless the radius of our support circle is very big, the length of each line between a pair of points will never be long enough to see them. If this happens, we simply would need to increase the number of points.
+Теперь нужно отрисовать наши точки. Как вы понимаете, мы не можем просто отрисовать 32 точки: нам нужно отрисовать и все, что между каждой из них. Мы могли бы вычислить каждую точку сами используя предыдущий способ, и отрисовать их по-одной, но это очень сложно и не эффективно (кроме случаев когда вам именно это и нужно). Итак, мы просто отрисуем прямые линии между каждой парой точек. Unless the radius of our support circle is very big, the length of each line between a pair of points will never be long enough to see them. If this happens, we simply would need to increase the number of points.
 
-Draw the arc on screen
-^^^^^^^^^^^^^^^^^^^^^^
-We now have a function that draws stuff on screen: it is time to call it in the _draw() function.
+Отрисовка дуги на экране
+^^^^^^^^^^^^^^^^^^^^^^^^
+Теперь у нас есть функция которая рисует на экране: настало время вызвать ее в функции _draw().
 
 ::
 
@@ -152,9 +152,9 @@ Result:
 
 
 
-Arc polygon function
-^^^^^^^^^^^^^^^^^^^^
-We can take this a step further and write a function that draws the plain portion of the disc defined by the arc, not only its shape. The method is exactly the same a previously, except that we draw a polygon instead of lines:
+Функция полигональной дуги
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+Мы можем сделать еще один шаг и написать функцию, которая рисует гладкую часть диска, определяемую дугой, а не только ее форму. Метод точно такой же, как и ранее, за исключением того, что мы рисуем многоугольник вместо линий:
 
 ::
 
