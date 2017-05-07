@@ -130,7 +130,7 @@ derived node, типа :ref:`Control <class_Control>` или
 
 Фактическое положение точки, расположенной по кругу под углом 'angle' (в радианах) задается в Vector2(cos(angle), sin(angle)). Поскольку cos() и sin() возвращают значение между -1 и 1, позиция задается на круге с радиусом 1. Чтобы получить позицию на заданном опорном круге, радиус которого задан в 'radius', нужно просто умножить позицию на 'radius'. Наконец, нам нужно расположитьнаш опорный круг в позицию 'center', что достигается сложением его с нашим значением Vector2. Наконец, мы вставим точку в Vector2Array который объявили ранее.
 
-Теперь нужно отрисовать наши точки. Как вы понимаете, мы не можем просто отрисовать 32 точки: нам нужно отрисовать и все, что между каждой из них. Мы могли бы вычислить каждую точку сами используя предыдущий способ, и отрисовать их по-одной, но это очень сложно и не эффективно (кроме случаев когда вам именно это и нужно). Итак, мы просто отрисуем прямые линии между каждой парой точек. Unless the radius of our support circle is very big, the length of each line between a pair of points will never be long enough to see them. If this happens, we simply would need to increase the number of points.
+Теперь нужно отрисовать наши точки. Как вы понимаете, мы не можем просто отрисовать 32 точки: нам нужно отрисовать и все, что между каждой из них. Мы могли бы вычислить каждую точку сами используя предыдущий способ, и отрисовать их по-одной, но это очень сложно и не эффективно (кроме случаев когда вам именно это и нужно). Итак, мы просто отрисуем прямые линии между каждой парой точек. Если радиус опорного круга небольшой, длина каждой линии между парой точек никогда не будет достаточной длины чтобы быть заметной. Если это произошло, нужно просто увеличить количество точек.
 
 Отрисовка дуги на экране
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -172,11 +172,11 @@ Result:
         
 .. image:: /img/result_drawarc_poly.png
 
-Dynamic custom drawing
-^^^^^^^^^^^^^^^^^^^^^^
-Alright, we are now able to draw custom stuff on screen. However, it is very static: let's make this shape turn around the center. The solution to do this is simply to change the angle_from and angle_to values over time. For our example, we will simply increment them by 50. This increment value has to remain constant, else the rotation speed will change accordingly.
+Динамическое кастомное рисование
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Итак, теперь мы можем нарисовать что-то свое на экране. Но, все это статично: давайте заставим эту фигуру вращаться вокруг центра. Для этого нам нужно просто изменять значения angle_from и angle_to все время. Для нашего примера, мы просто будем увеличивать на 50. Это значение приращения должно оставаться постоянным, иначе скорость вращения будет меняться соответственно.
 
-First, we have to make both angle_from and angle_to variables global at the top of our script. Also note that you can store them in other nodes and access them using get_node().
+Во-првых, мы должны сделать так чтобы переменные angle_from и angle_to глобальными в начале нашего скрипта. Также обратите внимание, что вы можете хранить их в других узлах и обращаться к ним используя get_node().
 
 ::
 
@@ -188,11 +188,11 @@ First, we have to make both angle_from and angle_to variables global at the top 
 
 
 
-We make these values change in the _process(delta) function. To activate this function, we need to call set_process(true) in the _ready() function. 
+Мы изменяем эти значения в функции _process(delta). Для активации этой функции, нам нужно вызвать set_process(true) в функции _ready() . 
 
-We also increment our angle_from and angle_to values here. However, we must not forget to wrap() the resulting values between 0 and 360°! That is, if the angle is 361°, then it is actually 1°. If you don't wrap these values, the script will work correctly but angles values will grow bigger and bigger over time, until they reach the maximum integer value Godot can manage (2^31 - 1). When this happens, Godot may crash or produce unexpected behavior. Since Godot doesn't provide a wrap() function, we'll create it here, as it is relatively simple.
+Здесь мы также инкрементируем значения angle_from и angle_to. Но, не забывайте wrap() полученные значения между 0 и 360°! То есть, если угол равен 361°, то в действительности это 1°. Если вы не wrap эти значения, скрипт будет работать корректно но но величина угла будет все время нарастать, пока не привысит допустимый предел в Godot который равен (2^31 - 1). Когда это произойдет, Godot может крашнуться или выдать неожиданное поведение. Поскольку Godot не предоставляет функцию wrap(), мы создадим ее здесь, поскольку это отномительно просто.
 
-Finally, we must not forget to call the update() function, which automatically calls _draw(). This way, you can control when you want to refresh the frame.
+И наконец, незабудьте вызвать функцию update(), которая автоматически вызовет _draw(). Таким образом, таким образом вы сможете управлять тем, когда вы хотите рефрешнуть кадр.
 
 ::
 
