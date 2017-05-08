@@ -86,7 +86,7 @@ derived node, типа :ref:`Control <class_Control>` или
     extends Node2D
 
     func _draw():
-        #your draw commands here
+        #ваши команды рисования
         pass
 
     func _process(delta):
@@ -214,7 +214,7 @@ Result:
          angle_to = wrap(angle_to, 0, 360)
      update()
 
-Also, don't forget to modify the _draw() function to make use of these variables:
+Также, не забудьте модифицировать функцию _draw() на использование этих переменных:
 ::
 
  func _draw():
@@ -224,12 +224,12 @@ Also, don't forget to modify the _draw() function to make use of these variables
 
 	draw_circle_arc( center, radius, angle_from, angle_to, color )
 
-Let's run!
-It works, but the arc is rotating insanely fast! What's wrong?
+Теперь запустим!
+Работает, Но дуга вращается безумно быстро! Что не так?
 
-The reason is that your GPU is actually displaying the frames as fast as he can. We need to "normalize" the drawing by this speed. To achieve, we have to make use of the 'delta' parameter of the _process() function. 'delta' contains the time elapsed between the two last rendered frames. It is generally small (about 0.0003 seconds, but this depends on your hardware). So, using 'delta' to control your drawing ensures your program to run at the same speed on every hardware.
+Дело в том что ваш GPU старается отображать кадры как можно быстрее. Нам нужно "нормализовать" отрисовку по его скорости. Для чего, используют параметр 'delta' функции _process(). 'delta' содержит время, прошедшее между двумя последними отрендеренными кадрами. Обычно это очень мало (около 0.0003 секунды, но это зависит от вашего железа). Итак, использование 'delta' для управления отрисовкой обеспечивает одинаковую скорость вашей игры на любом железе.
 
-In our case, we simply need to multiply our 'rotation_ang' variable by 'delta' in the _process() function. This way, our 2 angles will be increased by a much smaller value, which directly depends on the rendering speed.
+В нашем случае, нам нужно просто умножить значение переменной 'rotation_ang' на 'delta' в функции _process(). Таким образом, наши 2 угла будут увеличиваться на гораздо меньшее значение, напрямую зависящее от скорости рендеринга.
 
 ::
 
@@ -237,20 +237,20 @@ In our case, we simply need to multiply our 'rotation_ang' variable by 'delta' i
      angle_from += rotation_ang * delta
      angle_to += rotation_ang * delta
      
-     # we only wrap angles if both of them are bigger than 360
+     # мы wrap углы только если они оба больше 360
      if (angle_from > 360 && angle_to > 360):
          angle_from = wrap(angle_from, 0, 360)
          angle_to = wrap(angle_to, 0, 360)
      update()
 
-Let's run again! This time, the rotation displays fine!
+Запустим снова! Теперь, вращение выглядит правильно!
 
 Tools
 -----
 
-Drawing your own nodes might also be desired while running them in the
-editor, to use as preview or visualization of some feature or
-behavior.
+Вы можете захотеть отрисовку ваших собственных узлов прямо в редакторе
+, чтобы использовать в качестве предварительного просмотра или визуализации
+некоторых функций или поведения.
 
-Remember to just use the "tool" keyword at the top of the script
-(check the :ref:`doc_gdscript` reference if you forgot what this does).
+Помните просто используйте ключевое слово "tool" в начале скрипта
+(см. руководство :ref:`doc_gdscript` если позабыли об этом).
