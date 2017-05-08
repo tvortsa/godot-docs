@@ -1,46 +1,46 @@
 .. _doc_screen-reading_shaders:
 
-Screen-reading shaders
+Screen-reading шейдеры
 ======================
 
-Introduction
-~~~~~~~~~~~~
+Введение
+~~~~~~~~
 
-Very often it is desired to make a shader that reads from the same
-screen it's writing to. 3D APIs such as OpenGL or DirectX make this very
-difficult because of internal hardware limitations. GPUs are extremely
-parallel, so reading and writing causes all sort of cache and coherency
-problems. As a result, not even the most modern hardware supports this
-properly.
+Очень часто нужно сделать шейдер который считывает с того-же экрана, в
+который и записывает. 3D API типа OpenGL или DirectX делают это довольно
+сложно из-за внутренних аппаратных ограничений. GPU экстремально паралелен,
+так что чтение и запись вызывают все виды проблемм с кэшем и когерентностью.
+В результате, даже самые современные аппаратные средства не поддерживают это 
+должным образом.
 
-The workaround is to make a copy of the screen, or a part of the screen,
-to a back-buffer and then read from it while drawing. Godot provides a
-few tools that makes this process easy!
+Обходной путь - сделать копию экрана, или части экрана,
+бэк-буффером и производить чтение из него при отрисовке. Godot предоставляет
+несколько инструментов упрощающих этот процесс!
 
-TexScreen shader instruction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+инструкция шейдера TexScreen
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Godot :ref:`doc_shading_language` has a special instruction, "texscreen", it takes as
-parameter the UV of the screen and returns a vec3 RGB with the color. A
-special built-in varying: SCREEN_UV can be used to obtain the UV for
-the current fragment. As a result, this simple 2D fragment shader:
+Godot :ref:`doc_shading_language` обладает специальной инструкцией, "texscreen",
+она принимает в качестве параметра UV экрана и возвращает vec3 RGB с цветом. 
+Специальный встроенный varying: SCREEN_UV можно использовать для получения UV для текущего
+фрагмента. В результате, это просто 2D fragment shader:
 
 ::
 
     COLOR=vec4( texscreen(SCREEN_UV), 1.0 );
 
-results in an invisible object, because it just shows what lies behind.
-The same shader using the visual editor looks like this:
+результат приводит к невидимому объекту, поскольку отображает
+просто то что лежит за ним.
+Тот же шейдер, который использует визуальный редактор, выглядит следующим образом:
 
 .. image:: /img/texscreen_visual_shader.png
 
 TexScreen example
 ~~~~~~~~~~~~~~~~~
 
-Texscreen instruction can be used for a lot of things. There is a
-special demo for *Screen Space Shaders*, that you can download to see
-and learn. One example is a simple shader to adjust brightness, contrast
-and saturation:
+Texscreen инструкция может быть использована для множества вещей. Есть специальное демо
+для *Screen Space Shaders*, которое вы можете скачать и поразобраться.
+Один шейдер просто добавляет яркость, контраст и насыщенность:
 
 ::
 
@@ -56,8 +56,8 @@ and saturation:
 
     COLOR.rgb = c;
 
-Behind the scenes
-~~~~~~~~~~~~~~~~~
+За кулисами
+~~~~~~~~~~~
 
 While this seems magical, it's not. The Texscreen instruction, when
 first found in a node that is about to be drawn, does a full-screen
