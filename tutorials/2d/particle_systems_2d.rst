@@ -20,115 +20,113 @@
 Particles2D
 ~~~~~~~~~~~
 
-Particle systems are added to the scene via the
-:ref:`Particles2D <class_Particles2D>`
-node. They are enabled by default and start emitting white points
-downwards (as affected by the gravity). This provides a reasonable
-starting point to start adapting it to our needs.
+Системы частиц добавляются в сцену узлом
+:ref:`Particles2D <class_Particles2D>`. Они включены по-умолчанию
+И запускают эмиссию частиц в виде падающих белых точек (под действием гравитации).
+Это разумная отправная точка для последующих настроек тоак как вам надо.
 
 .. image:: /img/particles1.png
 
 Текстура
 ~~~~~~~~
 
-A particle system uses a single texture (in the future this might be
-extended to animated textures via spritesheet). The texture is set via
-the relevant texture property:
+Системы частиц используют одну текстуру (в будущем это возможно будет
+расширено анимацией через spritesheet). Текстуру задают через соответствующее свойство:
 
 .. image:: /img/particles2.png
 
 Физические переменные
 ---------------------
 
-Before taking a look at the global parameters for the particle system,
-let's first see what happens when the physics variables are tweaked.
+Перед тем как начать разговор о глобальных переменных для систем частиц,
+давайте сначала посмотрим, что произойдет, когда физические параметры будут изменены.
 
 Direction - направление
 -----------------------
 
-This is the base angle at which particles emit. Default is 0 (down):
+Это базовый угол направления эмиссии. По - умолчанию равен 0 (вниз):
 
 .. image:: /img/paranim1.gif
 
-Changing it will change the emissor direction, but gravity will still
-affect them:
+Изменяя этот угол, изменяется направление эмиссии но гравитация
+продолжит свое воздействие:
 
 .. image:: /img/paranim2.gif
 
-This parameter is useful because, by rotating the node, gravity will
-also be rotated. Changing direction keeps them separate.
+Этот параметр полезен потому что, вращая узел, гравитация тоже будет вращаться.
+Изменение направления держит их отдельно.
 
 Spread-распространение
 ----------------------
 
-Spread is the angle at which particles will randomly be emitted.
-Increasing the spread will increase the angle. A spread of 180 will emit
-in all directions.
+Spread это угол в пределах которого частицы будут случайно испускаться.
+Увеличение spread увеличивает этот угол. Spread равное 180 будет испускать
+частицы во всех направлениях.
 
 .. image:: /img/paranim3.gif
 
 Линейная скорость
 -----------------
 
-Linear velocity is the speed at which particles will be emitted (in
-pixels/sec). Speed might later be modified by gravity or other
-accelerations (as described further below).
+Linear velocity это скорость с которой испускаются частицы (в
+пикселей в секунду). Скорость впоследствии может изменяться 
+гравитацией или accelerations (как описано ниже).
 
 .. image:: /img/paranim4.gif
 
 Скорость вращения
 -----------------
 
-Spin velocity is the speed at which particles turn around their center
-(in degrees/sec).
+Spin velocity это скорость с которой частицы вращаются вокруг своего центра
+(в градусах/чекунду).
 
 .. image:: /img/paranim5.gif
 
 Орбитальная скорость
 --------------------
 
-Orbit velocity is used to make particles turn around their center.
+Orbit velocity используется для того, чтобы частицы вращались вокруг их центра.
 
 .. image:: /img/paranim6.gif
 
 Направление и сила гравитации
 -----------------------------
 
-Gravity can be modified as in direction and strength. Gravity affects
-every particle currently alive.
+Gravity имеет направление и силу. Гравитация применяется к каждой
+живущей на данный момент частице.
 
 .. image:: /img/paranim7.gif
 
 Радиальное ускорение
 --------------------
 
-If this acceleration is positive, particles are accelerated away from
-the center. If negative, they are absorbed towards it.
+Если это ускорение положительное, частицы ускоряются от их центра. 
+Если отрицательное, они поглощаются ею.
 
 .. image:: /img/paranim8.gif
 
 Тангенциальное ускорение
 ------------------------
 
-This acceleration will use the tangent vector to the center. Combining
-with radial acceleration can do nice effects.
+Это ускорение использует tangent vector к центру. Совместно с
+radial acceleration может давать хороший эффект.
 
 .. image:: /img/paranim9.gif
 
 Damping-демпфирование
 ---------------------
 
-Damping applies friction to the particles, forcing them to stop. It is
-specially useful for sparks or explosions, which usually begin with a
-high linear velocity and then stop as they fade.
+Damping применяет трение к частицам, заставляя их останавливаться. Это
+особенно полезно для искр и взрывов, которые обычно имеют высокую
+линейную скоростьy и затем останавливаются по мере падения.
 
 .. image:: /img/paranim10.gif
 
 Начальный угол
 --------------
 
-Determines the initial angle of the particle (in degress). This parameter
-is mostly useful randomized.
+Задает начальный угол частиц (в градусах). Этот параметр
+в основном полезно рандомизировать.
 
 .. image:: /img/paranim11.gif
 
