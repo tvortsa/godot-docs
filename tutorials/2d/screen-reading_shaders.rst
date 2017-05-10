@@ -90,18 +90,18 @@ Back-buffer логика
 
 Поясним логику работы копирования бэк-буфера в Godot:
 
--  If a node uses the texscreen(), the entire screen is copied to the
-   back buffer before drawing that node. This only happens the first
-   time, subsequent nodes do not trigger this.
--  If a BackBufferCopy node was processed before the situation in the
-   point above (even if texscreen() was not used), this behavior
-   described in the point above does not happen. In other words,
-   automatic copying of the entire screen only happens if texscreen() is
-   used in a node for the first time and no BackBufferCopy node (not
-   disabled) was found before in tree-order.
--  BackBufferCopy can copy either the entire screen or a region. If set
-   to only a region (not the whole screen) and your shader uses pixels
-   not in the region copied, the result of that read is undefined
-   (most likely garbage from previous frames). In other words, it's
-   possible to use BackBufferCopy to copy back a region of the screen
-   and then use texscreen() on a different region. Avoid this behavior!
+-  Если узел использующий texscreen(), копирует в бэк-буфер весь экран
+   перед тем как отрисовать узел. Это происходит только первый раз,
+   последующие узлы этого не активируют.
+-  Если узел BackBufferCopy уже был обработан - ситуация указана выше
+    (даже если texscreen() не использовался), это поведение описанное в 
+    пункте выше не происходит. Иными словами, автоматическое копирование
+    всего экрана происходит только если texscreen() используется в узле
+    впервые и узел BackBufferCopy (не отключен) не был обнаружен ранее в
+    tree-order.
+-  BackBufferCopy может скопировать либо весь экран, либо его часть. Если
+   задана часть (не весь экран) а ваш шейдер использует пиксели не из
+   региона, результат чтения не определен
+   (скорее всего мусор из предыдущих кадров). Другими словами, вероятно
+   использовано BackBufferCopy для копирования бэк области
+   и затем использован texscreen() для другого региона. Избегайте этого!
