@@ -1,21 +1,21 @@
 .. _doc_particle_systems_2d:
 
-Particle Systems (2D)
+Системы частиц (2D)
 =====================
 
-Intro
------
+Введение
+--------
 
-A simple (but flexible enough for most uses) particle system is
-provided. Particle systems are used to simulate complex physical effects
-such as sparks, fire, magic particles, smoke, mist, magic, etc.
+В поставке идет простая (но достаточно гибкую для большинства применений) 
+система частиц. Частицы используют для симуляции комплексных физических
+эффектов таких как искры, огонь, волшебная пыль, дым, mist, и т.п.
 
-The idea is that a "particle" is emitted at a fixed interval and with a
-fixed lifetime. During his lifetime, every particle will have the same
-base behavior. What makes every particle different and provides a more
-organic look is the "randomness" associated to each parameter. In
-essence, creating a particle system means setting base physics
-parameters and then adding randomness to them.
+Идея в том что "частица" испускаются за определенный промежуток времени
+с заданной продолжительностью жизни. Во время жизни, каждая частица обладает 
+одинаковым базовым поведением. Каждую частицу делает уникальной и обеспечивает
+более органичный вид - "случайность" ассоциированная с каждым параметром. 
+В сущности, создание системы частиц означает установку базовых физических
+параметров и затем добавление им случайности.
 
 Particles2D
 ~~~~~~~~~~~
@@ -28,8 +28,8 @@ starting point to start adapting it to our needs.
 
 .. image:: /img/particles1.png
 
-Texture
-~~~~~~~
+Текстура
+~~~~~~~~
 
 A particle system uses a single texture (in the future this might be
 extended to animated textures via spritesheet). The texture is set via
@@ -37,14 +37,14 @@ the relevant texture property:
 
 .. image:: /img/particles2.png
 
-Physics variables
------------------
+Физические переменные
+---------------------
 
 Before taking a look at the global parameters for the particle system,
 let's first see what happens when the physics variables are tweaked.
 
-Direction
----------
+Direction - направление
+-----------------------
 
 This is the base angle at which particles emit. Default is 0 (down):
 
@@ -58,8 +58,8 @@ affect them:
 This parameter is useful because, by rotating the node, gravity will
 also be rotated. Changing direction keeps them separate.
 
-Spread
-------
+Spread-распространение
+----------------------
 
 Spread is the angle at which particles will randomly be emitted.
 Increasing the spread will increase the angle. A spread of 180 will emit
@@ -67,8 +67,8 @@ in all directions.
 
 .. image:: /img/paranim3.gif
 
-Linear velocity
----------------
+Линейная скорость
+-----------------
 
 Linear velocity is the speed at which particles will be emitted (in
 pixels/sec). Speed might later be modified by gravity or other
@@ -76,47 +76,47 @@ accelerations (as described further below).
 
 .. image:: /img/paranim4.gif
 
-Spin velocity
--------------
+Скорость вращения
+-----------------
 
 Spin velocity is the speed at which particles turn around their center
 (in degrees/sec).
 
 .. image:: /img/paranim5.gif
 
-Orbit velocity
---------------
+Орбитальная скорость
+--------------------
 
 Orbit velocity is used to make particles turn around their center.
 
 .. image:: /img/paranim6.gif
 
-Gravity direction & strength
-----------------------------
+Направление и сила гравитации
+-----------------------------
 
 Gravity can be modified as in direction and strength. Gravity affects
 every particle currently alive.
 
 .. image:: /img/paranim7.gif
 
-Radial acceleration
--------------------
+Радиальное ускорение
+--------------------
 
 If this acceleration is positive, particles are accelerated away from
 the center. If negative, they are absorbed towards it.
 
 .. image:: /img/paranim8.gif
 
-Tangential acceleration
------------------------
+Тангенциальное ускорение
+------------------------
 
 This acceleration will use the tangent vector to the center. Combining
 with radial acceleration can do nice effects.
 
 .. image:: /img/paranim9.gif
 
-Damping
--------
+Damping-демпфирование
+---------------------
 
 Damping applies friction to the particles, forcing them to stop. It is
 specially useful for sparks or explosions, which usually begin with a
@@ -124,23 +124,23 @@ high linear velocity and then stop as they fade.
 
 .. image:: /img/paranim10.gif
 
-Initial angle
--------------
+Начальный угол
+--------------
 
 Determines the initial angle of the particle (in degress). This parameter
 is mostly useful randomized.
 
 .. image:: /img/paranim11.gif
 
-Initial & final size
---------------------
+Начальный и финальный размер
+----------------------------
 
 Determines the initial and final scales of the particle.
 
 .. image:: /img/paranim12.gif
 
-Color phases
-------------
+Цвет фазы
+---------
 
 Particles can use up to 4 color phases. Each color phase can include
 transparency.
@@ -156,13 +156,13 @@ Will result in:
 
 .. image:: /img/paranim13.gif
 
-Global parameters
------------------
+Глобальные параметры
+--------------------
 
 These parameters affect the behavior of the entire system.
 
-Lifetime
---------
+Время жизни
+-----------
 
 The time in seconds that every particle will stay alive. When lifetime
 ends, a new particle is created to replace it.
