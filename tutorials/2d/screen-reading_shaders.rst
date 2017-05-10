@@ -59,38 +59,36 @@ Texscreen инструкция может быть использована дл
 За кулисами
 ~~~~~~~~~~~
 
-While this seems magical, it's not. The Texscreen instruction, when
-first found in a node that is about to be drawn, does a full-screen
-copy to a back-buffer. Subsequent nodes that use texscreen() in
-shaders will not have the screen copied for them, because this ends up
-being very inefficient.
+Выглядит магией, но это не так. Инструкция Texscreen, при первом обнаружении
+в узле который должен быть отрисован, делает полно-экранную копию экрана
+в back-buffer.Последующие узлы которые используют texscreen() в
+шейдерах для них не будет создаваться копия экрана, потому что это очень
+неэффективно.
 
-As a result, if shaders that use texscreen() overlap, the second one
-will not use the result of the first one, resulting in unexpected
-visuals:
+В результате, если шейдеры использующие texscreen() налагаются друг на друга,
+второй не будет использовать результаты первого, в результате непредвиденные
+визуализации:
 
 .. image:: /img/texscreen_demo1.png
 
-In the above image, the second sphere (top right) is using the same
-source for texscreen() as the first one below, so the first one
-"disappears", or is not visible.
+На картинке выше, вторая сфера (вверху справа) использует тот-же исходный
+texscreen() что и первая ниже, так что первая "исчезает", или невидна.
 
-To correct this, a
+Чтобы исправить это, узел
 :ref:`BackBufferCopy <class_BackBufferCopy>`
-node can be instanced between both spheres. BackBufferCopy can work by
-either specifying a screen region or the whole screen:
+можно инстанцировать для обеих сфер. BackBufferCopy с переданной ему 
+частью экрана или со всем экраном целиком:
 
 .. image:: /img/texscreen_bbc.png
 
-With correct back-buffer copying, the two spheres blend correctly:
+С корректными копиями бэк-буфера, две сферы смешиваются корректно:
 
 .. image:: /img/texscreen_demo2.png
 
-Back-buffer logic
+Back-buffer логика
 ~~~~~~~~~~~~~~~~~
 
-So, to make it clearer, here's how the backbuffer copying logic works in
-Godot:
+Поясним логику работы копирования бэк-буфера в Godot:
 
 -  If a node uses the texscreen(), the entire screen is copied to the
    back buffer before drawing that node. This only happens the first
