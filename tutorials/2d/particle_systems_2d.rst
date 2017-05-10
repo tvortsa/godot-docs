@@ -133,37 +133,37 @@ Damping применяет трение к частицам, заставляя 
 Начальный и финальный размер
 ----------------------------
 
-Determines the initial and final scales of the particle.
+Определяет начальный и финальный масштаб частиц.
 
 .. image:: /img/paranim12.gif
 
 Цвет фазы
 ---------
 
-Particles can use up to 4 color phases. Each color phase can include
-transparency.
+Частицы могут иметь до 4 цветовых фаз. Каждая фаза цвета может включать
+прозрачность.
 
-Phases must provide an offset value from 0 to 1, and always in
-ascending order. For example, a color will begin at offset 0 and end
-in offset 1, but 4 colors might use different offsets, such as 0, 0.2,
-0.8 and 1.0 for the different phases:
+Фазы должны обеспечивать смещение значений в пределах от 0 дo 1, и всегда
+по возрастанию. Например, цвет в начале будет со смещением 0 а в конце
+- 1, но 4 цвета могут иметь различные смещения, такие как 0, 0.2,
+0.8 1.0 для разных фаз:
 
 .. image:: /img/particlecolorphases.png
 
-Will result in:
+В результате:
 
 .. image:: /img/paranim13.gif
 
 Глобальные параметры
 --------------------
 
-These parameters affect the behavior of the entire system.
+Эти параметры влияют на поведение всей системы.
 
 Время жизни
 -----------
 
-The time in seconds that every particle will stay alive. When lifetime
-ends, a new particle is created to replace it.
+Время в секундах, в течение которого каждая частица останется в живых. 
+Когда срок жизни Заканчивается, пораждается новая частица ей на смену.
 
 Lifetime: 0.5
 
@@ -176,8 +176,8 @@ Lifetime: 4.0
 Timescale
 ---------
 
-It happens often that the effect achieved is perfect, except too fast or
-too slow. Timescale helps adjust the overall speed.
+Часто эффект выглядит как надо, но слишком медленно или быстро.
+Timescale помогает подстроить среднюю скорость.
 
 Timescale everything 2x:
 
@@ -186,72 +186,69 @@ Timescale everything 2x:
 Preprocess
 ----------
 
-Particle systems begin with 0 particles emitted, then start emitting.
-This can be an inconvenience when just loading a scene and systems like
-a torch, mist, etc begin emitting the moment you enter. Preprocess is
-used to let the system process a given amount of seconds before it is
-actually shown the first time.
+Системы частиц стартуют с 0 испускаемых частиц, затем эмиссия начинается.
+Это может быть неудобством, когда вы просто загружаете сцену и системы типа факела,
+begin emitting the moment you enter. Preprocess используется чтобы дать системе
+обработать какоето количество секунд прежде чем действительно появиться.
 
 Emit timeout
 ------------
 
-This variable will switch emission off after given amount of seconds
-being on. When zero, itś disabled.
+Эта переменная отключает эмиссию после заданного количества секунд. Если ноль, то оно отключено.
 
 Offset
 ------
 
-Allows to move the emission center away from the center
+Позволяет переместить центр эмиссии от центра
 
 Half extents
 ------------
 
-Makes the center (by default 1 pixel) wider, to the size in pixels
-desired. Particles will emit randomly inside this area.
+Расширяет центр эмиссии (по-умолчанию 1 pixel), до заданного размера в пикселях. 
+Частицы будут испускаться случайно в заданной области.
 
 .. image:: /img/paranim17.gif
 
-It is also possible to set an emission mask by using this value. Check
-the "Particles" menu on the 2D scene editor viewport and select your
-favorite texture. Opaque pixels will be used as potential emission
-location, while transparent ones will be ignored:
+Также можно установить маску эмиссии, используя это значение. В меню
+"Particles" во вьюпорте редактора 2D сцены выделите нужную текстуру.
+Непрозрачные пиксели будут использоваться как потенциальные точки эмиссии,
+а прозрачные будут проигнорированы:
 
 .. image:: /img/paranim19.gif
 
 Local space
 -----------
 
-By default this option is on, and it means that the space that particles
-are emitted to is contained within the node. If the node is moved, all
-particles are moved with it:
+Эта опция включена по-умолчанию, и это означает, что пространство, в котором находятся частицы
+и испускаются - находится внутри узла. Если узел переместить, все частицы переместяться с ним:
 
 .. image:: /img/paranim20.gif
 
-If disabled, particles will emit to global space, meaning that if the
-node is moved, the emissor is moved too:
+Если disabled, будут испускаться в глобальном пространстве, что означает что если
+узел перемещается, the emissor is moved too:
 
 .. image:: /img/paranim21.gif
 
 Explosiveness
 -------------
 
-If lifetime is 1 and there are 10 particles, it means every particle
-will be emitted every 0.1 seconds. The explosiveness parameter changes
-this, and forces particles to be emitted all together. Ranges are:
+Если lifetime равно 1 и есть 10 частиц, это значит что каждая частица
+будет испускаться за 0.1 секунду. Параметр explosiveness изменяет это,
+заставляет частицы испускаться разом. Диапазоны:
 
--  0: Emit all particles together.
--  1: Emit particles at equal interval.
+-  0: Испускаются все частицы вместе.
+-  1: Испускать частицы с равным интервалом.
 
-Values in the middle are also allowed. This feature is useful for
-creating explosions or sudden bursts of particles:
+Допускаются промежуточные значения. Эта функция полезна для создания
+взрывов или внезапных всплесков частиц:
 
 .. image:: /img/paranim18.gif
 
 Randomness
 ----------
 
-All physics parameters can be randomized. Random variables go from 0 to
-1. the formula to randomize a parameter is:
+Все физические параметры могут быть рандомизированы. Случайные переменные
+от 0 до 1. формула для рандомизации параметра :
 
 ::
 
