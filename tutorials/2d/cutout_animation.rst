@@ -1,47 +1,45 @@
 .. _doc_cutout_animation:
 
-Cutout animation
+Cutout анимация
 ================
 
-What is it?
-~~~~~~~~~~~
+Что это такое?
+~~~~~~~~~~~~~~
 
-Cut-out is a technique of animating in 2D where pieces of paper (or
-similar material) are cut in special shapes and laid one over the other.
-The papers are animated and photographed, frame by frame using a stop
-motion technique (more info
+Cut-out это техника анимации в 2D где кусочки бумаги (или похожего
+материала) разрезают на специальные формыи раскладывают друг на друге.
+Бумагу анимируют и фотографируют, кадр за кадром используя технику stop
+motion (больше об этом:
 `here <http://en.wikipedia.org/wiki/Cutout_animation>`__).
 
-With the advent of the digital age, this technique became possible using
-computers, which resulted in an increased amount of animation TV shows
-using digital Cut-out. Notable examples are `South
-Park <http://en.wikipedia.org/wiki/South_Park>`__ or `Jake and the Never
-Land
-Pirates <http://en.wikipedia.org/wiki/Jake_and_the_Never_Land_Pirates>`__
+С появлением цифровой эры, эта техника пришла на компьютеры, 
+в результате чего увеличилось количество анимации на TV использующей 
+цифровой cut-out. Известные примеры `SouthPark <http://en.wikipedia.org/wiki/South_Park>`__ или
+`Jake and the Never Land Pirates <http://en.wikipedia.org/wiki/Jake_and_the_Never_Land_Pirates>`__
 .
 
-In video games, this technique also become very popular. Examples of
-this are `Paper
-Mario <http://en.wikipedia.org/wiki/Super_Paper_Mario>`__ or `Rayman
-Origins <http://en.wikipedia.org/wiki/Rayman_Origins>`__ .
+В видео-играх, эта техника также стала очень популярной. Примеры:
+`Paper Mario <http://en.wikipedia.org/wiki/Super_Paper_Mario>`__ 
+или `Rayman Origins <http://en.wikipedia.org/wiki/Rayman_Origins>`__ .
 
-Cutout in Godot
+Cutout в Godot
 ~~~~~~~~~~~~~~~
 
-Godot provides a few tools for working with these kind of assets, but
-its overall design makes it ideal for the workflow. The reason is that,
-unlike other tools meant for this, Godot has the following advantages:
+Godot предоставляет несколько инструментов для работы с такими активами, 
+Но их общий дизайн делает его идеальным для рабочего процесса. Дело в том,
+что в отличие от других инструментов, предназначенных для этого, Godot
+обладает следующими преимуществами:
 
--  **The animation system is fully integrated with the engine**: This
-   means, animations can control much more than just motion of objects,
-   such as textures, sprite sizes, pivots, opacity, color modulation,
-   etc. Everything can be animated and blended.
--  **Mix with Traditional**: AnimatedSprite allows traditional animation
-   to be mixed, very useful for complex objects, such as shape of hands
-   and foot, changing facial expression, etc.
--  **Custom Shaped Elements**: Can be created with
+-  **Сиситема анимации полностью интегрирована в движок**: Это означает,
+   что анимация может контролировать гораздо больше, чем просто движение объектов,
+   например текстуры, размер спрайтов, опорные точки, прозрачность, модуляции цвета,
+   и т.п. Все может быть анимировано и смешано.
+-  **Совмещение с традиционной анимацией**: AnimatedSprite позволяет совмещать 
+   традиционную анимацию, очень удобно для сложных объектов, таких как формы рук и ног
+   смена выражения лица, и т.п.
+-  **Кастомные элементы форм**: Могжно создавать с
    :ref:`Polygon2D <class_Polygon2D>`
-   allowing the mixing of UV animation, deformations, etc.
+   позволяют смешивать UV анимацию, деформации и т.п..
 -  **Particle Systems**: Can also be mixed with the traditional
    animation hierarchy, useful for magic effects, jetpacks, etc.
 -  **Custom Colliders**: Set colliders and influence areas in different
@@ -49,7 +47,7 @@ unlike other tools meant for this, Godot has the following advantages:
 -  **Animation Tree**: Allows complex combinations and blendings of
    several animations, the same way it works in 3D.
 
-And much more!
+И многое другое!
 
 Making of GBot!
 ~~~~~~~~~~~~~~~
@@ -62,7 +60,7 @@ character, created by Andreas Esau.
 
 Get your assets: :download:`gbot_resources.zip </files/gbot_resources.zip>`.
 
-Setting up the rig
+Настройка оснастки
 ~~~~~~~~~~~~~~~~~~
 
 Create an empty Node2D as root of the scene, we will work under it:
@@ -94,7 +92,7 @@ the rotation pivot:
 
 .. image:: /img/tuto_cutout4.png
 
-Adjusting the pivot
+Настройка pivot
 ~~~~~~~~~~~~~~~~~~~
 
 The pivot can be adjusted by changing the *offset* property in the
@@ -135,7 +133,7 @@ won't learn about all this!):
 But then, we lose the hierarchy layout, which allows to control the
 skeleton like.. a skeleton. Is there any hope?.. Of Course!
 
-RemoteTransform2D node
+узел RemoteTransform2D 
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Godot provides a special node, :ref:`RemoteTransform2D <class_RemoteTransform2D>`.
@@ -155,8 +153,8 @@ easily animate and pose the character:
 
 .. image:: /img/tutovec_torso4.gif
 
-Completing the skeleton
-~~~~~~~~~~~~~~~~~~~~~~~
+Завершение скелета
+~~~~~~~~~~~~~~~~~~
 
 Complete the skeleton by following the same steps for the rest of the
 parts. The resulting scene should look similar to this:
@@ -179,7 +177,7 @@ To solve these problems, Godot supports a simple method of skeletons.
 Skeletons
 ~~~~~~~~~
 
-Godot doesn't actually support *true* Skeketons, but it does feature a
+Godot doesn't actually support *true* Skeletons, but it does feature a
 helper to create "bones" between nodes. This is enough for most cases,
 but the way it works is not completely obvious.
 
@@ -241,8 +239,8 @@ sense soon.
 Now that a whole skeleton is rigged, the next step is setting up the IK
 chains. IK chains allow for more natural control of extremities.
 
-IK chains
-~~~~~~~~~
+IK цепочки
+~~~~~~~~~~
 
 IK chains are a powerful animation tool. Imagine you want to pose a character's foot in a specific position on the ground. Without IK chains, each motion of the foot would require rotating and positioning several other bones. This would be quite complex and lead to imprecise results.
 
@@ -270,14 +268,14 @@ grab it and move it. Result will be pleasant, satisfaction warranted!
 
 .. image:: /img/tutovec_torso5.gif
 
-Animation
-~~~~~~~~~
+Анимация
+~~~~~~~~
 
 The following section will be a collection of tips for creating
 animation for your rigs. If unsure about how the animation system in
 Godot works, refresh it by checking again the :ref:`doc_animations`.
 
-2D animation
+2D анимация
 ------------
 
 When doing animation in 2D, a helper will be present in the top menu.
@@ -290,7 +288,7 @@ selected objects or bones. This depends on the mask enabled. Green items
 will insert keys while red ones will not, so modify the key insertion
 mask to your preference.
 
-Rest pose
+Rest поза
 ~~~~~~~~~
 
 These kind of rigs do not have a "rest" pose, so it's recommended to
@@ -311,7 +309,7 @@ Simply do the following steps:
 
 .. image:: /img/tuto_cutout21.png
 
-Rotation
+Вращение
 ~~~~~~~~
 
 Animating these models means only modifying the rotation of the nodes.
@@ -343,8 +341,8 @@ aid on this the "Behind Parent" property exists on any Node2D:
 
 .. image:: /img/tuto_cutout23.png
 
-Batch setting transition curves
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Кривые перехода в пакетном режиме
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When creating really complex animations and inserting lots of keyframes,
 editing the individual keyframe curves for each can become an endless
