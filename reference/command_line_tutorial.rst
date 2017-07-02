@@ -5,11 +5,10 @@ Command line tutorial
 
 .. highlight:: shell
 
-Some developers like using the command line extensively. Godot is
-designed to be friendly to them, so here are the steps for working
-entirely from the command line. Given the engine relies on little to no
-external libraries, initialization times are pretty fast, making it
-suitable for this workflow.
+Некоторым разработчикам нравится широко использовать командную строку.
+Godot приветствует это, вот шаги для работы полностью из командной строки.
+Учитывая что движок мало полагается на внешние библиотеки, время инициализации
+довольно быстрое, делая это подходящим для рабочего процесса.
 
 Path
 ----
