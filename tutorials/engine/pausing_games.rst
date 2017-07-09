@@ -11,73 +11,74 @@
 HНо это не так просто как может показаться. Игра может быть остановлена,
 но некоторые меню и анимации возможно должны продолжать работать.
 
-Implementing a fine-grained control for what can be paused (and what can
-not) is a lot of work, so a simple framework for pausing is provided in
-Godot.
+Реализация fine-grained управления тем что можно запаузить (а что нет)
+это объемный труд, поэтому GoDot предоставляет простой фрэймворк для паузы.
 
 How pausing worksThe game might be stopped
 
 
 -----------------
 
-To set pause mode, the pause state must be set. This is done by calling
+Чтобы задать режим паузы, должно быть установлено "состояние паузы". Это можно сделать вызовом
 :ref:`SceneTree.set_pause() <class_SceneTree_set_pause>`
-with a "true" argument:
+с аргументом "true":
 
 ::
 
     get_tree().set_pause(true)
 
-Doing so will have the following behavior:
+Это приведет к следующему поведению:
 
--  2D and 3D physics will be stopped.
--  _process and _fixed_process will not be called anymore in nodes.
--  _input and _input_event will not be called anymore either.
+-  2D и 3D физика будет остановлена.
+-  _process и _fixed_process больше не будут вызываться ни в каких узлах.
+-  _input и _input_event больше не будет вызываться.
 
-This effectively stops the whole game. Calling this function from a
-script, by default, will result in an unrecoverable state (nothing will
-work anymore!).
+Это эффективный останов всей игры. Вызов этой функции из скрипта,
+по умолчанию, приводит к невосстановимому состоянию (ничего больше не работает!).
 
-White-listing nodes
+Белый список узлов
 -------------------
 
-Before enabling pause, make sure that nodes that must keep working
-during pause are white-listed. This is done by editing the "Pause Mode"
-property in a node:
+Перед активацией паузы, убедитесь что узлы, которые должны продолжать работать
+и во время паузы - занесены в белый список. Это задается свойством "Pause Mode"
+в узле:
 
 .. image:: /img/pausemode.png
 
-By default all nodes have this property in the "Inherit" state. This
-means, that they will only process (or not) depending on what this same
-property is set on the parent node. If the parent is set to "Inherit" ,
-then the grandparent will be checked and so on. Ultimately, if a state
-can't be found in any of the grandparents, the pause state in SceneTree
-is used. This means that, by default, when the game is paused every node
-will be paused.
+По умолчанию у всех узлов это свойство в значении "Inherit" state. Это
+значит, что они будут (или не будут) продолжать работать в зависимости
+от того какое значение этого свойства у родительского узла.
+Если у родителя тоже "Inherit" , то надо смотреть у пра-родителя и т.д..
+Наконец, если state не найден ни у кого из пра-родителей, используется
+pause state в SceneTree.
+Тоесть, по-умолчанию, если игра на паузе - каждый узел тоже будет поставлен
+на паузу.
 
-So the three possible states for a node are:
+Таким образом возможно три состояния для узла:
 
--  **Inherit**: Process depending on the state of the parent,
-   grandparent, etc. The first parent that has a non-Inherit state.
--  **Stop**: Stop the node no matter what (and children in Inherit
-   mode). When paused this node will not process.
--  **Process**: Process the node no matter what (and children in Inherit
-   mode). Paused or not this node will process.
+-  **Inherit**: в зависимости от состояния родителя,
+   пра-родителя, и т.п. The first parent that has a non-Inherit state.
+-  **Stop**: Останавливается не зависимо от предка (и его потомки в Inherit
+   режиме). При паузе этот узел останавливается.
+-  **Process**: Продолжит работу (и его потомки в режиме Inherit).
+    не зависимо от паузы игры.
 
-Example
+Пример
 -------
 
-An example of this is creating a popup or panel with controls inside,
-and set its pause mode to "Process" then just hide it:
+Примером этого является создание всплывающего окна или 
+панели с элементами управления внутри,
+задайте его режим паузы в "Process" а затем просто скройте его:
 
 .. image:: /img/pause_popup.png
 
-Just by setting the root of the pause popup to "Process", all children
-and grandchildren will inherit that state. This way, this branch of the
-scene tree will continue working when paused.
+Просто установив root всплывающего окна в "Process", все потомки
+будут наследовать это состояние. Таким образом, эта ветвь
+scene tree будет продолжать работать даже при паузе.
 
-Finally, make it so when a pause button is pressed (any button will do),
-enable the pause and show the pause screen.
+Наконец, сделаем так чтобы при нажатии кнопки паузы 
+(любая кнопка может ею быть),
+активировалась пауза и отображался экран паузы.
 
 ::
 
@@ -85,8 +86,7 @@ enable the pause and show the pause screen.
         get_tree().set_pause(true)
         get_node("pause_popup").show()
 
-To remove the pause, just do the opposite when the pause screen is
-closed:
+Для отмены паузы, сделайте обратное когда экран паузы зыкрывается:
 
 ::
 
@@ -94,4 +94,4 @@ closed:
         get_node("pause_popup").hide()
         get_tree().set_pause(false)
 
-And that should be all!
+И это должно быть все!
