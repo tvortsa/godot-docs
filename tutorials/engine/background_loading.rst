@@ -1,39 +1,38 @@
 .. _doc_background_loading:
 
-Background loading
+Фоновая загрузка
 ==================
 
-When switching the main scene of your game (for example going to a new
-level), you might want to show a loading screen with some indication
-that progress is being made. The main load method
-(``ResourceLoader::load`` or just ``load`` from gdscript) blocks your
-thread while the resource is being loaded, so It's not good. This
-document discusses the ``ResourceInteractiveLoader`` class for smoother
-load screens.
+При переключении главной сцены вашей игры (например при переходе на другой уровень),
+вы возможно захотите показывать некоторый экран с индикатором прогресса
+загрузки. Главный метод load 
+(``ResourceLoader::load`` or just ``load`` from gdscript) блокирует ваш поток пока 
+ресурс не будет загружен, это не есть хорошо. В этом документе мы обсудим
+класс ``ResourceInteractiveLoader`` для экрна гладкой загрузки.
 
 ResourceInteractiveLoader
 -------------------------
 
-The ``ResourceInteractiveLoader`` class allows you to load a resource in
-stages. Every time the method ``poll`` is called, a new stage is loaded,
-and control is returned to the caller. Each stage is generally a
-sub-resource that is loaded by the main resource. For example, if you're
-loading a scene that loads 10 images, each image will be one stage.
+Класс ``ResourceInteractiveLoader`` позволяет вам загружать ресурсы
+этапами (stage). Всякий раз при вызове метода ``poll`` загружается новый stage,
+и управление возвращается вызывателю. Каждый stage обычно является
+под-ресурсом который загружается основным ресурсом. Например, если вы загружаете
+сцену которая содержит 10 изображений, каждое изображение будет одним stage.
 
-Usage
------
+Использование
+-------------
 
-Usage is generally as follows
+Обычно процесс такой:
 
-Obtaining a ResourceInteractiveLoader
+Получение ResourceInteractiveLoader
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
     Ref<ResourceInteractiveLoader> ResourceLoader::load_interactive(String p_path);
 
-This method will give you a ResourceInteractiveLoader that you will use
-to manage the load operation.
+Этот метод даст вам ResourceInteractiveLoader который вы будете использовать для
+управления процессом загрузки.
 
 Polling
 ~~~~~~~
@@ -42,12 +41,12 @@ Polling
 
     Error ResourceInteractiveLoader::poll();
 
-Use this method to advance the progress of the load. Each call to
-``poll`` will load the next stage of your resource. Keep in mind that
-each stage is one entire "atomic" resource, such as an image, or a mesh,
-so it will take several frames to load.
+Используйте этот метод для продвижения хода загрузки. Каждый вызов
+``poll`` будет загружать следующий stage вашего ресурса. Помните что каждый
+stage это один целый "атомарный" ресурс, такой как изображение, или mesh,
+такчто потребуется несколько кадров для загрузки.
 
-Returns ``OK`` on no errors, ``ERR_FILE_EOF`` when loading is finished.
+Возвращает ``OK`` если ошибок нет, ``ERR_FILE_EOF``когда загрузка завершена.
 Any other return value means there was an error and loading has stopped.
 
 Load progress (optional)
