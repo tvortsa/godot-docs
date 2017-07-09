@@ -1,22 +1,23 @@
 .. _doc_pausing_games:
 
-Pausing games
+Пауза в игре
 =============
 
-Pause?
+Пауза?
 ------
 
-In most games it is desirable to, at some point, interrupt the
-game to do something else, such as taking a break or changing options.
-However this is not as simple as it seems. The game might be stopped,
-but it might be desirable that some menus and animations continue
-working.
+В большинстве игр желательно, в какой-то момент, прервать игру
+чтобы выполнить что-то другое, например перерыв или изменение параметров.
+HНо это не так просто как может показаться. Игра может быть остановлена,
+но некоторые меню и анимации возможно должны продолжать работать.
 
 Implementing a fine-grained control for what can be paused (and what can
 not) is a lot of work, so a simple framework for pausing is provided in
 Godot.
 
-How pausing works
+How pausing worksThe game might be stopped
+
+
 -----------------
 
 To set pause mode, the pause state must be set. This is done by calling
